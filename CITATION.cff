@@ -1,0 +1,41 @@
+cff-version: 1.2.0
+title: MDLR
+message: >-
+  If you use this software, please cite it using the
+  metadata from this file.
+type: software
+authors:
+  - given-names: Jonatan Jalle
+    family-names: Steller
+    email: jonatan.steller@adwmainz.de
+    affiliation: Academy of Sciences and Literature Mainz
+    orcid: 'https://orcid.org/0000-0002-5101-5275'
+  - name: "MDLR contributors"
+repository-code: >-
+  https://github.com/digicademy/mdlr
+abstract: >-
+  This extension provides a web frontend library for use
+  in TYPO3 and other web applications with Fluid-based
+  templating. Components are defined via Fluid to provide
+  vanilla HTML, CSS and a tiny bit of JS. They follow an
+  atomic-design pattern from small atoms via larger
+  molecules, organisms, and templates all the way to pages.
+  This implementation avoids reactive frameworks, CSS and
+  JS preprocessors, as well as largely JS-based web
+  components in favour of delivering readable but coherent
+  HTML to end users. All components aim for semantic
+  expressivity, accessibility, and responsive layouts that
+  adapt to various form factors from mobile to tablet to
+  laptop to desktop.
+keywords:
+  - TYPO3
+  - Frontend
+  - Atomic
+  - Responsive
+  - Accessible
+  - Components
+  - Fluid
+  - Academic
+license: GPL 3
+version: 0.1.0
+date-released: '2025-07-23'
