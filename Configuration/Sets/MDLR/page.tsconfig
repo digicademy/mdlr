@@ -1,0 +1,56 @@
+// Set layouts
+mod.web_layout.BackendLayouts {
+
+  // Default
+  default {
+    title = LLL:EXT:chf_base/Resources/Private/Language/locallang.xlf:layout.default
+    icon = EXT:chf_base/Resources/Public/Images/LayoutDefault.svg
+    config {
+      backend_layout {
+        colCount = 12
+        rowCount = 1
+        rows {
+          1 {
+            columns {
+              1 {
+                name = LLL:EXT:chf_base/Resources/Private/Language/locallang.xlf:layout.generic.main
+                identifier = main
+                colPos = 0
+                colspan = 12
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+
+  // Hub
+  hub {
+    title = LLL:EXT:chf_base/Resources/Private/Language/locallang.xlf:layout.hub
+    icon = EXT:chf_base/Resources/Public/Images/LayoutHub.svg
+    config {
+      backend_layout {
+        colCount = 12
+        rowCount = 1
+        rows {
+          1 {
+            columns {
+              1 {
+                name = LLL:EXT:chf_base/Resources/Private/Language/locallang.xlf:layout.generic.main
+                identifier = main
+                colPos = 0
+                colspan = 12
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+// Set fullscreen buttons to appear by default
+TCAdefaults {
+    tt_content.image_zoom = 1
+}
