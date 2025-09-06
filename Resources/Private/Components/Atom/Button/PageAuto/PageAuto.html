@@ -1,0 +1,7 @@
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" data-namespace-typo3-fluid="true">
+    <f:argument name="variants" type="string[]" optional="{true}" default="{}" description="Type of button to produce (tiny, mini, icon, tinyicon, miniicon, texticon, round, light, overlay, transparent, unobtrusive, unobserved, embedded, sidelined)" />
+    <f:argument name="pageUid" type="int" optional="{false}" description="Page UID to link to" />
+    <f:argument name="function" type="string" optional="{true}" default="" description="JavaScript function to apply (storage, back, up, pdf, fullscreen, scroll, dropdown, hierarchy, modal, modal-close, toast-close, copy, share, mastodon)" />
+
+    <f:link.typolink parameter="{pageUid}" class="mdlr-button {f:if(condition: '{variant} != \'\'', then: 'mdlr-variant-{variant} ') -> f:for(each: '{variants}', as: 'variant')} {f:if(condition: '{function} != \'\'', then: 'mdlr-function-{function}')}" />
+</html>

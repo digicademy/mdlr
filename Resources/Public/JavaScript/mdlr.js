@@ -487,7 +487,7 @@ if(backButtons.length > 0) {
     backButtons.forEach(function(backButton) {
         backButton.addEventListener('click', function(e) {
             history.back();
-            //e.preventDefault();
+            e.preventDefault();
         });
         backButton.addEventListener('keydown', function(e) {
             if(e.code == 'Enter' || e.code == 'Space') {
@@ -503,7 +503,7 @@ if(upButtons.length > 0) {
     upButtons.forEach(function(upButton) {
         upButton.addEventListener('click', function(e) {
             window.scrollTo(0, 0);
-            //e.preventDefault();
+            e.preventDefault();
         });
         upButton.addEventListener('keydown', function(e) {
             if(e.code == 'Enter' || e.code == 'Space') {
@@ -519,7 +519,7 @@ if(pdfButtons.length > 0) {
     pdfButtons.forEach(function(pdfButton) {
         pdfButton.addEventListener('click', function(e) {
             window.print();
-            //e.preventDefault();
+            e.preventDefault();
         });
         pdfButton.addEventListener('keydown', function(e) {
             if(e.code == 'Enter' || e.code == 'Space') {
@@ -650,7 +650,7 @@ if(dropdowns.length > 0) {
         // On click
         dropdown.addEventListener('click', function(e) {
             mdlrDropdown(e.currentTarget);
-            //e.preventDefault();
+            e.preventDefault();
         });
 
         // On enter or space keypresses
@@ -1027,7 +1027,7 @@ if(copyButtons.length > 0) {
     copyButtons.forEach(function(copyButton) {
         copyButton.addEventListener('click', function(e) {
             mdlrCopy(e.currentTarget);
-            //e.preventDefault();
+            e.preventDefault();
         });
         copyButton.addEventListener('keydown', function(e) {
             if(e.code == 'Enter' || e.code == 'Space') {
