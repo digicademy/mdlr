@@ -33,11 +33,11 @@ window.addEventListener( 'beforeinstallprompt', (e) => {
 
         // Case 1: user installs app
         if ( choice.outcome === 'accepted' ) {
-            mdlr_toast_open( 'notification', 'Erfolgreich installiert' );
+            mdlr_toast_open( 'notify', 'Erfolgreich installiert' );
 
         // Case 2: user does not install app
         } else {
-            mdlr_toast_open( 'notification', 'App leider nicht installiert' );
+            mdlr_toast_open( 'notify', 'App leider nicht installiert' );
         }
 
         // Hide the button
