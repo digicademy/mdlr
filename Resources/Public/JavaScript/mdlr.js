@@ -368,6 +368,7 @@ if(storageButtons.length > 0) {
 function mdlrStorageClear() {
     localStorage.clear();
     mdlrStorageEvaluate();
+    mdlrWatchlistView();
 }
 
 // Evaluate whether there is local storage to delete
@@ -1061,7 +1062,7 @@ function mdlrCopy(clickedElement) {
                     mdlrToastOpen(failureMessage);
                 });
 
-            // Error notification, especially in non-HTTPS contexts
+            // Error notification, especially useful in non-HTTPS contexts
             // navigator.clipboard.writeText is only available with HTTPS
             } catch (error) {
                 mdlrToastOpen(failureMessage);
@@ -1184,4 +1185,335 @@ function mdlrMastodon(clickedElement) {
     else {
         mdlrToastOpen(failureMessage)
     }
+}
+
+/*
+# Watchlist ###################################################################
+*/
+
+const watchlistAdders = mdlrElements('.mdlr-function-watchlist-add');
+const watchlistCsvs = mdlrElements('.mdlr-function-watchlist-csv');
+const watchlistJsons = mdlrElements('.mdlr-function-watchlist-json');
+const watchlistClearers = mdlrElements('.mdlr-function-watchlist-clear');
+const watchlistEmpties = mdlrElements('.mdlr-function-watchlist-empty');
+const watchlistSerialisations = mdlrElements('.mdlr-function-watchlist-serialisations');
+
+// Activate all buttons for watchlists
+if(watchlistAdders.length > 0) {
+    watchlistAdders.forEach(function(watchlistAdder) {
+        watchlistAdder.addEventListener('click', function(e) {
+            mdlrWatchlistAdd(e.currentTarget);
+            //e.preventDefault();
+        });
+        watchlistAdder.addEventListener('keydown', function(e) {
+            if(e.code == 'Enter' || e.code == 'Space') {
+                mdlrWatchlistAdd(e.currentTarget);
+                e.preventDefault();
+            }
+        });
+    });
+}
+if(watchlistCsvs.length > 0) {
+    watchlistCsvs.forEach(function(watchlistCsv) {
+        watchlistCsv.addEventListener('click', function(e) {
+            mdlrWatchlistCsv();
+            //e.preventDefault();
+        });
+        watchlistCsv.addEventListener('keydown', function(e) {
+            if(e.code == 'Enter' || e.code == 'Space') {
+                mdlrWatchlistCsv();
+                e.preventDefault();
+            }
+        });
+    });
+}
+if(watchlistJsons.length > 0) {
+    watchlistJsons.forEach(function(watchlistJson) {
+        watchlistJson.addEventListener('click', function(e) {
+            mdlrWatchlistJson();
+            //e.preventDefault();
+        });
+        watchlistJson.addEventListener('keydown', function(e) {
+            if(e.code == 'Enter' || e.code == 'Space') {
+                mdlrWatchlistJson();
+                e.preventDefault();
+            }
+        });
+    });
+}
+if(watchlistClearers.length > 0) {
+    watchlistClearers.forEach(function(watchlistClearer) {
+        watchlistClearer.addEventListener('click', function(e) {
+            mdlrWatchlistSet();
+            //e.preventDefault();
+        });
+        watchlistClearer.addEventListener('keydown', function(e) {
+            if(e.code == 'Enter' || e.code == 'Space') {
+                mdlrWatchlistSet();
+                e.preventDefault();
+            }
+        });
+    });
+}
+
+// Retrieve watchlist
+function mdlrWatchlistGet() {
+
+    // Get current watchlist if available
+    let watchlist = localStorage.getItem('watchlist');
+    if(watchlist) {
+        watchlist = JSON.parse(watchlist);
+    } else {
+        watchlist = {};
+    }
+
+    // Return list
+    return watchlist;
+}
+
+// Save watchlist
+function mdlrWatchlistSet(watchlist = null) {
+
+    // Either clear watchlist
+    if(!watchlist || Object.keys(watchlist).length == 0) {
+        localStorage.removeItem('watchlist');
+
+    // Or save it to local storage
+    } else {
+        localStorage.setItem('watchlist', JSON.stringify(watchlist));
+    }
+
+    // Update DOM
+    mdlrWatchlistView();
+}
+
+// Add entry to watchlist array
+function mdlrWatchlistAdd(clickedElement) {
+
+    // Retrieve watchlist
+    let watchlist = mdlrWatchlistGet();
+
+    // Retrieve new list item
+    var addUrl = clickedElement.dataset.target;
+    var addLabel = clickedElement.dataset.label;
+    var addType = clickedElement.dataset.type;
+    var messageFailure = clickedElement.dataset.failure;
+
+    // Show failure message if URL is in watchlist already
+    if(watchlist[addUrl]) {
+        mdlrToastOpen(messageFailure);
+    } else {
+
+        // Add item to watchlist
+        watchlist[addUrl] = [
+            addLabel,
+            addType,
+        ];
+
+        // Update watchlist
+        mdlrWatchlistSet(watchlist);
+    }
+}
+
+// Remove entry from watchlist
+function mdlrWatchlistRemove(clickedElement) {
+
+    // Retrieve watchlist
+    let watchlist = mdlrWatchlistGet();
+
+    // Retrieve list item to remove
+    var removeUrl = clickedElement.dataset.target;
+    var messageFailure = clickedElement.dataset.failure;
+
+    // Show failure message if URL is not in watchlist
+    if(!watchlist[removeUrl]) {
+        mdlrToastOpen(messageFailure);
+    } else {
+
+        // Remove item from watchlist
+        delete watchlist[removeUrl];
+
+        // Update watchlist and show success message
+        mdlrWatchlistSet(watchlist);
+    }
+}
+
+// Update watchlist view
+function mdlrWatchlistView() {
+
+    // Reset all add buttons
+    if(watchlistAdders.length > 0) {
+        watchlistAdders.forEach(function(watchlistAdder) {
+            watchlistAdder.disabled = false;
+            const watchlistAdderIcon = watchlistAdder.querySelector('svg > use');
+            watchlistAdderIcon.setAttributeNS(null, 'href', '#icon-add');
+        });
+    }
+
+    // Remove existing list from DOM
+    const watchlistLists = mdlrElements('.mdlr-function-watchlist-list');
+    if(watchlistLists.length > 0) {
+        watchlistLists.forEach(function(watchlistList) {
+            watchlistList.remove();
+        });
+    }
+
+    // Retrieve watchlist
+    const watchlist = mdlrWatchlistGet();
+    if(watchlistEmpties.length > 0) {
+        watchlistEmpties.forEach(function(watchlistEmpty) {
+            const buttonRemove = watchlistEmpty.dataset.remove;
+            const messageFailure = watchlistEmpty.dataset.failure;
+
+            // Either hide empty note if the list has items
+            if(Object.keys(watchlist).length > 0) {
+                watchlistEmpty.classList.add('mdlr-variant-hidden');
+
+                // Show serialisations
+                if(watchlistSerialisations.length > 0) {
+                    watchlistSerialisations.forEach(function(watchlistSerialisation) {
+                        watchlistSerialisation.classList.remove('mdlr-variant-hidden');
+                    });
+                }
+
+                // Build list
+                let newList = document.createElement('ul');
+                newList.classList.add('mdlr-boxedlist', 'mdlr-function-watchlist-list');
+                watchlistEmpty.after(newList);
+
+                // Build list items
+                for(let [key, value] of Object.entries(watchlist)) {
+                    let newEntry = document.createElement('li');
+                    newList.appendChild(newEntry);
+
+                    // Button
+                    let newButton = document.createElement('button');
+                    newButton.classList.add('mdlr-variant-icon', 'mdlr-variant-transparent', 'mdlr-variant-sidelined');
+                    newButton.title = buttonRemove;
+                    newEntry.appendChild(newButton);
+
+                    // Button > icon
+                    let newButtonIcon = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+                    newButtonIcon.setAttributeNS(null, 'width', '24');
+                    newButtonIcon.setAttributeNS(null, 'height', '24');
+                    newButtonIcon.setAttributeNS(null, 'viewBox', '0 0 24 24');
+                    newButtonIcon.setAttributeNS(null, 'version', '1.1');
+                    newButtonIcon.ariaHidden = 'true';
+                    newButton.appendChild(newButtonIcon);
+
+                    // Button > icon > use
+                    let newButtonIconUse = document.createElementNS('http://www.w3.org/2000/svg', 'use');
+                    newButtonIconUse.setAttributeNS(null, 'href', '#icon-remove');
+                    newButtonIcon.appendChild(newButtonIconUse);
+
+                    // Button > span
+                    let newButtonSpan = document.createElement('span');
+                    newButtonSpan.textContent = buttonRemove;
+                    newButton.appendChild(newButtonSpan);
+
+                    // Attach function to button
+                    newButton.dataset.target = encodeURI(key); // Content escaped via function
+                    newButton.dataset.failure = messageFailure;
+                    newButton.addEventListener('click', function(e) {
+                        mdlrWatchlistRemove(e.currentTarget);
+                        //e.preventDefault();
+                    });
+                    newButton.addEventListener('keydown', function(e) {
+                        if(e.code == 'Enter' || e.code == 'Space') {
+                            mdlrWatchlistRemove(e.currentTarget);
+                            e.preventDefault();
+                        }
+                    });
+
+                    // Link
+                    let newLink = document.createElement('a');
+                    newLink.href = encodeURI(key); // Content escaped via function
+                    newLink.classList.add('mdlr-boxedlist-emphasis');
+                    newLink.textContent = value[0]; // Content auto-escaped via property
+                    newEntry.appendChild(newLink);
+
+                    // Paragraph
+                    let newParagraph = document.createElement('p');
+                    newParagraph.textContent = value[1]; // Content auto-escaped via property
+                    newEntry.appendChild(newParagraph);
+
+                    // Deactivate respective add buttons
+                    if(watchlistAdders.length > 0) {
+                        watchlistAdders.forEach(function(watchlistAdder) {
+                            if(watchlistAdder.dataset.target == encodeURI(key)) {
+                                watchlistAdder.disabled = true;
+                                const watchlistAdderIcon = watchlistAdder.querySelector('svg > use');
+                                watchlistAdderIcon.setAttributeNS(null, 'href', '#icon-checkmark');
+                            }
+                        });
+                    }
+                }
+
+            // Or only show note if the list is empty
+            } else {
+                watchlistEmpty.classList.remove('mdlr-variant-hidden');
+                if(watchlistSerialisations.length > 0) {
+                    watchlistSerialisations.forEach(function(watchlistSerialisation) {
+                        watchlistSerialisation.classList.add('mdlr-variant-hidden');
+                    });
+                }
+            }
+        });
+    }
+}
+
+// Automatically update watchlist view
+mdlrWatchlistView();
+
+// Save watchlist as CSV file
+function mdlrWatchlistCsv() {
+
+    // Retrieve watchlist
+    const watchlist = mdlrWatchlistGet();
+
+    // Generate CSV
+    let csv = '"URL","Label","Type"';
+    for(let [key, value] of Object.entries(watchlist)) {
+        csv += '\n"' + encodeURI(key) + '","' + value[0].replace('"', '') + '","' + value[1].replace('"', '') + '"';
+    }
+
+    // Turn into downloadable blob
+    const data = new Blob([csv], {type: 'text/csv'});
+    const downloadUrl = window.URL.createObjectURL(data);
+
+    // Download blob
+    let download = document.createElement('a');
+    download.href = downloadUrl;
+    download.download = 'watchlist.csv';
+    download.click();
+    window.URL.revokeObjectURL(downloadUrl);
+}
+
+// Save watchlist as JSON file
+function mdlrWatchlistJson() {
+
+    // Retrieve watchlist
+    const watchlist = mdlrWatchlistGet();
+
+    // Generate JSON
+    let json = [];
+    for(let [key, value] of Object.entries(watchlist)) {
+        json += [
+            encodeURI(key),
+            value[0].replace('"', ''),
+            value[1].replace('"', ''),
+        ];
+    }
+    json = JSON.stringify(json);
+
+    // Turn into downloadable blob
+    const data = new Blob([json], {type: 'application/json'});
+    const downloadUrl = window.URL.createObjectURL(data);
+
+    // Download blob
+    let download = document.createElement('a');
+    download.href = downloadUrl;
+    download.download = 'watchlist.json';
+    download.click();
+    window.URL.revokeObjectURL(downloadUrl);
 }
