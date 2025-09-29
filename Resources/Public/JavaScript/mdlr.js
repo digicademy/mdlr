@@ -1496,15 +1496,7 @@ function mdlrWatchlistJson() {
     const watchlist = mdlrWatchlistGet();
 
     // Generate JSON
-    let json = [];
-    for(let [key, value] of Object.entries(watchlist)) {
-        json += [
-            encodeURI(key),
-            value[0].replace('"', ''),
-            value[1].replace('"', ''),
-        ];
-    }
-    json = JSON.stringify(json);
+    json = JSON.stringify(watchlist);
 
     // Turn into downloadable blob
     const data = new Blob([json], {type: 'application/json'});
