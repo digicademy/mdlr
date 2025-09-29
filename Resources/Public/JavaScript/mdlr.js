@@ -983,7 +983,7 @@ function mdlrToastOpen(toastText) {
             }
 
             // Show dialog
-            toast.showModal();
+            toast.show();
             toast.setAttribute('aria-hidden', 'false');
             toast.classList.add('mdlr-variant-active');
 
