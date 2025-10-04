@@ -1,0 +1,10 @@
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" data-namespace-typo3-fluid="true">
+    <f:argument name="id" type="string" optional="{false}" description="ID of the dropdown" />
+    <f:argument name="variants" type="string[]" optional="{true}" default="{}" description="Type of dropdown to produce (right, up, toc)" />
+    <f:argument name="role" type="string" optional="{true}" default="listbox" description="Role of the popover menu (listbox)" />
+
+    <f:slot name="handle" />
+    <menu class="mdlr-dropdown {f:if(condition: '{variant} != \'\'', then: 'mdlr-variant-{variant} ') -> f:for(each: '{variants}', as: 'variant')}" id="{id}" role="{role}" popover="auto">
+        <f:slot name="list" />
+    </menu>
+</html>

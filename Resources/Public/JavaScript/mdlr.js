@@ -13,9 +13,7 @@ window.addEventListener( 'beforeinstallprompt', (e) => {
     // Display the install button
     const installButton = document.getElementById( 'install' );
     installButton.hidden = false;
-    setTimeout( function () {
-        installButton.classList.add( 'mdlr-variant-visible' );
-    }, 50 );
+    installButton.classList.add( 'mdlr-variant-visible' );
   
     // When the button is clicked, show the install prompt
     document.getElementById( 'install-button' ).addEventListener( 'click', ( e ) => {
@@ -23,8 +21,8 @@ window.addEventListener( 'beforeinstallprompt', (e) => {
     } );
     document.getElementById( 'install-button' ).addEventListener( 'keydown', function( e ) {
         if( e.code == 'Enter' || e.code == 'Space' ) {
-            deferredPrompt.prompt();
             e.preventDefault();
+            deferredPrompt.prompt();
         }
     });
 
@@ -61,10 +59,10 @@ const timelineRegions = mdlrElements('.mdlr-function-timeline');
 
 // Activate all copy buttons
 if(timelineRegions.length > 0) {
-    timelineRegions.forEach(function(timelineRegion) {
-        timelineRegion.addEventListener('mouseover', function(e) {
-            mdlrTimelineHighlight(e.currentTarget);
+    timelineRegions.forEach((timelineRegion) => {
+        timelineRegion.addEventListener('mouseover', (e) => {
             //e.preventDefault();
+            mdlrTimelineHighlight(e.currentTarget);
         });
     });
 }
@@ -78,7 +76,7 @@ function mdlrTimelineHighlight(hoveredElement) {
         target.classList.add('mdlr-variant-active');
 
         // Add one-time listener to remove highlight
-        hoveredElement.addEventListener('mouseout', function(e) {
+        hoveredElement.addEventListener('mouseout', (e) => {
             target.classList.remove('mdlr-variant-active');
         }, {once: true});
     }
@@ -95,15 +93,15 @@ const infoPopovers = mdlrElements('.mdlr-info > ol > li');
 
 // Activate all info buttons
 if(infoButtons.length > 0) {
-    infoButtons.forEach(function(infoButton) {
-        infoButton.addEventListener('click', function(e) {
-            mdlrInfoOpen(e.currentTarget);
+    infoButtons.forEach((infoButton) => {
+        infoButton.addEventListener('click', (e) => {
             //e.preventDefault();
+            mdlrInfoOpen(e.currentTarget);
         });
-        infoButton.addEventListener('keydown', function(e) {
+        infoButton.addEventListener('keydown', (e) => {
             if(e.code == 'Enter' || e.code == 'Space') {
-                mdlrInfoOpen(e.currentTarget);
                 e.preventDefault();
+                mdlrInfoOpen(e.currentTarget);
             }
         });
     });
@@ -118,7 +116,7 @@ function mdlrInfoOpen(clickedElement) {
     let targets = mdlrElements(targetId);
 
     // Close popover if it is already open
-    targets.forEach(function(target) {
+    targets.forEach((target) => {
         if(target.classList.contains('mdlr-variant-active')) {
             mdlrInfoClose();
         }
@@ -146,7 +144,7 @@ function mdlrInfoOpen(clickedElement) {
             target.classList.add('mdlr-variant-active');
 
             // Set a listener to close the popover on the next click anywhere in the document
-            setTimeout(function() {
+            setTimeout(() => {
                 document.addEventListener('click', mdlrInfoCloseConditions);
                 window.addEventListener('resize', mdlrInfoCloseConditions);
                 document.addEventListener('touchstart', mdlrInfoCloseConditions);
@@ -161,7 +159,7 @@ function mdlrInfoClose() {
 
     // Close popovers
     if(infoPopovers.length > 0) {
-        infoPopovers.forEach(function(infoPopover) {
+        infoPopovers.forEach((infoPopover) => {
             infoPopover.classList.remove('mdlr-variant-active');
         });
     }
@@ -179,8 +177,8 @@ function mdlrInfoCloseConditions(e) {
     // Check for 'escape' keypress if the event is a keypress
     if(e.code) {
         if(e.code == 'Escape' || e.code == 'Enter' || e.code == 'Space') {
-            mdlrInfoClose();
             e.preventDefault();
+            mdlrInfoClose();
         }
     }
 
@@ -202,15 +200,15 @@ const referenceLinks = mdlrElements('.mdlr-function-reference');
 
 // Activate all reference links
 if(referenceLinks.length > 0) {
-    referenceLinks.forEach(function(referenceLink) {
-        referenceLink.addEventListener('click', function(e) {
-            mdlrReferenceOpen(e.currentTarget);
+    referenceLinks.forEach((referenceLink) => {
+        referenceLink.addEventListener('click', (e) => {
             //e.preventDefault();
+            mdlrReferenceOpen(e.currentTarget);
         });
-        referenceLink.addEventListener('keydown', function(e) {
+        referenceLink.addEventListener('keydown', (e) => {
             if(e.code == 'Enter' || e.code == 'Space') {
-                mdlrReferenceOpen(e.currentTarget);
                 e.preventDefault();
+                mdlrReferenceOpen(e.currentTarget);
             }
         });
     });
@@ -225,7 +223,7 @@ function mdlrReferenceOpen(clickedElement) {
     let targets = mdlrElements(targetId);
 
     // Close popover if it is already open
-    targets.forEach(function(target) {
+    targets.forEach((target) => {
         if(document.getElementById('temporary-reference')) {
             mdlrReferenceClose();
         }
@@ -260,7 +258,7 @@ function mdlrReferenceOpen(clickedElement) {
             contentElement.classList.add('mdlr-variant-active');
 
             // Set a listener to close the popover on the next click anywhere in the document
-            setTimeout(function() {
+            setTimeout(() => {
                 document.addEventListener('click', mdlrReferenceCloseConditions);
                 window.addEventListener('resize', mdlrReferenceCloseConditions);
                 document.addEventListener('touchstart', mdlrReferenceCloseConditions);
@@ -276,7 +274,7 @@ function mdlrReferenceClose() {
     // Close popovers
     let referencePopover = document.getElementById('temporary-reference');
     referencePopover.classList.remove('mdlr-variant-active');
-    setTimeout(function() {
+    setTimeout(() => { // TODO Possibly remove this
         referencePopover.remove();
     }, 225);
 
@@ -293,8 +291,8 @@ function mdlrReferenceCloseConditions(e) {
     // Check for 'escape' keypress if the event is a keypress
     if(e.code) {
         if(e.code == 'Escape' || e.code == 'Enter' || e.code == 'Space') {
-            mdlrReferenceClose();
             e.preventDefault();
+            mdlrReferenceClose();
         }
     }
 
@@ -350,15 +348,15 @@ const storageButtons = mdlrElements('.mdlr-function-storage');
 
 // Activate theme buttons
 if(storageButtons.length > 0) {
-    storageButtons.forEach(function(storageButton) {
-        storageButton.addEventListener('click', function(e) {
+    storageButtons.forEach((storageButton) => {
+        storageButton.addEventListener('click', (e) => {
+            e.preventDefault();
             mdlrStorageClear();
-            //e.preventDefault();
         });
-        storageButton.addEventListener('keydown', function(e) {
+        storageButton.addEventListener('keydown', (e) => {
             if(e.code == 'Enter' || e.code == 'Space') {
-                mdlrStorageClear();
                 e.preventDefault();
+                mdlrStorageClear();
             }
         });
     });
@@ -375,13 +373,13 @@ function mdlrStorageClear() {
 function mdlrStorageEvaluate() {
     if(localStorage.length > 0) {
         if(storageButtons.length > 0) {
-            storageButtons.forEach(function(storageButton) {
+            storageButtons.forEach((storageButton) => {
                 storageButton.disabled = false;
             });
         }
     } else {
         if(storageButtons.length > 0) {
-            storageButtons.forEach(function(storageButton) {
+            storageButtons.forEach((storageButton) => {
                 storageButton.disabled = true;
             });
         }
@@ -401,15 +399,15 @@ const themePictures = mdlrElements('picture.mdlr-variant-theme');
 
 // Activate theme buttons
 if(themeButtons.length > 0) {
-    themeButtons.forEach(function(themeButton) {
-        themeButton.addEventListener('click', function(e) {
+    themeButtons.forEach((themeButton) => {
+        themeButton.addEventListener('click', (e) => {
+            e.preventDefault();
             mdlrThemeSet(e.currentTarget.dataset.target);
-            //e.preventDefault();
         });
-        themeButton.addEventListener('keydown', function(e) {
+        themeButton.addEventListener('keydown', (e) => {
             if(e.code == 'Enter' || e.code == 'Space') {
-                mdlrThemeSet(e.currentTarget.dataset.target);
                 e.preventDefault();
+                mdlrThemeSet(e.currentTarget.dataset.target);
             }
         });
     });
@@ -420,7 +418,7 @@ function mdlrThemeSwitch(theme) {
     const themeActiveClass = 'mdlr-variant-active';
 
     // Activate only the requested switch buttons
-    themeButtons.forEach(function(themeButton) {
+    themeButtons.forEach((themeButton) => {
         if(themeButton.dataset.target == theme) {
             themeButton.classList.add(themeActiveClass);
         } else {
@@ -437,7 +435,7 @@ function mdlrThemeSet(theme) {
         'mdlr-theme-light',
         'mdlr-theme-dark'
     ];
-    themeClasses.forEach(function(themeClass) {
+    themeClasses.forEach((themeClass) => {
         root.classList.remove(themeClass);
     });
 
@@ -485,15 +483,15 @@ const pdfButtons = mdlrElements('.mdlr-function-pdf');
 
 // Activate back buttons
 if(backButtons.length > 0) {
-    backButtons.forEach(function(backButton) {
-        backButton.addEventListener('click', function(e) {
-            history.back();
+    backButtons.forEach((backButton) => {
+        backButton.addEventListener('click', (e) => {
             e.preventDefault();
+            history.back();
         });
-        backButton.addEventListener('keydown', function(e) {
+        backButton.addEventListener('keydown', (e) => {
             if(e.code == 'Enter' || e.code == 'Space') {
-                history.back();
                 e.preventDefault();
+                history.back();
             }
         });
     });
@@ -501,15 +499,15 @@ if(backButtons.length > 0) {
 
 // Activate up buttons
 if(upButtons.length > 0) {
-    upButtons.forEach(function(upButton) {
-        upButton.addEventListener('click', function(e) {
-            window.scrollTo(0, 0);
+    upButtons.forEach((upButton) => {
+        upButton.addEventListener('click', (e) => {
             e.preventDefault();
+            window.scrollTo(0, 0);
         });
-        upButton.addEventListener('keydown', function(e) {
+        upButton.addEventListener('keydown', (e) => {
             if(e.code == 'Enter' || e.code == 'Space') {
-                window.scrollTo(0, 0);
                 e.preventDefault();
+                window.scrollTo(0, 0);
             }
         });
     });
@@ -517,15 +515,15 @@ if(upButtons.length > 0) {
 
 // Activate PDF buttons
 if(pdfButtons.length > 0) {
-    pdfButtons.forEach(function(pdfButton) {
-        pdfButton.addEventListener('click', function(e) {
-            window.print();
+    pdfButtons.forEach((pdfButton) => {
+        pdfButton.addEventListener('click', (e) => {
             e.preventDefault();
+            window.print();
         });
-        pdfButton.addEventListener('keydown', function(e) {
+        pdfButton.addEventListener('keydown', (e) => {
             if(e.code == 'Enter' || e.code == 'Space') {
-                window.print();
                 e.preventDefault();
+                window.print();
             }
         });
     });
@@ -540,15 +538,15 @@ const fullscreenButtons = mdlrElements('.mdlr-function-fullscreen');
 
 // Activate fullscreen buttons
 if(fullscreenButtons.length > 0) {
-    fullscreenButtons.forEach(function(fullscreenButton) {
-        fullscreenButton.addEventListener('click', function(e) {
+    fullscreenButtons.forEach((fullscreenButton) => {
+        fullscreenButton.addEventListener('click', (e) => {
+            e.preventDefault();
             mdlrFullscreenToggle(e.currentTarget);
-            //e.preventDefault();
         });
-        fullscreenButton.addEventListener('keydown', function(e) {
+        fullscreenButton.addEventListener('keydown', (e) => {
             if(e.code == 'Enter' || e.code == 'Space') {
-                mdlrFullscreenToggle(e.currentTarget);
                 e.preventDefault();
+                mdlrFullscreenToggle(e.currentTarget);
             }
         });
     });
@@ -605,18 +603,18 @@ const headerbarOptions = {
 
 // Add or remove class when target element hits or exits viewport
 const headerbarCallback = (entries, observer) => {
-    entries.forEach(function(entry) {
+    entries.forEach((entry) => {
 
         // Entering viewport
         if(entry.isIntersecting) {
-            headerbars.forEach(function(headerbar) {
+            headerbars.forEach((headerbar) => {
                 headerbar.classList.remove('mdlr-variant-scrolled');
             });
         }
 
         // Exiting viewport
         else {
-            headerbars.forEach(function(headerbar) {
+            headerbars.forEach((headerbar) => {
                 headerbar.classList.add('mdlr-variant-scrolled');
             });
         }
@@ -626,119 +624,131 @@ const headerbarCallback = (entries, observer) => {
 // Initialise observer
 const headerbarObserver = new IntersectionObserver(headerbarCallback, headerbarOptions);
 const headerbarTargets = mdlrElements('.mdlr-function-scroll');
-headerbarTargets.forEach(function(headerbarTarget) {
-    headerbarObserver.observe(headerbarTarget);
-});
+if(headerbarTargets.length > 0) {
+    headerbarTargets.forEach((headerbarTarget) => {
+        headerbarObserver.observe(headerbarTarget);
+    });
+}
 
 /*
 # Dropdown ####################################################################
 */
 
 // Variable
-const dropdowns = mdlrElements('.mdlr-function-dropdown');
+const dropdowns = mdlrElements('.mdlr-dropdown');
 const dropdownClass = 'mdlr-variant-active';
-var dropdownTransition = 200;
 
-// Calculate CSS transition duration
+// Insert positions and transitions
 if(dropdowns.length > 0) {
-    dropdownTransition = (parseFloat(window.getComputedStyle(dropdowns[0]).transitionDuration)) * 1000;
-}
+    dropdowns.forEach((dropdown) => {
 
-// Activate all dropdown handles
-if(dropdowns.length > 0) {
-    dropdowns.forEach(function(dropdown) {
-
-        // On click
-        dropdown.addEventListener('click', function(e) {
-            mdlrDropdown(e.currentTarget);
-            e.preventDefault();
+        // Add position/transition after popover is opened
+        dropdown.addEventListener('toggle', (e) => {
+            if(e.newState == 'open') {
+                mdlrDropdownToggle(dropdown);
+            }
         });
 
-        // On enter or space keypresses
-        dropdown.addEventListener('keydown', function(e) {
-            if(e.code == 'Enter' || e.code == 'Space') {
-                mdlrDropdown(e.currentTarget);
-                e.preventDefault();
+        // Add transition before popover is closed
+        dropdown.addEventListener('beforetoggle', (e) => {
+            if(e.newState == 'closed') {
+                mdlrDropdownToggle(dropdown, true);
             }
         });
     });
 }
 
-// Toggle a clicked dropdown handle and element
-function mdlrDropdown(dropdown) {
-    if(dropdown) {
+// Manipulate handle and dropdown when opened/closed
+function mdlrDropdownToggle(dropdown, close = false) {
 
-        // If dropdown is open, close it
-        if(dropdown.classList.contains(dropdownClass) ) {
-            mdlrDropdownClose();
+    // Get handle
+    const handle = document.querySelector('[popovertarget="' + dropdown.id + '"]');
+
+    // Position dropdown
+    if(!close) {
+        const handleRect = handle.getBoundingClientRect();
+        if(dropdown.classList.contains('mdlr-variant-right')) {
+            dropdown.style.insetInlineStart = `${handleRect.right - dropdown.offsetWidth}px`;
+        } else {
+            dropdown.style.insetInlineStart = `${handleRect.left}px`;
+        }
+        if(dropdown.classList.contains('mdlr-variant-up')) {
+            dropdown.style.insetBlockStart = `${handleRect.top - dropdown.offsetHeight}px`;
+        } else {
+            dropdown.style.insetBlockStart = `${handleRect.bottom}px`;
         }
 
-        // If dropdown is closed, open it
-        else {
-            mdlrDropdownClose();
-            setTimeout(function() {
+        // Activate handle and dropdown
+        dropdown.classList.add(dropdownClass);
+        handle.classList.add(dropdownClass);
 
-                // Identify content element
-                const element = document.getElementById(dropdown.getAttribute('aria-controls'));
-
-                // Open dropdown
-                mdlrDropdownOpen(dropdown, element)
-
-                // Set one-time listeners for closing the dropdown (click, swipe, keypress)
-                setTimeout(function() {
-                    document.addEventListener('click', mdlrDropdownCloseConditions);
-                    window.addEventListener('touchstart', mdlrDropdownCloseConditions);
-                    window.addEventListener('keydown', mdlrDropdownCloseConditions);
-                }, dropdownTransition);
-            }, dropdownTransition);
-        }
+    // Reset handle and dropdown
+    } else {
+        dropdown.classList.remove(dropdownClass);
+        handle.classList.remove(dropdownClass);
     }
 }
 
-// Open specific dropdown
-function mdlrDropdownOpen(dropdown, element) {
-    dropdown.setAttribute('aria-expanded', 'true');
-    dropdown.classList.add(dropdownClass);
-    element.classList.add(dropdownClass);
-}
+/*
+# Select ######################################################################
+*/
 
-// Close all dropdowns
-function mdlrDropdownClose() {
-    dropdowns.forEach(function(dropdown) {
+const selectForms = mdlrElements('.mdlr-function-select-form');
 
-        // Identify content element
-        const element = document.getElementById(dropdown.getAttribute('aria-controls'));
-
-        // Close dropdown handle and content
-        dropdown.setAttribute('aria-expanded', 'false');
-        dropdown.classList.remove(dropdownClass);
-        element.classList.remove(dropdownClass);
-
-        // Remove unnecessary listeners for closing the dropdown (click, swipe, keypress)
-        document.removeEventListener('click', mdlrDropdownCloseConditions);
-        window.removeEventListener('touchstart', mdlrDropdownCloseConditions);
-        window.removeEventListener('keydown', mdlrDropdownCloseConditions);
+// Activate select form buttons
+if(selectForms.length > 0) {
+    selectForms.forEach((selectForm) => {
+        selectForm.addEventListener('click', (e) => {
+            e.preventDefault();
+            mdlrSelectForm(e.currentTarget);
+        });
+        selectForm.addEventListener('keydown', (e) => {
+            if(e.code == 'Enter' || e.code == 'Space') {
+                e.preventDefault();
+                mdlrSelectForm(e.currentTarget);
+            }
+        });
     });
 }
 
-// Close conditions for listeners
-function mdlrDropdownCloseConditions(e) {
+// Form-wide select
+function mdlrSelectForm(clickedElement) {
 
-    // Check for 'escape' keypress
-    if(e.code) {
-        if(e.code == 'Escape') {
-            mdlrDropdownClose();
-            e.preventDefault();
-        }
+    // Retrieve selection
+    const newAction = clickedElement.href;
+    const newLabel = clickedElement.textContent;
+
+    // Retrieve relevant elements
+    const popover = clickedElement.closest('menu');
+    const popoverItems = popover.querySelectorAll('li');
+    const popoverItemIcons = popover.querySelectorAll('svg > use');
+    const selectedItem = clickedElement.closest('li');
+    const selectedItemIcon = clickedElement.querySelector('svg > use');
+    const handleSpan = document.querySelector('[popovertarget="' + popover.id + '"] > span');
+    const form = clickedElement.closest('form');
+
+    // Unselect all options
+    if(popoverItems.length > 0) {
+        popoverItems.forEach((popoverItem) => {
+            popoverItem.ariaSelected = 'false';
+        });
+    }
+    if(popoverItemIcons.length > 0) {
+        popoverItemIcons.forEach((popoverItemIcon) => {
+            popoverItemIcon.setAttributeNS(null, 'href', '#icon-blank');
+        });
     }
 
-    // Check if click/swipe is outside focus element
-    else {
-        if(! e.target.closest('.mdlr-dropdown')) {
-            mdlrDropdownClose();
-            //e.preventDefault();
-        }
-    }
+    // Activate selected option
+    selectedItem.ariaSelected = 'true';
+    selectedItemIcon.setAttributeNS(null, 'href', '#icon-checkmark');
+
+    // Change form and handle accordingly
+    form.action = newAction;
+    handleSpan.textContent = newLabel;
+
+    // Hide popover
+    popover.hidePopover();
 }
 
 /*
@@ -750,15 +760,15 @@ const hierarchies = mdlrElements('.mdlr-function-hierarchy');
 
 // Activate all toggles
 if(hierarchies.length > 0) {
-    hierarchies.forEach(function(hierarchy) {
-        hierarchy.addEventListener('click', function(e) {
+    hierarchies.forEach((hierarchy) => {
+        hierarchy.addEventListener('click', (e) => {
+            e.preventDefault();
             mdlrHierarchy(e.currentTarget);
-            //e.preventDefault();
         });
-        hierarchy.addEventListener('keydown', function(e) {
+        hierarchy.addEventListener('keydown', (e) => {
             if(e.code == 'Enter' || e.code == 'Space') {
-                mdlrHierarchy(e.currentTarget);
                 e.preventDefault();
+                mdlrHierarchy(e.currentTarget);
             }
         });
     });
@@ -807,15 +817,15 @@ if(modals.length > 0) {
 
 // Activate opener buttons in modals
 if(modalOpeners.length > 0) {
-    modalOpeners.forEach(function(modalOpener) {
-        modalOpener.addEventListener('click', function(e) {
+    modalOpeners.forEach((modalOpener) => {
+        modalOpener.addEventListener('click', (e) => {
+            e.preventDefault();
             mdlrModalOpen(e.currentTarget);
-            //e.preventDefault();
         });
-        modalOpener.addEventListener('keydown', function(e) {
+        modalOpener.addEventListener('keydown', (e) => {
             if(e.code == 'Enter' || e.code == 'Space') {
-                mdlrModalOpen(e.currentTarget);
                 e.preventDefault();
+                mdlrModalOpen(e.currentTarget);
             }
         });
     });
@@ -823,15 +833,15 @@ if(modalOpeners.length > 0) {
 
 // Activate close buttons in modals
 if(modalClosers.length > 0) {
-    modalClosers.forEach(function(modalCloser) {
-        modalCloser.addEventListener('click', function(e) {
+    modalClosers.forEach((modalCloser) => {
+        modalCloser.addEventListener('click', (e) => {
+            e.preventDefault();
             mdlrModalClose();
-            //e.preventDefault();
         });
-        modalCloser.addEventListener('keydown', function(e) {
+        modalCloser.addEventListener('keydown', (e) => {
             if(e.code == 'Enter' || e.code == 'Space') {
-                mdlrModalClose();
                 e.preventDefault();
+                mdlrModalClose();
             }
         });
     });
@@ -858,7 +868,7 @@ function mdlrModalOpen(clickedElement) {
     document.body.classList.add('mdlr-variant-modal');
 
     // Focus specific element
-    setTimeout(function() {
+    setTimeout(() => {
         if(focusElement) {
             focusElement.focus();
         }
@@ -877,11 +887,11 @@ function mdlrModalClose() {
     document.body.classList.remove('mdlr-variant-modal');
 
     // Hide modal
-    modals.forEach(function(modal) {
+    modals.forEach((modal) => {
         modal.classList.remove('mdlr-variant-active');
 
         // Close modal after transition
-        setTimeout(function() {
+        setTimeout(() => {
             modal.close();
         }, modalTransition + 25);
     
@@ -905,8 +915,8 @@ function mdlrModalCloseConditions(e) {
     // Check for 'escape' keypress
     if(e.code) {
         if(e.code == 'Escape') {
-            mdlrModalClose();
             e.preventDefault();
+            mdlrModalClose();
         }
     }
 
@@ -931,8 +941,8 @@ function mdlrModalCloseConditions(e) {
         // Check dialog rect
         const inOpenModal = (openModalRect.top <= clientY && clientY <= openModalRect.top + openModalRect.height && openModalRect.left <= clientX && clientX <= openModalRect.left + openModalRect.width);
         if (! inOpenModal) {
-            mdlrModalClose();
             //e.preventDefault();
+            mdlrModalClose();
         }
     }
 }
@@ -953,15 +963,15 @@ if(toasts.length > 0) {
 
 // Activate all close buttons for toasts
 if(toastClosers.length > 0) {
-    toastClosers.forEach(function(toastCloser) {
-        toastCloser.addEventListener('click', function(e) {
+    toastClosers.forEach((toastCloser) => {
+        toastCloser.addEventListener('click', (e) => {
+            e.preventDefault();
             mdlrToastClose();
-            //e.preventDefault();
         });
-        toastCloser.addEventListener('keydown', function(e) {
+        toastCloser.addEventListener('keydown', (e) => {
             if(e.code == 'Enter' || e.code == 'Space') {
-                mdlrToastClose();
                 e.preventDefault();
+                mdlrToastClose();
             }
         });
     });
@@ -973,10 +983,10 @@ function mdlrToastOpen(toastText) {
     // Close open notification and add delay to accomodate the transition
     // Delay also makes actions appear like they took time to compute
     mdlrToastClose()
-    setTimeout(function() {
+    setTimeout(() => {
 
         // Add notification text
-        toasts.forEach(function(toast) {
+        toasts.forEach((toast) => {
             const notifications = toast.getElementsByTagName('p');
             for(const notification of notifications) {
                 notification.textContent = toastText;
@@ -990,7 +1000,7 @@ function mdlrToastOpen(toastText) {
         });
 
         // Remove notification after three seconds and transition bonus
-        setTimeout(function() {
+        setTimeout(() => {
             mdlrToastClose();
         }, toastTransition + 3050);
 
@@ -1001,12 +1011,12 @@ function mdlrToastOpen(toastText) {
 function mdlrToastClose() {
 
     // Remove active notifications
-    toasts.forEach(function(toast) {
+    toasts.forEach((toast) => {
         toast.classList.remove('mdlr-variant-active');
         toast.setAttribute('aria-hidden', 'true');
 
         // Clear dialog element and notification text
-        setTimeout(function() {
+        setTimeout(() => {
             toast.close();
             const notifications = toast.getElementsByTagName('p');
             for(const notification of notifications) {
@@ -1025,15 +1035,15 @@ const copyButtons = mdlrElements('.mdlr-function-copy');
 
 // Activate all copy buttons
 if(copyButtons.length > 0) {
-    copyButtons.forEach(function(copyButton) {
-        copyButton.addEventListener('click', function(e) {
-            mdlrCopy(e.currentTarget);
+    copyButtons.forEach((copyButton) => {
+        copyButton.addEventListener('click', (e) => {
             e.preventDefault();
+            mdlrCopy(e.currentTarget);
         });
-        copyButton.addEventListener('keydown', function(e) {
+        copyButton.addEventListener('keydown', (e) => {
             if(e.code == 'Enter' || e.code == 'Space') {
-                mdlrCopy(e.currentTarget);
                 e.preventDefault();
+                mdlrCopy(e.currentTarget);
             }
         });
     });
@@ -1054,11 +1064,11 @@ function mdlrCopy(clickedElement) {
                 navigator.clipboard.writeText(content)
 
                 // Success notification
-                .then(function() {
+                .then(() => {
                     mdlrToastOpen(successMessage);
 
                 // Failure notification
-                }, function() {
+                }, () => {
                     mdlrToastOpen(failureMessage);
                 });
 
@@ -1080,15 +1090,15 @@ const shareButtons = mdlrElements('.mdlr-function-share');
 
 // Activate all share buttons
 if(shareButtons.length > 0) {
-    shareButtons.forEach(function(shareButton) {
-        shareButton.addEventListener('click', function(e) {
+    shareButtons.forEach((shareButton) => {
+        shareButton.addEventListener('click', (e) => {
+            e.preventDefault();
             mdlrShare(e.currentTarget);
-            //e.preventDefault();
         });
-        shareButton.addEventListener('keydown', function(e) {
+        shareButton.addEventListener('keydown', (e) => {
             if(e.code == 'Enter' || e.code == 'Space') {
-                mdlrShare(e.currentTarget);
                 e.preventDefault();
+                mdlrShare(e.currentTarget);
             }
         });
     });
@@ -1100,7 +1110,7 @@ if(navigator.canShare && navigator.canShare({
     text: 'Sample text',
     url: 'https://www.adwmainz.de/'
     })) {
-    shareButtons.forEach(function(shareButton) {
+    shareButtons.forEach((shareButton) => {
         if(shareButton.parentElement.hidden == true) {
             shareButton.parentElement.hidden = false;
         }
@@ -1146,15 +1156,15 @@ const mastodonButtons = mdlrElements('.mdlr-function-mastodon');
 
 // Activate Mastodon share buttons
 if(mastodonButtons.length > 0) {
-    mastodonButtons.forEach(function(mastodonButton) {
-        mastodonButton.addEventListener('click', function(e) {
+    mastodonButtons.forEach((mastodonButton) => {
+        mastodonButton.addEventListener('click', (e) => {
+            e.preventDefault();
             mdlrMastodon(e.currentTarget);
-            //e.preventDefault();
         });
-        mastodonButton.addEventListener('keydown', function(e) {
+        mastodonButton.addEventListener('keydown', (e) => {
             if(e.code == 'Enter' || e.code == 'Space') {
-                mdlrMastodon(e.currentTarget);
                 e.preventDefault();
+                mdlrMastodon(e.currentTarget);
             }
         });
     });
@@ -1200,57 +1210,57 @@ const watchlistSerialisations = mdlrElements('.mdlr-function-watchlist-serialisa
 
 // Activate all buttons for watchlists
 if(watchlistAdders.length > 0) {
-    watchlistAdders.forEach(function(watchlistAdder) {
-        watchlistAdder.addEventListener('click', function(e) {
+    watchlistAdders.forEach((watchlistAdder) => {
+        watchlistAdder.addEventListener('click', (e) => {
+            e.preventDefault();
             mdlrWatchlistAdd(e.currentTarget);
-            //e.preventDefault();
         });
-        watchlistAdder.addEventListener('keydown', function(e) {
+        watchlistAdder.addEventListener('keydown', (e) => {
             if(e.code == 'Enter' || e.code == 'Space') {
-                mdlrWatchlistAdd(e.currentTarget);
                 e.preventDefault();
+                mdlrWatchlistAdd(e.currentTarget);
             }
         });
     });
 }
 if(watchlistCsvs.length > 0) {
-    watchlistCsvs.forEach(function(watchlistCsv) {
-        watchlistCsv.addEventListener('click', function(e) {
+    watchlistCsvs.forEach((watchlistCsv) => {
+        watchlistCsv.addEventListener('click', (e) => {
+            e.preventDefault();
             mdlrWatchlistCsv();
-            //e.preventDefault();
         });
-        watchlistCsv.addEventListener('keydown', function(e) {
+        watchlistCsv.addEventListener('keydown', (e) => {
             if(e.code == 'Enter' || e.code == 'Space') {
-                mdlrWatchlistCsv();
                 e.preventDefault();
+                mdlrWatchlistCsv();
             }
         });
     });
 }
 if(watchlistJsons.length > 0) {
-    watchlistJsons.forEach(function(watchlistJson) {
-        watchlistJson.addEventListener('click', function(e) {
+    watchlistJsons.forEach((watchlistJson) => {
+        watchlistJson.addEventListener('click', (e) => {
+            e.preventDefault();
             mdlrWatchlistJson();
-            //e.preventDefault();
         });
-        watchlistJson.addEventListener('keydown', function(e) {
+        watchlistJson.addEventListener('keydown', (e) => {
             if(e.code == 'Enter' || e.code == 'Space') {
-                mdlrWatchlistJson();
                 e.preventDefault();
+                mdlrWatchlistJson();
             }
         });
     });
 }
 if(watchlistClearers.length > 0) {
-    watchlistClearers.forEach(function(watchlistClearer) {
-        watchlistClearer.addEventListener('click', function(e) {
+    watchlistClearers.forEach((watchlistClearer) => {
+        watchlistClearer.addEventListener('click', (e) => {
+            e.preventDefault();
             mdlrWatchlistSet();
-            //e.preventDefault();
         });
-        watchlistClearer.addEventListener('keydown', function(e) {
+        watchlistClearer.addEventListener('keydown', (e) => {
             if(e.code == 'Enter' || e.code == 'Space') {
-                mdlrWatchlistSet();
                 e.preventDefault();
+                mdlrWatchlistSet();
             }
         });
     });
@@ -1343,7 +1353,7 @@ function mdlrWatchlistView() {
 
     // Reset all add buttons
     if(watchlistAdders.length > 0) {
-        watchlistAdders.forEach(function(watchlistAdder) {
+        watchlistAdders.forEach((watchlistAdder) => {
             watchlistAdder.disabled = false;
             const watchlistAdderIcon = watchlistAdder.querySelector('svg > use');
             watchlistAdderIcon.setAttributeNS(null, 'href', '#icon-add');
@@ -1353,7 +1363,7 @@ function mdlrWatchlistView() {
     // Remove existing list from DOM
     const watchlistLists = mdlrElements('.mdlr-function-watchlist-list');
     if(watchlistLists.length > 0) {
-        watchlistLists.forEach(function(watchlistList) {
+        watchlistLists.forEach((watchlistList) => {
             watchlistList.remove();
         });
     }
@@ -1361,7 +1371,7 @@ function mdlrWatchlistView() {
     // Retrieve watchlist
     const watchlist = mdlrWatchlistGet();
     if(watchlistEmpties.length > 0) {
-        watchlistEmpties.forEach(function(watchlistEmpty) {
+        watchlistEmpties.forEach((watchlistEmpty) => {
             const buttonRemove = watchlistEmpty.dataset.remove;
             const messageFailure = watchlistEmpty.dataset.failure;
 
@@ -1371,7 +1381,7 @@ function mdlrWatchlistView() {
 
                 // Show serialisations
                 if(watchlistSerialisations.length > 0) {
-                    watchlistSerialisations.forEach(function(watchlistSerialisation) {
+                    watchlistSerialisations.forEach((watchlistSerialisation) => {
                         watchlistSerialisation.classList.remove('mdlr-variant-hidden');
                     });
                 }
@@ -1414,14 +1424,14 @@ function mdlrWatchlistView() {
                     // Attach function to button
                     newButton.dataset.target = encodeURI(key); // Content escaped via function
                     newButton.dataset.failure = messageFailure;
-                    newButton.addEventListener('click', function(e) {
+                    newButton.addEventListener('click', (e) => {
+                        e.preventDefault();
                         mdlrWatchlistRemove(e.currentTarget);
-                        //e.preventDefault();
                     });
-                    newButton.addEventListener('keydown', function(e) {
+                    newButton.addEventListener('keydown', (e) => {
                         if(e.code == 'Enter' || e.code == 'Space') {
-                            mdlrWatchlistRemove(e.currentTarget);
                             e.preventDefault();
+                            mdlrWatchlistRemove(e.currentTarget);
                         }
                     });
 
@@ -1439,7 +1449,7 @@ function mdlrWatchlistView() {
 
                     // Deactivate respective add buttons
                     if(watchlistAdders.length > 0) {
-                        watchlistAdders.forEach(function(watchlistAdder) {
+                        watchlistAdders.forEach((watchlistAdder) => {
                             if(watchlistAdder.dataset.target == encodeURI(key)) {
                                 watchlistAdder.disabled = true;
                                 const watchlistAdderIcon = watchlistAdder.querySelector('svg > use');
@@ -1453,7 +1463,7 @@ function mdlrWatchlistView() {
             } else {
                 watchlistEmpty.classList.remove('mdlr-variant-hidden');
                 if(watchlistSerialisations.length > 0) {
-                    watchlistSerialisations.forEach(function(watchlistSerialisation) {
+                    watchlistSerialisations.forEach((watchlistSerialisation) => {
                         watchlistSerialisation.classList.add('mdlr-variant-hidden');
                     });
                 }

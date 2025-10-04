@@ -8,8 +8,9 @@
     <f:argument name="iconAfter" type="string" optional="{true}" default="" description="The icon to display after the text (cf. available icon assets)" />
     <f:argument name="aria" type="string[]" optional="{true}" default="{}" description="Array of additional ARIA attributes" />
     <f:argument name="data" type="string[]" optional="{true}" default="{}" description="Array of additional data attributes" />
+    <f:argument name="popoverTarget" type="string" optional="{true}" default="" description="ID of the popover to toggle via this button" />
 
-    <button id="{id}" class="{f:if(condition: '{variant} != \'\'', then: 'mdlr-variant-{variant} ') -> f:for(each: '{variants}', as: 'variant')} {f:if(condition: '{function} != \'\'', then: 'mdlr-function-{function}')}" title="{f:if(condition: '{hint} != \'\'', then: '{hint}', else: '{text}')}" {f:if(condition: '{ariaKey} != \'\' && {ariaValue} != \'\'', then: 'aria-{ariaKey}="{ariaValue}" ') -> f:for(each: '{aria}', as: 'ariaValue', key: 'ariaKey')} {f:if(condition: '{dataKey} != \'\' && {dataValue} != \'\'', then: 'data-{dataKey}="{dataValue}" ') -> f:for(each: '{data}', as: 'dataValue', key: 'dataKey')}>
+    <button type="button" id="{id}" class="{f:if(condition: '{variant} != \'\'', then: 'mdlr-variant-{variant} ') -> f:for(each: '{variants}', as: 'variant')} {f:if(condition: '{function} != \'\'', then: 'mdlr-function-{function}')}" title="{f:if(condition: '{hint} != \'\'', then: '{hint}', else: '{text}')}" {f:if(condition: '{popoverTarget} != \'\'', then: 'popovertarget="{popoverTarget}" popovertargetaction="toggle"')} {f:if(condition: '{ariaKey} != \'\' && {ariaValue} != \'\'', then: 'aria-{ariaKey}="{ariaValue}" ') -> f:for(each: '{aria}', as: 'ariaValue', key: 'ariaKey')} {f:if(condition: '{dataKey} != \'\' && {dataValue} != \'\'', then: 'data-{dataKey}="{dataValue}" ') -> f:for(each: '{data}', as: 'dataValue', key: 'dataKey')}>
         <f:if condition="{icon} != ''">
             <svg width="24" height="24" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                 <use href="#icon-{icon}" />
