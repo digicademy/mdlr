@@ -1,325 +1,13 @@
 /*
-This file is part of the MDLR web frontend library v0.5.0.
+This file is part of the MDLR atomic web component library.
 
-The atomic interface library is designed to work with semantic HTML for
-accessible, responsive web apps. It is MIT licenced.
+For the full copyright and license information, please read the
+LICENSE.txt file that was distributed with this source code.
 */
 
-/*
-// Show a functioning install button if the app is not installed yet
-window.addEventListener( 'beforeinstallprompt', (e) => {
-    const deferredPrompt = e;
-
-    // Display the install button
-    const installButton = document.getElementById( 'install' );
-    installButton.hidden = false;
-    installButton.classList.add( 'mdlr-variant-visible' );
-  
-    // When the button is clicked, show the install prompt
-    document.getElementById( 'install-button' ).addEventListener( 'click', ( e ) => {
-        deferredPrompt.prompt();
-    } );
-    document.getElementById( 'install-button' ).addEventListener( 'keydown', function( e ) {
-        if( e.code == 'Enter' || e.code == 'Space' ) {
-            e.preventDefault();
-            deferredPrompt.prompt();
-        }
-    });
-
-    // Wait for the user response and show a notification
-    deferredPrompt.userChoice.then( ( choice ) => {
-
-        // Case 1: user installs app
-        if ( choice.outcome === 'accepted' ) {
-            mdlr_toast_open( 'notify', 'Erfolgreich installiert' );
-
-        // Case 2: user does not install app
-        } else {
-            mdlr_toast_open( 'notify', 'App leider nicht installiert' );
-        }
-
-        // Hide the button
-        installButton.classList.remove( 'mdlr-variant-visible' );
-        setTimeout( function () {
-            installButton.hidden = true;
-        }, 350 );
-
-        // Reset the variable
-        deferredPrompt = null;
-    } );
-} );*/
-
 
 /*
-# Timeline ####################################################################
-*/
-
-// Variable
-const timelineRegions = mdlrElements('.mdlr-function-timeline');
-
-// Activate all copy buttons
-if(timelineRegions.length > 0) {
-    timelineRegions.forEach((timelineRegion) => {
-        timelineRegion.addEventListener('mouseover', (e) => {
-            //e.preventDefault();
-            mdlrTimelineHighlight(e.currentTarget);
-        });
-    });
-}
-
-// Highlight desired content
-function mdlrTimelineHighlight(hoveredElement) {
-    if(hoveredElement) {
-
-        // Highlight target element
-        const target = document.getElementById(hoveredElement.dataset.target);
-        target.classList.add('mdlr-variant-active');
-
-        // Add one-time listener to remove highlight
-        hoveredElement.addEventListener('mouseout', (e) => {
-            target.classList.remove('mdlr-variant-active');
-        }, {once: true});
-    }
-}
-
-
-/*
-# Info buttons ################################################################
-*/
-
-// Variables
-const infoButtons = mdlrElements('.mdlr-function-info');
-const infoPopovers = mdlrElements('.mdlr-info > ol > li');
-
-// Activate all info buttons
-if(infoButtons.length > 0) {
-    infoButtons.forEach((infoButton) => {
-        infoButton.addEventListener('click', (e) => {
-            //e.preventDefault();
-            mdlrInfoOpen(e.currentTarget);
-        });
-        infoButton.addEventListener('keydown', (e) => {
-            if(e.code == 'Enter' || e.code == 'Space') {
-                e.preventDefault();
-                mdlrInfoOpen(e.currentTarget);
-            }
-        });
-    });
-}
-
-// Show info popover on demand
-function mdlrInfoOpen(clickedElement) {
-
-    // Identify the popover to open
-    let targetId = clickedElement.href;
-    targetId = targetId.substring(targetId.indexOf('#') );
-    let targets = mdlrElements(targetId);
-
-    // Close popover if it is already open
-    targets.forEach((target) => {
-        if(target.classList.contains('mdlr-variant-active')) {
-            mdlrInfoClose();
-        }
-        else {
-
-            // Get desired popover position
-            const viewport = window.innerWidth;
-            const offsetMin = clickedElement.offsetWidth;
-            const offsetAdditional = Math.round(0.25 * offsetMin);
-            const offsetWidth = target.offsetWidth;
-            const position = clickedElement.getBoundingClientRect();
-            const positionTop = position.top + window.scrollY + offsetMin;
-
-            // Calculate whether popover should be right-aligned
-            if((position.left + window.scrollX) > (viewport * 0.5)) {
-                var positionLeft = position.left + window.scrollX - offsetWidth + offsetMin + offsetAdditional;
-            }
-            else {
-                var positionLeft = position.left + window.scrollX - offsetAdditional;
-            }
-
-            // Position and show popover
-            target.style['top'] = positionTop + 'px';
-            target.style['left'] = positionLeft + 'px';
-            target.classList.add('mdlr-variant-active');
-
-            // Set a listener to close the popover on the next click anywhere in the document
-            setTimeout(() => {
-                document.addEventListener('click', mdlrInfoCloseConditions);
-                window.addEventListener('resize', mdlrInfoCloseConditions);
-                document.addEventListener('touchstart', mdlrInfoCloseConditions);
-                document.addEventListener('keydown', mdlrInfoCloseConditions);
-            }, 50);
-        }
-    });
-}
-
-// Close info popover on demand
-function mdlrInfoClose() {
-
-    // Close popovers
-    if(infoPopovers.length > 0) {
-        infoPopovers.forEach((infoPopover) => {
-            infoPopover.classList.remove('mdlr-variant-active');
-        });
-    }
-
-    // Remove unnecessary listeners
-    document.removeEventListener('click', mdlrInfoCloseConditions);
-    window.removeEventListener('resize', mdlrInfoCloseConditions);
-    document.removeEventListener('touchstart', mdlrInfoCloseConditions);
-    document.removeEventListener('keydown', mdlrInfoCloseConditions);
-}
-
-// Close all info popovers under certain conditions
-function mdlrInfoCloseConditions(e) {
-
-    // Check for 'escape' keypress if the event is a keypress
-    if(e.code) {
-        if(e.code == 'Escape' || e.code == 'Enter' || e.code == 'Space') {
-            e.preventDefault();
-            mdlrInfoClose();
-        }
-    }
-
-    // Check if click was outside the popover
-    else {
-        if(! e.target.closest('.mdlr-info > ol > li')) {
-            mdlrInfoClose();
-        }
-    }
-}
-
-
-/*
-# Reference links #############################################################
-*/
-
-// Variables
-const referenceLinks = mdlrElements('.mdlr-function-reference');
-
-// Activate all reference links
-if(referenceLinks.length > 0) {
-    referenceLinks.forEach((referenceLink) => {
-        referenceLink.addEventListener('click', (e) => {
-            //e.preventDefault();
-            mdlrReferenceOpen(e.currentTarget);
-        });
-        referenceLink.addEventListener('keydown', (e) => {
-            if(e.code == 'Enter' || e.code == 'Space') {
-                e.preventDefault();
-                mdlrReferenceOpen(e.currentTarget);
-            }
-        });
-    });
-}
-
-// Show reference popover on demand
-function mdlrReferenceOpen(clickedElement) {
-
-    // Identify the reference to show
-    let targetId = clickedElement.href;
-    targetId = targetId.substring(targetId.indexOf('#') );
-    let targets = mdlrElements(targetId);
-
-    // Close popover if it is already open
-    targets.forEach((target) => {
-        if(document.getElementById('temporary-reference')) {
-            mdlrReferenceClose();
-        }
-        else {
-
-            // Move content to temporary info popover
-            let content = document.createElement('li');
-            content.id = 'temporary-reference';
-            content.innerHTML = target.innerHTML;
-            const contentElement = document.getElementById('info-items').appendChild(content);
-
-            // Get desired popover position
-            const viewport = window.innerWidth;
-            const offsetMin = clickedElement.offsetWidth;
-            const offsetHeight = clickedElement.offsetHeight;
-            const offsetAdditional = 10;
-            const offsetWidth = contentElement.offsetWidth;
-            const position = clickedElement.getBoundingClientRect();
-            const positionTop = position.top + window.scrollY + offsetHeight;
-
-            // Calculate whether popover should be right-aligned
-            if((position.left + window.scrollX) > (viewport * 0.5)) {
-                var positionLeft = position.left + window.scrollX - offsetWidth + offsetMin + offsetAdditional;
-            }
-            else {
-                var positionLeft = position.left + window.scrollX - offsetAdditional;
-            }
-
-            // Position and show popover
-            contentElement.style['top'] = positionTop + 'px';
-            contentElement.style['left'] = positionLeft + 'px';
-            contentElement.classList.add('mdlr-variant-active');
-
-            // Set a listener to close the popover on the next click anywhere in the document
-            setTimeout(() => {
-                document.addEventListener('click', mdlrReferenceCloseConditions);
-                window.addEventListener('resize', mdlrReferenceCloseConditions);
-                document.addEventListener('touchstart', mdlrReferenceCloseConditions);
-                document.addEventListener('keydown', mdlrReferenceCloseConditions);
-            }, 50);
-        }
-    });
-}
-
-// Close reference popover on demand
-function mdlrReferenceClose() {
-
-    // Close popovers
-    let referencePopover = document.getElementById('temporary-reference');
-    referencePopover.classList.remove('mdlr-variant-active');
-    setTimeout(() => { // TODO Possibly remove this
-        referencePopover.remove();
-    }, 225);
-
-    // Remove unnecessary listeners
-    document.removeEventListener('click', mdlrReferenceCloseConditions);
-    window.removeEventListener('resize', mdlrReferenceCloseConditions);
-    document.removeEventListener('touchstart', mdlrReferenceCloseConditions);
-    document.removeEventListener('keydown', mdlrReferenceCloseConditions);
-}
-
-// Close reference popover under certain conditions
-function mdlrReferenceCloseConditions(e) {
-
-    // Check for 'escape' keypress if the event is a keypress
-    if(e.code) {
-        if(e.code == 'Escape' || e.code == 'Enter' || e.code == 'Space') {
-            e.preventDefault();
-            mdlrReferenceClose();
-        }
-    }
-
-    // Check if click was outside the popover
-    else {
-        if(! e.target.closest('.mdlr-info > ol > li#temporary-reference')) {
-            mdlrReferenceClose();
-        }
-    }
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/*
-# Basics ######################################################################
+## Basics #####################################################################
 */
 
 // General variables
@@ -330,8 +18,37 @@ function mdlrElements(selector) {
     return Array.prototype.slice.call(document.querySelectorAll(selector), 0);
 }
 
+// Activate buttons
+function mdlrActivate(buttons, callback, clickedElementAtt = false) {
+    for(const button of buttons) {
+
+        // Click or touch
+        button.addEventListener('click', (e) => {
+            e.preventDefault();
+            if(clickedElementAtt) {
+                callback(e.currentTarget);
+            } else {
+                callback();
+            }
+        });
+
+        // Keyboard input
+        button.addEventListener('keydown', (e) => {
+            if(e.code == 'Enter' || e.code == 'Space') {
+                e.preventDefault();
+                if(clickedElementAtt) {
+                    callback(e.currentTarget);
+                } else {
+                    callback();
+                }
+            }
+        });
+    }
+}
+
+
 /*
-# Web app #####################################################################
+## Web app ####################################################################
 */
 
 // Register service worker
@@ -339,28 +56,14 @@ if ('serviceWorker' in navigator) {
     navigator.serviceWorker.register('mdlr-sw.js')
 }
 
+
 /*
-# Storage #####################################################################
+## Storage ####################################################################
 */
 
-// Variables
+// Elements and buttons
 const storageButtons = mdlrElements('.mdlr-function-storage');
-
-// Activate theme buttons
-if(storageButtons.length > 0) {
-    storageButtons.forEach((storageButton) => {
-        storageButton.addEventListener('click', (e) => {
-            e.preventDefault();
-            mdlrStorageClear();
-        });
-        storageButton.addEventListener('keydown', (e) => {
-            if(e.code == 'Enter' || e.code == 'Space') {
-                e.preventDefault();
-                mdlrStorageClear();
-            }
-        });
-    });
-}
+mdlrActivate(storageButtons, mdlrStorageClear);
 
 // Remove all content of local storage
 function mdlrStorageClear() {
@@ -372,59 +75,41 @@ function mdlrStorageClear() {
 // Evaluate whether there is local storage to delete
 function mdlrStorageEvaluate() {
     if(localStorage.length > 0) {
-        if(storageButtons.length > 0) {
-            storageButtons.forEach((storageButton) => {
-                storageButton.disabled = false;
-            });
+        for(const storageButton of storageButtons) {
+            storageButton.disabled = false;
         }
     } else {
-        if(storageButtons.length > 0) {
-            storageButtons.forEach((storageButton) => {
-                storageButton.disabled = true;
-            });
+        for(const storageButton of storageButtons) {
+            storageButton.disabled = true;
         }
     }
 }
 
-// Automatically evaluate local storage
+// Initially evaluate local storage
 mdlrStorageEvaluate();
 
+
 /*
-# Theme #######################################################################
+## Theme ######################################################################
 */
 
-// Variables
+// Elements and buttons
 const themeButtons = mdlrElements('.mdlr-function-theme');
 const themePictures = mdlrElements('picture.mdlr-variant-theme');
-
-// Activate theme buttons
-if(themeButtons.length > 0) {
-    themeButtons.forEach((themeButton) => {
-        themeButton.addEventListener('click', (e) => {
-            e.preventDefault();
-            mdlrThemeSet(e.currentTarget.dataset.target);
-        });
-        themeButton.addEventListener('keydown', (e) => {
-            if(e.code == 'Enter' || e.code == 'Space') {
-                e.preventDefault();
-                mdlrThemeSet(e.currentTarget.dataset.target);
-            }
-        });
-    });
-}
+mdlrActivate(themeButtons, mdlrThemeSetClick, true);
 
 // Highlight the active switch button
 function mdlrThemeSwitch(theme) {
     const themeActiveClass = 'mdlr-variant-active';
 
     // Activate only the requested switch buttons
-    themeButtons.forEach((themeButton) => {
+    for(const themeButton of themeButtons) {
         if(themeButton.dataset.target == theme) {
             themeButton.classList.add(themeActiveClass);
         } else {
             themeButton.classList.remove(themeActiveClass);
         }
-    });
+    }
 }
 
 // Set requested theme class
@@ -435,12 +120,12 @@ function mdlrThemeSet(theme) {
         'mdlr-theme-light',
         'mdlr-theme-dark'
     ];
-    themeClasses.forEach((themeClass) => {
+    for(const themeClass of themeClasses) {
         root.classList.remove(themeClass);
-    });
+    }
 
     // Add requested class and save user preference
-    if(theme != null) {
+    if(theme) {
         switch(theme) {
 
             // Light mode
@@ -469,88 +154,40 @@ function mdlrThemeSet(theme) {
     mdlrStorageEvaluate();
 }
 
-// Automatically activate theme
+// Get requested theme name from element
+function mdlrThemeSetClick(clickedElement) {
+    mdlrThemeSet(clickedElement.dataset.target);
+}
+
+// Initially activate theme
 mdlrThemeSet(localStorage.getItem('theme'));
 
+
 /*
-# Back, up, and PDF ###########################################################
+## Back, up, and PDF ##########################################################
 */
 
-// Variable
+// Elements and buttons
 const backButtons = mdlrElements('.mdlr-function-back');
 const upButtons = mdlrElements('.mdlr-function-up');
 const pdfButtons = mdlrElements('.mdlr-function-pdf');
+mdlrActivate(backButtons, history.back);
+mdlrActivate(upButtons, mdlrScrollTop);
+mdlrActivate(pdfButtons, window.print);
 
-// Activate back buttons
-if(backButtons.length > 0) {
-    backButtons.forEach((backButton) => {
-        backButton.addEventListener('click', (e) => {
-            e.preventDefault();
-            history.back();
-        });
-        backButton.addEventListener('keydown', (e) => {
-            if(e.code == 'Enter' || e.code == 'Space') {
-                e.preventDefault();
-                history.back();
-            }
-        });
-    });
+// Scroll to top
+function mdlrScrollTop() {
+    window.scrollTo(0, 0);
 }
 
-// Activate up buttons
-if(upButtons.length > 0) {
-    upButtons.forEach((upButton) => {
-        upButton.addEventListener('click', (e) => {
-            e.preventDefault();
-            window.scrollTo(0, 0);
-        });
-        upButton.addEventListener('keydown', (e) => {
-            if(e.code == 'Enter' || e.code == 'Space') {
-                e.preventDefault();
-                window.scrollTo(0, 0);
-            }
-        });
-    });
-}
-
-// Activate PDF buttons
-if(pdfButtons.length > 0) {
-    pdfButtons.forEach((pdfButton) => {
-        pdfButton.addEventListener('click', (e) => {
-            e.preventDefault();
-            window.print();
-        });
-        pdfButton.addEventListener('keydown', (e) => {
-            if(e.code == 'Enter' || e.code == 'Space') {
-                e.preventDefault();
-                window.print();
-            }
-        });
-    });
-}
 
 /*
-# Fullscreen ##################################################################
+## Fullscreen #################################################################
 */
 
-// Variable
+// Elements and buttons
 const fullscreenButtons = mdlrElements('.mdlr-function-fullscreen');
-
-// Activate fullscreen buttons
-if(fullscreenButtons.length > 0) {
-    fullscreenButtons.forEach((fullscreenButton) => {
-        fullscreenButton.addEventListener('click', (e) => {
-            e.preventDefault();
-            mdlrFullscreenToggle(e.currentTarget);
-        });
-        fullscreenButton.addEventListener('keydown', (e) => {
-            if(e.code == 'Enter' || e.code == 'Space') {
-                e.preventDefault();
-                mdlrFullscreenToggle(e.currentTarget);
-            }
-        });
-    });
-}
+mdlrActivate(fullscreenButtons, mdlrFullscreenToggle, true);
 
 // Open a specific element in fullscreen
 function mdlrFullscreenToggle(clickedElement) {
@@ -588,11 +225,12 @@ function mdlrFullscreenToggle(clickedElement) {
     }
 }
 
+
 /*
-# Headerbars ##################################################################
+## Headerbars #################################################################
 */
 
-// Variable
+// Elements and buttons
 const headerbars = mdlrElements('.mdlr-variant-headerbar');
 
 // Set up observer
@@ -603,62 +241,59 @@ const headerbarOptions = {
 
 // Add or remove class when target element hits or exits viewport
 const headerbarCallback = (entries, observer) => {
-    entries.forEach((entry) => {
+    for(const entry of entries) {
 
         // Entering viewport
         if(entry.isIntersecting) {
-            headerbars.forEach((headerbar) => {
+            for(const headerbar of headerbars) {
                 headerbar.classList.remove('mdlr-variant-scrolled');
-            });
+            }
         }
 
         // Exiting viewport
         else {
-            headerbars.forEach((headerbar) => {
+            for(const headerbar of headerbars) {
                 headerbar.classList.add('mdlr-variant-scrolled');
-            });
+            }
         }
-    });
+    }
 }
 
 // Initialise observer
 const headerbarObserver = new IntersectionObserver(headerbarCallback, headerbarOptions);
 const headerbarTargets = mdlrElements('.mdlr-function-scroll');
-if(headerbarTargets.length > 0) {
-    headerbarTargets.forEach((headerbarTarget) => {
-        headerbarObserver.observe(headerbarTarget);
-    });
+for(const headerbarTarget of headerbarTargets) {
+    headerbarObserver.observe(headerbarTarget);
 }
 
+
 /*
-# Dropdown ####################################################################
+## Dropdowns ##################################################################
 */
 
-// Variable
+// Elements and buttons
 const dropdowns = mdlrElements('.mdlr-dropdown');
 const dropdownClass = 'mdlr-variant-active';
 
 // Insert positions and transitions
-if(dropdowns.length > 0) {
-    dropdowns.forEach((dropdown) => {
+for(const dropdown of dropdowns) {
 
-        // Add position/transition after popover is opened
-        dropdown.addEventListener('toggle', (e) => {
-            if(e.newState == 'open') {
-                mdlrDropdownToggle(dropdown);
-            }
-        });
+    // Add position/transition after popover is opened
+    dropdown.addEventListener('toggle', (e) => {
+        if(e.newState == 'open') {
+            mdlrDropdownToggle(dropdown);
+        }
+    });
 
-        // Add transition before popover is closed
-        dropdown.addEventListener('beforetoggle', (e) => {
-            if(e.newState == 'closed') {
-                mdlrDropdownToggle(dropdown, true);
-            }
-        });
+    // Add transition before popover is closed
+    dropdown.addEventListener('beforetoggle', (e) => {
+        if(e.newState == 'closed') {
+            mdlrDropdownToggle(dropdown, true);
+        }
     });
 }
 
-// Manipulate handle and dropdown when opened/closed
+// Manipulate dropdown and handle when opened/closed
 function mdlrDropdownToggle(dropdown, close = false) {
 
     // Get handle
@@ -678,38 +313,30 @@ function mdlrDropdownToggle(dropdown, close = false) {
             dropdown.style.insetBlockStart = `${handleRect.bottom}px`;
         }
 
-        // Activate handle and dropdown
-        dropdown.classList.add(dropdownClass);
+        // Activate handle
         handle.classList.add(dropdownClass);
 
-    // Reset handle and dropdown
+        // Listen for scroll events
+        document.addEventListener('scroll', (e) => {
+            dropdown.hidePopover();
+        }, {
+            once: true,
+        });
+
+    // Reset handle
     } else {
-        dropdown.classList.remove(dropdownClass);
         handle.classList.remove(dropdownClass);
     }
 }
 
+
 /*
-# Select ######################################################################
+## Selects ####################################################################
 */
 
+// Elements and buttons
 const selectForms = mdlrElements('.mdlr-function-select-form');
-
-// Activate select form buttons
-if(selectForms.length > 0) {
-    selectForms.forEach((selectForm) => {
-        selectForm.addEventListener('click', (e) => {
-            e.preventDefault();
-            mdlrSelectForm(e.currentTarget);
-        });
-        selectForm.addEventListener('keydown', (e) => {
-            if(e.code == 'Enter' || e.code == 'Space') {
-                e.preventDefault();
-                mdlrSelectForm(e.currentTarget);
-            }
-        });
-    });
-}
+mdlrActivate(selectForms, mdlrSelectForm, true);
 
 // Form-wide select
 function mdlrSelectForm(clickedElement) {
@@ -728,15 +355,11 @@ function mdlrSelectForm(clickedElement) {
     const form = clickedElement.closest('form');
 
     // Unselect all options
-    if(popoverItems.length > 0) {
-        popoverItems.forEach((popoverItem) => {
-            popoverItem.ariaSelected = 'false';
-        });
+    for(const popoverItem of popoverItems) {
+        popoverItem.ariaSelected = 'false';
     }
-    if(popoverItemIcons.length > 0) {
-        popoverItemIcons.forEach((popoverItemIcon) => {
-            popoverItemIcon.setAttributeNS(null, 'href', '#icon-blank');
-        });
+    for(const popoverItemIcon of popoverItemIcons) {
+        popoverItemIcon.setAttributeNS(null, 'href', '#icon-blank');
     }
 
     // Activate selected option
@@ -751,101 +374,17 @@ function mdlrSelectForm(clickedElement) {
     popover.hidePopover();
 }
 
-/*
-# Hierarchy ###################################################################
-*/
-
-// Variable
-const hierarchies = mdlrElements('.mdlr-function-hierarchy');
-
-// Activate all toggles
-if(hierarchies.length > 0) {
-    hierarchies.forEach((hierarchy) => {
-        hierarchy.addEventListener('click', (e) => {
-            e.preventDefault();
-            mdlrHierarchy(e.currentTarget);
-        });
-        hierarchy.addEventListener('keydown', (e) => {
-            if(e.code == 'Enter' || e.code == 'Space') {
-                e.preventDefault();
-                mdlrHierarchy(e.currentTarget);
-            }
-        });
-    });
-}
-
-// Toggle display of an element
-function mdlrHierarchy(clickedElement) {
-    if(clickedElement) {
-
-        // Get toggle data
-        const hierarchyClass = 'mdlr-variant-active';
-        const element = clickedElement.parentElement.parentElement.querySelector('ul.mdlr-variant-ondemand');
-
-        // Toggle CSS class
-        if(element) {
-
-            // Remove
-            if(element.classList.contains(hierarchyClass)) {
-                element.classList.remove(hierarchyClass);
-                clickedElement.classList.remove(hierarchyClass);
-            }
-
-            // Add
-            else {
-                element.classList.add(hierarchyClass);
-                clickedElement.classList.add(hierarchyClass);
-            }
-        }
-    }
-}
 
 /*
-# Modals ######################################################################
+## Modals #####################################################################
 */
 
-// Variables
+// Elements and buttons
 const modals = mdlrElements('.mdlr-modal');
 const modalOpeners = mdlrElements('.mdlr-function-modal');
 const modalClosers = mdlrElements('.mdlr-function-modal-close');
-var modalTransition = 200;
-
-// Calculate CSS transition duration
-if(modals.length > 0) {
-    modalTransition = (parseFloat(window.getComputedStyle(modals[0]).transitionDuration)) * 1000;
-}
-
-// Activate opener buttons in modals
-if(modalOpeners.length > 0) {
-    modalOpeners.forEach((modalOpener) => {
-        modalOpener.addEventListener('click', (e) => {
-            e.preventDefault();
-            mdlrModalOpen(e.currentTarget);
-        });
-        modalOpener.addEventListener('keydown', (e) => {
-            if(e.code == 'Enter' || e.code == 'Space') {
-                e.preventDefault();
-                mdlrModalOpen(e.currentTarget);
-            }
-        });
-    });
-}
-
-// Activate close buttons in modals
-if(modalClosers.length > 0) {
-    modalClosers.forEach((modalCloser) => {
-        modalCloser.addEventListener('click', (e) => {
-            e.preventDefault();
-            mdlrModalClose();
-        });
-        modalCloser.addEventListener('keydown', (e) => {
-            if(e.code == 'Enter' || e.code == 'Space') {
-                e.preventDefault();
-                mdlrModalClose();
-            }
-        });
-    });
-}
+mdlrActivate(modalOpeners, mdlrModalOpen, true);
+mdlrActivate(modalClosers, mdlrModalClose);
 
 // Open a specific modal
 function mdlrModalOpen(clickedElement) {
@@ -855,199 +394,80 @@ function mdlrModalOpen(clickedElement) {
     const modal = document.getElementById(modalId);
     const focusId = clickedElement.dataset.focus;
     const focusElement = document.getElementById(focusId);
-    modal.dataset.opener = clickedElement.id;
 
     // Show dialog
     modal.showModal();
-    modal.classList.add('mdlr-variant-active');
 
-    // Focus close button for keyboard users
-    modal.querySelectorAll('button')[0].focus();
-
-    // Enable scroll prevention
-    document.body.classList.add('mdlr-variant-modal');
-
-    // Focus specific element
-    setTimeout(() => {
-        if(focusElement) {
+    // Focus specific element if supplied
+    // Timeout required to avoid issues with changing display property
+    if(focusElement) {
+        setTimeout(() => {
             focusElement.focus();
-        }
-
-        // Set one-time listeners for removing the modal (click, swipe, keypress)
-        document.addEventListener('click', mdlrModalCloseConditions);
-        window.addEventListener('touchstart', mdlrModalCloseConditions);
-        window.addEventListener('keydown', mdlrModalCloseConditions);
-    }, modalTransition);
+        }, 300);
+    }
 }
 
 // Close all modals
 function mdlrModalClose() {
-
-    // Remove scroll prevention
-    document.body.classList.remove('mdlr-variant-modal');
-
-    // Hide modal
-    modals.forEach((modal) => {
-        modal.classList.remove('mdlr-variant-active');
-
-        // Close modal after transition
-        setTimeout(() => {
-            modal.close();
-        }, modalTransition + 25);
-    
-        // Return keyboard focus to the opener
-        const modalOpenerId = modal.dataset.opener
-        if(modalOpenerId && modalOpenerId != '') {
-            document.getElementById(modalOpenerId).focus();
-            modal.dataset.opener = '';
-        }
-    });
-
-    // Remove unnecessary listeners for removing the modal (click, swipe, keypress)
-    document.removeEventListener('click', mdlrModalCloseConditions);
-    window.removeEventListener('touchstart', mdlrModalCloseConditions);
-    window.removeEventListener('keydown', mdlrModalCloseConditions);
-}
-
-// Close conditions for listeners
-function mdlrModalCloseConditions(e) {
-
-    // Check for 'escape' keypress
-    if(e.code) {
-        if(e.code == 'Escape') {
-            e.preventDefault();
-            mdlrModalClose();
-        }
-    }
-
-    // Check if click/swipe is outside dialog
-    else {
-        const openModal = document.querySelector('.mdlr-modal[open]');
-        const openModalRect = openModal.getBoundingClientRect();
-        let clientY = 0;
-        let clientX = 0;
-
-        // Click
-        if(e.clientY && e.clientX) {
-            clientY = e.clientY;
-            clientX = e.clientX;
-
-        // Swipe
-        } else if(e.touches[0].clientY && e.touches[0].clientX) {
-            clientY = e.touches[0].clientY;
-            clientX = e.touches[0].clientX;
-        }
-
-        // Check dialog rect
-        const inOpenModal = (openModalRect.top <= clientY && clientY <= openModalRect.top + openModalRect.height && openModalRect.left <= clientX && clientX <= openModalRect.left + openModalRect.width);
-        if (! inOpenModal) {
-            //e.preventDefault();
-            mdlrModalClose();
-        }
+    for(const modal of modals) {
+        modal.close();
     }
 }
+
 
 /*
-# Toasts ######################################################################
+## Toasts #####################################################################
 */
 
-// Variables
+// Elements and buttons
 const toasts = mdlrElements('.mdlr-toast');
 const toastClosers = mdlrElements('.mdlr-function-toast-close');
-var toastTransition = 200;
-
-// Calculate CSS transition duration
-if(toasts.length > 0) {
-    toastTransition = (parseFloat(window.getComputedStyle(toasts[0]).transitionDuration)) * 1000;
-}
-
-// Activate all close buttons for toasts
-if(toastClosers.length > 0) {
-    toastClosers.forEach((toastCloser) => {
-        toastCloser.addEventListener('click', (e) => {
-            e.preventDefault();
-            mdlrToastClose();
-        });
-        toastCloser.addEventListener('keydown', (e) => {
-            if(e.code == 'Enter' || e.code == 'Space') {
-                e.preventDefault();
-                mdlrToastClose();
-            }
-        });
-    });
-}
+mdlrActivate(toastClosers, mdlrToastClose);
 
 // Open toast notification
 function mdlrToastOpen(toastText) {
 
-    // Close open notification and add delay to accomodate the transition
-    // Delay also makes actions appear like they took time to compute
-    mdlrToastClose()
+    // Add notification text
+    for(const toast of toasts) {
+        const notifications = toast.getElementsByTagName('p');
+        for(const notification of notifications) {
+            notification.textContent = toastText;
+        }
+
+        // Show popover
+        toast.showPopover();
+    }
+
+    // Auto-remove notification after three seconds
+    // Timeout required but may accidentally close successive notification as well
     setTimeout(() => {
-
-        // Add notification text
-        toasts.forEach((toast) => {
-            const notifications = toast.getElementsByTagName('p');
-            for(const notification of notifications) {
-                notification.textContent = toastText;
-            }
-
-            // Show dialog
-            toast.show();
-            toast.setAttribute('aria-hidden', 'false');
-            toast.classList.add('mdlr-variant-active');
-
-        });
-
-        // Remove notification after three seconds and transition bonus
-        setTimeout(() => {
-            mdlrToastClose();
-        }, toastTransition + 3050);
-
-    }, toastTransition + 50);
+        mdlrToastClose();
+    }, 3000);
 }
 
 // Close toast notification
 function mdlrToastClose() {
 
-    // Remove active notifications
-    toasts.forEach((toast) => {
-        toast.classList.remove('mdlr-variant-active');
-        toast.setAttribute('aria-hidden', 'true');
+    // Hide popover
+    for(const toast of toasts) {
+        toast.hidePopover();
 
-        // Clear dialog element and notification text
-        setTimeout(() => {
-            toast.close();
-            const notifications = toast.getElementsByTagName('p');
-            for(const notification of notifications) {
-                notification.textContent = '';
-            }
-        }, toastTransition + 25);
-    });
+        // Clear notification text
+        const notifications = toast.getElementsByTagName('p');
+        for(const notification of notifications) {
+            notification.textContent = '';
+        }
+    }
 }
+
 
 /*
-# Copy ########################################################################
+## Copy #######################################################################
 */
 
-// Variable
+// Elements and buttons
 const copyButtons = mdlrElements('.mdlr-function-copy');
-
-// Activate all copy buttons
-if(copyButtons.length > 0) {
-    copyButtons.forEach((copyButton) => {
-        copyButton.addEventListener('click', (e) => {
-            e.preventDefault();
-            mdlrCopy(e.currentTarget);
-        });
-        copyButton.addEventListener('keydown', (e) => {
-            if(e.code == 'Enter' || e.code == 'Space') {
-                e.preventDefault();
-                mdlrCopy(e.currentTarget);
-            }
-        });
-    });
-}
+mdlrActivate(copyButtons, mdlrCopy, true);
 
 // Copy desired content
 function mdlrCopy(clickedElement) {
@@ -1081,28 +501,14 @@ function mdlrCopy(clickedElement) {
     }
 }
 
+
 /*
-# Share #######################################################################
+## Share ######################################################################
 */
 
-// Variable
+// Elements and buttons
 const shareButtons = mdlrElements('.mdlr-function-share');
-
-// Activate all share buttons
-if(shareButtons.length > 0) {
-    shareButtons.forEach((shareButton) => {
-        shareButton.addEventListener('click', (e) => {
-            e.preventDefault();
-            mdlrShare(e.currentTarget);
-        });
-        shareButton.addEventListener('keydown', (e) => {
-            if(e.code == 'Enter' || e.code == 'Space') {
-                e.preventDefault();
-                mdlrShare(e.currentTarget);
-            }
-        });
-    });
-}
+mdlrActivate(shareButtons, mdlrShare, true);
 
 // Enable share buttons only when the browser feature is available
 if(navigator.canShare && navigator.canShare({
@@ -1110,14 +516,14 @@ if(navigator.canShare && navigator.canShare({
     text: 'Sample text',
     url: 'https://www.adwmainz.de/'
     })) {
-    shareButtons.forEach((shareButton) => {
+    for(const shareButton of shareButtons) {
         if(shareButton.parentElement.hidden == true) {
             shareButton.parentElement.hidden = false;
         }
         else {
             shareButton.hidden = false;
         }
-    });
+    }
 }
 
 // Open the browser's share dialog
@@ -1147,28 +553,14 @@ async function mdlrShare(clickedElement) {
     }
 }
 
+
 /*
-# Mastodon ####################################################################
+## Mastodon ###################################################################
 */
 
-// Variables
+// Elements and buttons
 const mastodonButtons = mdlrElements('.mdlr-function-mastodon');
-
-// Activate Mastodon share buttons
-if(mastodonButtons.length > 0) {
-    mastodonButtons.forEach((mastodonButton) => {
-        mastodonButton.addEventListener('click', (e) => {
-            e.preventDefault();
-            mdlrMastodon(e.currentTarget);
-        });
-        mastodonButton.addEventListener('keydown', (e) => {
-            if(e.code == 'Enter' || e.code == 'Space') {
-                e.preventDefault();
-                mdlrMastodon(e.currentTarget);
-            }
-        });
-    });
-}
+mdlrActivate(mastodonButtons, mdlrMastodon, true);
 
 // Share to user-defined Mastodon instance (no central share URL due to federation)
 function mdlrMastodon(clickedElement) {
@@ -1197,8 +589,9 @@ function mdlrMastodon(clickedElement) {
     }
 }
 
+
 /*
-# Watchlist ###################################################################
+## Watchlist ##################################################################
 */
 
 const watchlistAdders = mdlrElements('.mdlr-function-watchlist-add');
@@ -1207,64 +600,10 @@ const watchlistJsons = mdlrElements('.mdlr-function-watchlist-json');
 const watchlistClearers = mdlrElements('.mdlr-function-watchlist-clear');
 const watchlistEmpties = mdlrElements('.mdlr-function-watchlist-empty');
 const watchlistSerialisations = mdlrElements('.mdlr-function-watchlist-serialisations');
-
-// Activate all buttons for watchlists
-if(watchlistAdders.length > 0) {
-    watchlistAdders.forEach((watchlistAdder) => {
-        watchlistAdder.addEventListener('click', (e) => {
-            e.preventDefault();
-            mdlrWatchlistAdd(e.currentTarget);
-        });
-        watchlistAdder.addEventListener('keydown', (e) => {
-            if(e.code == 'Enter' || e.code == 'Space') {
-                e.preventDefault();
-                mdlrWatchlistAdd(e.currentTarget);
-            }
-        });
-    });
-}
-if(watchlistCsvs.length > 0) {
-    watchlistCsvs.forEach((watchlistCsv) => {
-        watchlistCsv.addEventListener('click', (e) => {
-            e.preventDefault();
-            mdlrWatchlistCsv();
-        });
-        watchlistCsv.addEventListener('keydown', (e) => {
-            if(e.code == 'Enter' || e.code == 'Space') {
-                e.preventDefault();
-                mdlrWatchlistCsv();
-            }
-        });
-    });
-}
-if(watchlistJsons.length > 0) {
-    watchlistJsons.forEach((watchlistJson) => {
-        watchlistJson.addEventListener('click', (e) => {
-            e.preventDefault();
-            mdlrWatchlistJson();
-        });
-        watchlistJson.addEventListener('keydown', (e) => {
-            if(e.code == 'Enter' || e.code == 'Space') {
-                e.preventDefault();
-                mdlrWatchlistJson();
-            }
-        });
-    });
-}
-if(watchlistClearers.length > 0) {
-    watchlistClearers.forEach((watchlistClearer) => {
-        watchlistClearer.addEventListener('click', (e) => {
-            e.preventDefault();
-            mdlrWatchlistSet();
-        });
-        watchlistClearer.addEventListener('keydown', (e) => {
-            if(e.code == 'Enter' || e.code == 'Space') {
-                e.preventDefault();
-                mdlrWatchlistSet();
-            }
-        });
-    });
-}
+mdlrActivate(watchlistAdders, mdlrWatchlistAdd, true);
+mdlrActivate(watchlistCsvs, mdlrWatchlistCsv);
+mdlrActivate(watchlistJsons, mdlrWatchlistJson);
+mdlrActivate(watchlistClearers, mdlrWatchlistSet);
 
 // Retrieve watchlist
 function mdlrWatchlistGet() {
@@ -1352,127 +691,106 @@ function mdlrWatchlistRemove(clickedElement) {
 function mdlrWatchlistView() {
 
     // Reset all add buttons
-    if(watchlistAdders.length > 0) {
-        watchlistAdders.forEach((watchlistAdder) => {
-            watchlistAdder.disabled = false;
-            const watchlistAdderIcon = watchlistAdder.querySelector('svg > use');
-            watchlistAdderIcon.setAttributeNS(null, 'href', '#icon-add');
-        });
+    for(const watchlistAdder of watchlistAdders) {
+        watchlistAdder.disabled = false;
+        const watchlistAdderIcon = watchlistAdder.querySelector('svg > use');
+        watchlistAdderIcon.setAttributeNS(null, 'href', '#icon-add');
     }
 
     // Remove existing list from DOM
     const watchlistLists = mdlrElements('.mdlr-function-watchlist-list');
-    if(watchlistLists.length > 0) {
-        watchlistLists.forEach((watchlistList) => {
-            watchlistList.remove();
-        });
+    for(const watchlistList of watchlistLists) {
+        watchlistList.remove();
     }
 
     // Retrieve watchlist
     const watchlist = mdlrWatchlistGet();
-    if(watchlistEmpties.length > 0) {
-        watchlistEmpties.forEach((watchlistEmpty) => {
-            const buttonRemove = watchlistEmpty.dataset.remove;
-            const messageFailure = watchlistEmpty.dataset.failure;
+    for(const watchlistEmpty of watchlistEmpties) {
+        const buttonRemove = watchlistEmpty.dataset.remove;
+        const messageFailure = watchlistEmpty.dataset.failure;
 
-            // Either hide empty note if the list has items
-            if(Object.keys(watchlist).length > 0) {
-                watchlistEmpty.classList.add('mdlr-variant-hidden');
+        // Either hide empty note if the list has items
+        if(Object.keys(watchlist).length > 0) {
+            watchlistEmpty.classList.add('mdlr-variant-hidden');
 
-                // Show serialisations
-                if(watchlistSerialisations.length > 0) {
-                    watchlistSerialisations.forEach((watchlistSerialisation) => {
-                        watchlistSerialisation.classList.remove('mdlr-variant-hidden');
-                    });
-                }
+            // Show serialisations
+            for(const watchlistSerialisation of watchlistSerialisations) {
+                watchlistSerialisation.classList.remove('mdlr-variant-hidden');
+            }
 
-                // Build list
-                let newList = document.createElement('ul');
-                newList.classList.add('mdlr-boxedlist', 'mdlr-function-watchlist-list');
-                watchlistEmpty.after(newList);
+            // Build list
+            let newList = document.createElement('ul');
+            newList.classList.add('mdlr-boxedlist', 'mdlr-function-watchlist-list');
+            watchlistEmpty.after(newList);
 
-                // Build list items
-                for(let [key, value] of Object.entries(watchlist)) {
-                    let newEntry = document.createElement('li');
-                    newList.appendChild(newEntry);
+            // Build list items
+            for(const [key, value] of Object.entries(watchlist)) {
+                let newEntry = document.createElement('li');
+                newList.appendChild(newEntry);
 
-                    // Button
-                    let newButton = document.createElement('button');
-                    newButton.classList.add('mdlr-variant-icon', 'mdlr-variant-transparent', 'mdlr-variant-sidelined');
-                    newButton.title = buttonRemove;
-                    newEntry.appendChild(newButton);
+                // Button
+                let newButton = document.createElement('button');
+                newButton.classList.add('mdlr-variant-icon', 'mdlr-variant-transparent', 'mdlr-variant-sidelined');
+                newButton.title = buttonRemove;
+                newEntry.appendChild(newButton);
 
-                    // Button > icon
-                    let newButtonIcon = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
-                    newButtonIcon.setAttributeNS(null, 'width', '24');
-                    newButtonIcon.setAttributeNS(null, 'height', '24');
-                    newButtonIcon.setAttributeNS(null, 'viewBox', '0 0 24 24');
-                    newButtonIcon.setAttributeNS(null, 'version', '1.1');
-                    newButtonIcon.ariaHidden = 'true';
-                    newButton.appendChild(newButtonIcon);
+                // Button > icon
+                let newButtonIcon = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+                newButtonIcon.setAttributeNS(null, 'width', '24');
+                newButtonIcon.setAttributeNS(null, 'height', '24');
+                newButtonIcon.setAttributeNS(null, 'viewBox', '0 0 24 24');
+                newButtonIcon.setAttributeNS(null, 'version', '1.1');
+                newButtonIcon.ariaHidden = 'true';
+                newButton.appendChild(newButtonIcon);
 
-                    // Button > icon > use
-                    let newButtonIconUse = document.createElementNS('http://www.w3.org/2000/svg', 'use');
-                    newButtonIconUse.setAttributeNS(null, 'href', '#icon-remove');
-                    newButtonIcon.appendChild(newButtonIconUse);
+                // Button > icon > use
+                let newButtonIconUse = document.createElementNS('http://www.w3.org/2000/svg', 'use');
+                newButtonIconUse.setAttributeNS(null, 'href', '#icon-remove');
+                newButtonIcon.appendChild(newButtonIconUse);
 
-                    // Button > span
-                    let newButtonSpan = document.createElement('span');
-                    newButtonSpan.textContent = buttonRemove;
-                    newButton.appendChild(newButtonSpan);
+                // Button > span
+                let newButtonSpan = document.createElement('span');
+                newButtonSpan.textContent = buttonRemove;
+                newButton.appendChild(newButtonSpan);
 
-                    // Attach function to button
-                    newButton.dataset.target = encodeURI(key); // Content escaped via function
-                    newButton.dataset.failure = messageFailure;
-                    newButton.addEventListener('click', (e) => {
-                        e.preventDefault();
-                        mdlrWatchlistRemove(e.currentTarget);
-                    });
-                    newButton.addEventListener('keydown', (e) => {
-                        if(e.code == 'Enter' || e.code == 'Space') {
-                            e.preventDefault();
-                            mdlrWatchlistRemove(e.currentTarget);
-                        }
-                    });
+                // Attach function to button
+                newButton.dataset.target = encodeURI(key); // Content escaped via function
+                newButton.dataset.failure = messageFailure;
+                mdlrActivate([newButton], mdlrWatchlistRemove, true);
 
-                    // Link
-                    let newLink = document.createElement('a');
-                    newLink.href = encodeURI(key); // Content escaped via function
-                    newLink.classList.add('mdlr-boxedlist-emphasis');
-                    newLink.textContent = value[0]; // Content auto-escaped via property
-                    newEntry.appendChild(newLink);
+                // Link
+                let newLink = document.createElement('a');
+                newLink.href = encodeURI(key); // Content escaped via function
+                newLink.classList.add('mdlr-boxedlist-emphasis');
+                newLink.textContent = value[0]; // Content auto-escaped via property
+                newEntry.appendChild(newLink);
 
-                    // Paragraph
-                    let newParagraph = document.createElement('p');
-                    newParagraph.textContent = value[1]; // Content auto-escaped via property
-                    newEntry.appendChild(newParagraph);
+                // Paragraph
+                let newParagraph = document.createElement('p');
+                newParagraph.textContent = value[1]; // Content auto-escaped via property
+                newEntry.appendChild(newParagraph);
 
-                    // Deactivate respective add buttons
-                    if(watchlistAdders.length > 0) {
-                        watchlistAdders.forEach((watchlistAdder) => {
-                            if(watchlistAdder.dataset.target == encodeURI(key)) {
-                                watchlistAdder.disabled = true;
-                                const watchlistAdderIcon = watchlistAdder.querySelector('svg > use');
-                                watchlistAdderIcon.setAttributeNS(null, 'href', '#icon-checkmark');
-                            }
-                        });
+                // Deactivate respective add buttons
+                for(const watchlistAdder of watchlistAdders) {
+                    if(watchlistAdder.dataset.target == encodeURI(key)) {
+                        watchlistAdder.disabled = true;
+                        const watchlistAdderIcon = watchlistAdder.querySelector('svg > use');
+                        watchlistAdderIcon.setAttributeNS(null, 'href', '#icon-checkmark');
                     }
                 }
-
-            // Or only show note if the list is empty
-            } else {
-                watchlistEmpty.classList.remove('mdlr-variant-hidden');
-                if(watchlistSerialisations.length > 0) {
-                    watchlistSerialisations.forEach((watchlistSerialisation) => {
-                        watchlistSerialisation.classList.add('mdlr-variant-hidden');
-                    });
-                }
             }
-        });
+
+        // Or only show note if the list is empty
+        } else {
+            watchlistEmpty.classList.remove('mdlr-variant-hidden');
+            for(const watchlistSerialisation of watchlistSerialisations) {
+                watchlistSerialisation.classList.add('mdlr-variant-hidden');
+            }
+        }
     }
 }
 
-// Automatically update watchlist view
+// Initially update watchlist view
 mdlrWatchlistView();
 
 // Save watchlist as CSV file
@@ -1483,7 +801,7 @@ function mdlrWatchlistCsv() {
 
     // Generate CSV
     let csv = '"URL","Label","Type"';
-    for(let [key, value] of Object.entries(watchlist)) {
+    for(const [key, value] of Object.entries(watchlist)) {
         csv += '\n"' + encodeURI(key) + '","' + value[0].replace('"', '') + '","' + value[1].replace('"', '') + '"';
     }
 
@@ -1519,3 +837,321 @@ function mdlrWatchlistJson() {
     download.click();
     window.URL.revokeObjectURL(downloadUrl);
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*
+## Hierarchies ################################################################
+*/
+
+/*// Elements and buttons
+const hierarchies = mdlrElements('.mdlr-function-hierarchy');
+mdlrActivate(hierarchies, mdlrHierarchy, true);
+
+// Toggle display of an element
+function mdlrHierarchy(clickedElement) {
+    if(clickedElement) {
+
+        // Get toggle data
+        const hierarchyClass = 'mdlr-variant-active';
+        const element = clickedElement.parentElement.parentElement.querySelector('ul.mdlr-variant-ondemand');
+
+        // Toggle CSS class
+        if(element) {
+
+            // Remove
+            if(element.classList.contains(hierarchyClass)) {
+                element.classList.remove(hierarchyClass);
+                clickedElement.classList.remove(hierarchyClass);
+            }
+
+            // Add
+            else {
+                element.classList.add(hierarchyClass);
+                clickedElement.classList.add(hierarchyClass);
+            }
+        }
+    }
+}
+*/
+
+
+
+
+/*// Show a functioning install button if the app is not installed yet
+window.addEventListener( 'beforeinstallprompt', (e) => {
+    const deferredPrompt = e;
+
+    // Display the install button
+    const installButton = document.getElementById( 'install' );
+    installButton.hidden = false;
+    installButton.classList.add( 'mdlr-variant-visible' );
+  
+    // When the button is clicked, show the install prompt
+    document.getElementById( 'install-button' ).addEventListener( 'click', ( e ) => {
+        deferredPrompt.prompt();
+    } );
+    document.getElementById( 'install-button' ).addEventListener( 'keydown', function( e ) {
+        if( e.code == 'Enter' || e.code == 'Space' ) {
+            e.preventDefault();
+            deferredPrompt.prompt();
+        }
+    });
+
+    // Wait for the user response and show a notification
+    deferredPrompt.userChoice.then( ( choice ) => {
+
+        // Case 1: user installs app
+        if ( choice.outcome === 'accepted' ) {
+            mdlr_toast_open( 'notify', 'Erfolgreich installiert' );
+
+        // Case 2: user does not install app
+        } else {
+            mdlr_toast_open( 'notify', 'App leider nicht installiert' );
+        }
+
+        // Hide the button
+        installButton.classList.remove( 'mdlr-variant-visible' );
+        setTimeout( function () {
+            installButton.hidden = true;
+        }, 350 );
+
+        // Reset the variable
+        deferredPrompt = null;
+    } );
+} );*/
+
+
+/*
+## Timeline ###################################################################
+*/
+
+/*// Elements and buttons
+const timelineRegions = mdlrElements('.mdlr-function-timeline');
+
+// Activate all copy buttons
+for(const timelineRegion of timelineRegions) {
+    timelineRegion.addEventListener('mouseover', (e) => {
+        e.preventDefault();
+        mdlrTimelineHighlight(e.currentTarget);
+    });
+}
+
+// Highlight desired content
+function mdlrTimelineHighlight(hoveredElement) {
+    if(hoveredElement) {
+
+        // Highlight target element
+        const target = document.getElementById(hoveredElement.dataset.target);
+        target.classList.add('mdlr-variant-active');
+
+        // Add one-time listener to remove highlight
+        hoveredElement.addEventListener('mouseout', (e) => {
+            target.classList.remove('mdlr-variant-active');
+        }, {once: true});
+    }
+}*/
+
+
+/*
+## Info buttons ###############################################################
+*/
+
+/*// Elements and buttons
+const infoButtons = mdlrElements('.mdlr-function-info');
+const infoPopovers = mdlrElements('.mdlr-info > ol > li');
+mdlrActivate(infoButtons, mdlrInfoOpen, true);
+
+// Show info popover on demand
+function mdlrInfoOpen(clickedElement) {
+
+    // Identify the popover to open
+    let targetId = clickedElement.href;
+    targetId = targetId.substring(targetId.indexOf('#') );
+    let targets = mdlrElements(targetId);
+
+    // Close popover if it is already open
+    for(const target of targets) {
+        if(target.classList.contains('mdlr-variant-active')) {
+            mdlrInfoClose();
+        }
+        else {
+
+            // Get desired popover position
+            const viewport = window.innerWidth;
+            const offsetMin = clickedElement.offsetWidth;
+            const offsetAdditional = Math.round(0.25 * offsetMin);
+            const offsetWidth = target.offsetWidth;
+            const position = clickedElement.getBoundingClientRect();
+            const positionTop = position.top + window.scrollY + offsetMin;
+
+            // Calculate whether popover should be right-aligned
+            if((position.left + window.scrollX) > (viewport * 0.5)) {
+                var positionLeft = position.left + window.scrollX - offsetWidth + offsetMin + offsetAdditional;
+            }
+            else {
+                var positionLeft = position.left + window.scrollX - offsetAdditional;
+            }
+
+            // Position and show popover
+            target.style['top'] = positionTop + 'px';
+            target.style['left'] = positionLeft + 'px';
+            target.classList.add('mdlr-variant-active');
+
+            // Set a listener to close the popover on the next click anywhere in the document
+            setTimeout(() => { // TODO Remove when converting to popover
+                document.addEventListener('click', mdlrInfoCloseConditions);
+                window.addEventListener('resize', mdlrInfoCloseConditions);
+                document.addEventListener('touchstart', mdlrInfoCloseConditions);
+                document.addEventListener('keydown', mdlrInfoCloseConditions);
+            }, 50);
+        }
+    }
+}
+
+// Close info popover on demand
+function mdlrInfoClose() {
+
+    // Close popovers
+    for(const infoPopover of infoPopovers) {
+        infoPopover.classList.remove('mdlr-variant-active');
+    }
+
+    // Remove unnecessary listeners
+    document.removeEventListener('click', mdlrInfoCloseConditions);
+    window.removeEventListener('resize', mdlrInfoCloseConditions);
+    document.removeEventListener('touchstart', mdlrInfoCloseConditions);
+    document.removeEventListener('keydown', mdlrInfoCloseConditions);
+}
+
+// Close all info popovers under certain conditions
+function mdlrInfoCloseConditions(e) {
+
+    // Check for 'escape' keypress if the event is a keypress
+    if(e.code) {
+        if(e.code == 'Escape' || e.code == 'Enter' || e.code == 'Space') {
+            e.preventDefault();
+            mdlrInfoClose();
+        }
+    }
+
+    // Check if click was outside the popover
+    else {
+        if(! e.target.closest('.mdlr-info > ol > li')) {
+            mdlrInfoClose();
+        }
+    }
+}*/
+
+
+/*
+## Reference links ############################################################
+*/
+
+/*// Elements and buttons
+const referenceLinks = mdlrElements('.mdlr-function-reference');
+mdlrActivate(referenceLinks, mdlrReferenceOpen, true);
+
+// Show reference popover on demand
+function mdlrReferenceOpen(clickedElement) {
+
+    // Identify the reference to show
+    let targetId = clickedElement.href;
+    targetId = targetId.substring(targetId.indexOf('#') );
+    let targets = mdlrElements(targetId);
+
+    // Close popover if it is already open
+    for(const target of targets) {
+        if(document.getElementById('temporary-reference')) {
+            mdlrReferenceClose();
+        }
+        else {
+
+            // Move content to temporary info popover
+            let content = document.createElement('li');
+            content.id = 'temporary-reference';
+            content.innerHTML = target.innerHTML;
+            const contentElement = document.getElementById('info-items').appendChild(content);
+
+            // Get desired popover position
+            const viewport = window.innerWidth;
+            const offsetMin = clickedElement.offsetWidth;
+            const offsetHeight = clickedElement.offsetHeight;
+            const offsetAdditional = 10;
+            const offsetWidth = contentElement.offsetWidth;
+            const position = clickedElement.getBoundingClientRect();
+            const positionTop = position.top + window.scrollY + offsetHeight;
+
+            // Calculate whether popover should be right-aligned
+            if((position.left + window.scrollX) > (viewport * 0.5)) {
+                var positionLeft = position.left + window.scrollX - offsetWidth + offsetMin + offsetAdditional;
+            }
+            else {
+                var positionLeft = position.left + window.scrollX - offsetAdditional;
+            }
+
+            // Position and show popover
+            contentElement.style['top'] = positionTop + 'px';
+            contentElement.style['left'] = positionLeft + 'px';
+            contentElement.classList.add('mdlr-variant-active');
+
+            // Set a listener to close the popover on the next click anywhere in the document
+            setTimeout(() => { // TODO Remove when converting to popover
+                document.addEventListener('click', mdlrReferenceCloseConditions);
+                window.addEventListener('resize', mdlrReferenceCloseConditions);
+                document.addEventListener('touchstart', mdlrReferenceCloseConditions);
+                document.addEventListener('keydown', mdlrReferenceCloseConditions);
+            }, 50);
+        }
+    }
+}
+
+// Close reference popover on demand
+function mdlrReferenceClose() {
+
+    // Close popovers
+    let referencePopover = document.getElementById('temporary-reference');
+    referencePopover.classList.remove('mdlr-variant-active');
+    setTimeout(() => { // TODO Remove when converting to popover
+        referencePopover.remove();
+    }, 225);
+
+    // Remove unnecessary listeners
+    document.removeEventListener('click', mdlrReferenceCloseConditions);
+    window.removeEventListener('resize', mdlrReferenceCloseConditions);
+    document.removeEventListener('touchstart', mdlrReferenceCloseConditions);
+    document.removeEventListener('keydown', mdlrReferenceCloseConditions);
+}
+
+// Close reference popover under certain conditions
+function mdlrReferenceCloseConditions(e) {
+
+    // Check for 'escape' keypress if the event is a keypress
+    if(e.code) {
+        if(e.code == 'Escape' || e.code == 'Enter' || e.code == 'Space') {
+            e.preventDefault();
+            mdlrReferenceClose();
+        }
+    }
+
+    // Check if click was outside the popover
+    else {
+        if(! e.target.closest('.mdlr-info > ol > li#temporary-reference')) {
+            mdlrReferenceClose();
+        }
+    }
+}*/
