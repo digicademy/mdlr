@@ -227,7 +227,7 @@ function mdlrFullscreenToggle(clickedElement) {
 
 
 /*
-## Headerbars #################################################################
+## Headerbar ##################################################################
 */
 
 // Elements and buttons
@@ -268,7 +268,7 @@ for(const headerbarTarget of headerbarTargets) {
 
 
 /*
-## Dropdowns ##################################################################
+## Dropdown ###################################################################
 */
 
 // Elements and buttons
@@ -331,7 +331,7 @@ function mdlrDropdownToggle(dropdown, close = false) {
 
 
 /*
-## Selects ####################################################################
+## Select #####################################################################
 */
 
 // Elements and buttons
@@ -376,7 +376,7 @@ function mdlrSelectForm(clickedElement) {
 
 
 /*
-## Modals #####################################################################
+## Modal ######################################################################
 */
 
 // Elements and buttons
@@ -416,7 +416,7 @@ function mdlrModalClose() {
 
 
 /*
-## Toasts #####################################################################
+## Toast ######################################################################
 */
 
 // Elements and buttons
@@ -855,7 +855,7 @@ function mdlrWatchlistJson() {
 
 
 /*
-## Hierarchies ################################################################
+## Hierarchy ##################################################################
 */
 
 /*// Elements and buttons
@@ -968,7 +968,7 @@ function mdlrTimelineHighlight(hoveredElement) {
 
 
 /*
-## Info buttons ###############################################################
+## Info button ################################################################
 */
 
 /*// Elements and buttons
@@ -1059,7 +1059,7 @@ function mdlrInfoCloseConditions(e) {
 
 
 /*
-## Reference links ############################################################
+## Reference link #############################################################
 */
 
 /*// Elements and buttons

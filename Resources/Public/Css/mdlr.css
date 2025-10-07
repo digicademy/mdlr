@@ -167,7 +167,7 @@ LICENSE.txt file that was distributed with this source code.
 
 
 /*
-## Atoms ######################################################################
+## Atom #######################################################################
 */
 
 /* Basics */
@@ -260,13 +260,13 @@ body {
     navigation: auto;
 }
 
-/* Assets */
+/* Asset */
 
 .mdlr-asset {
     display: none; /* Removed from DOM, also for screen readers */
 }
 
-/* Headings */
+/* Heading */
 
 h1,
 h2,
@@ -354,7 +354,7 @@ h6 {
 }
 
 
-/* Inline styles */
+/* Inline style */
 
 strong {
     font-weight: var(--mdlr-font-main-emphasis);
@@ -373,7 +373,7 @@ abbr {
     cursor: help;
 }
 
-/* Notes */
+/* Note */
 
 p.mdlr-note {
     text-align: center;
@@ -382,7 +382,7 @@ p.mdlr-note {
     margin-top: 1.15em;
 }
 
-/* Links */
+/* Link */
 
 a {
     color: var(--mdlr-color-highlight-intense);
@@ -435,14 +435,14 @@ a.mdlr-variant-inherit.mdlr-variant-active:active span {
     transition: var(--mdlr-transition-click);
 }
 
-/* Images */
+/* Image */
 
 img {
     max-width: 100%;
     display: block;
 }
 
-/* Image links */
+/* Image link */
 
 a.mdlr-imagelink {
     display: flex;
@@ -480,7 +480,7 @@ a.mdlr-imagelink.mdlr-variant-unobtrusive span {
     height: 0;
 }
 
-/* Buttons and inputs */
+/* Control */
 
 label {
     cursor: pointer;
@@ -521,7 +521,7 @@ button:disabled abbr {
     cursor: not-allowed;
 }
 
-/* Buttons */
+/* Control: button */
 
 select,
 input[type="button"],
@@ -878,7 +878,7 @@ a.mdlr-button.mdlr-variant-texticon svg:last-child {
     margin-right: -0.25em;
 }
 
-/* Inputs */
+/* Control: input */
 
 input[type="email"],
 input[type="number"],
@@ -936,7 +936,7 @@ textarea:enabled:focus-visible {
     transition: var(--mdlr-transition-click);
 }
 
-/* Switches */
+/* Control: switch */
 
 input[type="checkbox"].mdlr-switch {
     -webkit-appearance: none;
@@ -999,7 +999,7 @@ input[type="checkbox"].mdlr-switch:checked::before {
     box-shadow: var(--mdlr-shadow-regular);
 }
 
-/* Attributions */
+/* Attribution */
 
 p.mdlr-attribution {
     font-size: var(--mdlr-font-main-smaller);
@@ -1080,10 +1080,10 @@ p.mdlr-attribution:hover {
 
 
 /*
-## Molecules ##################################################################
+## Molecule ###################################################################
 */
 
-/* Empty states */
+/* Empty state */
 
 .mdlr-empty {
     margin: 0 auto;
@@ -1105,7 +1105,7 @@ p.mdlr-attribution:hover {
     text-wrap: balance;
 }
 
-/* Logos */
+/* Logo */
 
 .mdlr-logo {
     display: flex;
@@ -1140,7 +1140,7 @@ p.mdlr-attribution:hover {
     }
 }
 
-/* Titles */
+/* Title */
 
 .mdlr-title {
     display: grid !important;
@@ -1195,7 +1195,7 @@ p.mdlr-title-superheading {
     }
 }
 
-/* Link rows */
+/* Link row */
 
 ol.mdlr-linkrow,
 ul.mdlr-linkrow {
@@ -1206,7 +1206,7 @@ ul.mdlr-linkrow {
     gap: 0 var(--mdlr-spacing-padding-horizontal);
 }
 
-/* Image rows */
+/* Image row */
 
 ol.mdlr-imagerow,
 ul.mdlr-imagerow {
@@ -1217,7 +1217,7 @@ ul.mdlr-imagerow {
     gap: calc(0.55 * var(--mdlr-spacing-margin)) calc(1.15 * var(--mdlr-spacing-margin));
 }
 
-/* Button rows */
+/* Button row */
 
 menu.mdlr-buttonrow {
     display: flex;
@@ -1252,7 +1252,7 @@ menu.mdlr-buttonrow:not(.mdlr-variant-separate) > *:last-of-type > button:not(.m
     border-bottom-right-radius: var(--mdlr-spacing-radius);
 }
 
-/* Viewswitchers */
+/* Viewswitcher */
 
 menu.mdlr-viewswitcher {
     display: flex;
@@ -1353,7 +1353,7 @@ menu.mdlr-viewswitcher > li > a:focus-visible::after {
     }
 }
 
-/* Pills */
+/* Pill */
 
 ol.mdlr-pills,
 ul.mdlr-pills {
@@ -1412,7 +1412,7 @@ ul.mdlr-pills > li > a > span {
     transform: translateY(var(--mdlr-font-main-offset));
 }
 
-/* Boxes */
+/* Boxed */
 
 .mdlr-boxedlist,
 .mdlr-boxedpreview {
@@ -1431,7 +1431,7 @@ ul.mdlr-pills > li > a > span {
     box-shadow: var(--mdlr-shadow-elevated);
 }
 
-/* Boxed lists */
+/* Boxed: list */
 
 dl.mdlr-boxedlist,
 ul.mdlr-boxedlist {
@@ -1571,7 +1571,7 @@ dl.mdlr-boxedlist > div.mdlr-boxedlist-addition {
     }
 }
 
-/* Boxed previews */
+/* Boxed: preview */
 
 .mdlr-boxedpreview {
     display: flex;
@@ -1631,7 +1631,7 @@ dl.mdlr-boxedlist > div.mdlr-boxedlist-addition {
     -webkit-box-orient: vertical;
 }
 
-/* Dropdowns */
+/* Dropdown */
 
 menu.mdlr-dropdown[popover] {
     visibility: hidden;
@@ -1782,10 +1782,10 @@ menu.mdlr-dropdown.mdlr-variant-toc li a.mdlr-button.mdlr-variant-indent-2:first
 
 
 /*
-## Organisms ##################################################################
+## Organism ###################################################################
 */
 
-/* Toasts */
+/* Toast */
 
 dialog.mdlr-toast[popover] {
     --mdlr-component-toast: 0;
@@ -1871,7 +1871,7 @@ dialog.mdlr-toast > button {
     }
 }
 
-/* Forms */
+/* Form */
 
 .mdlr-form {
     display: flex;
@@ -1944,7 +1944,7 @@ dialog.mdlr-toast > button {
     }
 }
 
-/* Flexlists */
+/* Flexlist */
 
 .mdlr-flexlist {
     display: flex;
@@ -2019,7 +2019,7 @@ dialog.mdlr-toast > button {
     clear: both;
 }
 
-/* Content: paragraphs and lists */
+/* Content: paragraph and list */
 
 .mdlr-content p,
 .mdlr-content ol,
@@ -2224,7 +2224,7 @@ dialog.mdlr-toast > button {
     background: var(--mdlr-color-primary-more);
 }
 
-/* Content: headings */
+/* Content: heading */
 
 .mdlr-content h1,
 .mdlr-content h2,
@@ -2428,7 +2428,7 @@ dialog.mdlr-toast > button {
     }
 }
 
-/* Content: lines */
+/* Content: line */
 
 .mdlr-content hr,
 .frame-ruler-before::before,
@@ -2458,7 +2458,7 @@ dialog.mdlr-toast > button {
     }
 }
 
-/* Content: tables */
+/* Content: table */
 
 .mdlr-content figure.table {
     overflow-x: auto;
@@ -2530,7 +2530,7 @@ dialog.mdlr-toast > button {
     margin-top: 0 !important;
 }
 
-/* Content: galleries */
+/* Content: gallery */
 
 .mdlr-content .mdlr-gallery {
     overflow-x: auto;
@@ -2666,11 +2666,10 @@ dialog.mdlr-toast > button {
 
 
 /*
-## Templates ##################################################################
+## Template ###################################################################
 */
 
-
-/* Patterns */
+/* Pattern */
 
 .mdlr-pattern.mdlr-variant-triptych {
     display: grid;
@@ -2942,13 +2941,12 @@ dialog.mdlr-toast > button {
 
 
 /*
-## Pages ######################################################################
+## Page #######################################################################
 */
-
 
 /* Default */
 
-/* Sections */
+/* Section */
 
 .mdlr-section {
     clear: both;
@@ -3050,7 +3048,7 @@ dialog.mdlr-toast > button {
     }
 }
 
-/* Modals */
+/* Modal */
 
 body:has(dialog.mdlr-modal[open]) {
     overflow: hidden;

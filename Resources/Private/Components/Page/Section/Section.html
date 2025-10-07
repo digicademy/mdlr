@@ -1,0 +1,11 @@
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" data-namespace-typo3-fluid="true">
+    <f:argument name="id" type="string" optional="{false}" description="ID of the section" />
+    <f:argument name="semanticType" type="string" optional="{true}" default="section" description="Semantic section type (footer, main, article, header)" />
+    <f:argument name="semanticOnly" type="bool" optional="{true}" default="{false}" description="Whether the section is purely semantic" />
+    <f:argument name="variants" type="string[]" optional="{true}" default="{}" description="Type of section to produce (headerbar, title, odd, even, wide, ultrawide, scrolled)" />
+    <f:argument name="function" type="string" optional="{true}" default="" description="JavaScript function to apply (scroll)" />
+
+    <{semanticType} id="{id}" class="{f:if(condition: '!{semanticOnly}', then: 'mdlr-section')} {f:if(condition: '{variant} != \'\'', then: 'mdlr-variant-{variant} ') -> f:for(each: '{variants}', as: 'variant')} {f:if(condition: '{function} != \'\'', then: 'mdlr-function-{function}')}">
+        <f:slot />
+    </{semanticType}>
+</html>
