@@ -2669,6 +2669,130 @@ dialog.mdlr-toast > button {
 ## Template ###################################################################
 */
 
+/* Area */
+
+.mdlr-area-slot-a {
+    grid-area: a;
+}
+
+.mdlr-area-slot-b {
+    grid-area: b;
+}
+
+.mdlr-area-slot-c {
+    grid-area: c;
+}
+
+.mdlr-area-slot-d {
+    grid-area: d;
+}
+
+.mdlr-area-align-left,
+.mdlr-area-align-left-above-900,
+.mdlr-area-align-left-below-900,
+.mdlr-area-align-left-above-600,
+.mdlr-area-align-left-below-600,
+.mdlr-area-align-center,
+.mdlr-area-align-center-above-900,
+.mdlr-area-align-center-below-900,
+.mdlr-area-align-center-above-600,
+.mdlr-area-align-center-below-600,
+.mdlr-area-align-right,
+.mdlr-area-align-right-above-900,
+.mdlr-area-align-right-below-900,
+.mdlr-area-align-right-above-600,
+.mdlr-area-align-right-below-600,
+.mdlr-area-align-top,
+.mdlr-area-align-middle,
+.mdlr-area-align-bottom {
+    display: flex;
+    justify-content: center;
+}
+
+.mdlr-area-align-left {
+    justify-content: start;
+}
+
+.mdlr-area-align-center {
+    justify-content: center;
+}
+
+.mdlr-area-align-right {
+    justify-content: end;
+}
+
+.mdlr-area-align-top {
+    align-items: start;
+}
+
+.mdlr-area-align-middle {
+    align-items: center;
+}
+
+.mdlr-area-align-bottom {
+    align-items: end;
+}
+
+@media screen and (min-width: 901px) {
+
+    .mdlr-area-align-left-above-900 {
+        justify-content: start;
+    }
+
+    .mdlr-area-align-center-above-900 {
+        justify-content: center;
+    }
+
+    .mdlr-area-align-right-above-900 {
+        justify-content: end;
+    }
+}
+
+@media screen and (max-width: 900px) {
+
+    .mdlr-area-align-left-below-900 {
+        justify-content: start;
+    }
+
+    .mdlr-area-align-center-below-900 {
+        justify-content: center;
+    }
+
+    .mdlr-area-align-right-below-900 {
+        justify-content: end;
+    }
+}
+
+@media screen and (min-width: 601px) {
+
+    .mdlr-area-align-left-above-600 {
+        justify-content: start;
+    }
+
+    .mdlr-area-align-center-above-600 {
+        justify-content: center;
+    }
+
+    .mdlr-area-align-right-above-600 {
+        justify-content: end;
+    }
+}
+
+@media screen and (max-width: 600px) {
+
+    .mdlr-area-align-left-below-600 {
+        justify-content: start;
+    }
+
+    .mdlr-area-align-center-below-600 {
+        justify-content: center;
+    }
+
+    .mdlr-area-align-right-below-600 {
+        justify-content: end;
+    }
+}
+
 /* Pattern */
 
 .mdlr-pattern.mdlr-variant-triptych {
@@ -2697,98 +2821,21 @@ dialog.mdlr-toast > button {
     gap: var(--mdlr-spacing-margin);
 }
 
-.mdlr-pattern.mdlr-variant-clasped.mdlr-variant-missing-b {
+.mdlr-pattern.mdlr-variant-clasped.mdlr-variant-clasped-missing-b {
     grid-template-areas:
         'a . d'
         'c c c';
 }
 
-.mdlr-pattern.mdlr-variant-clasped.mdlr-variant-missing-c {
+.mdlr-pattern.mdlr-variant-clasped.mdlr-variant-clasped-missing-c {
     grid-template-areas:
         'a b b'
         'a . d';
 }
 
-.mdlr-pattern.mdlr-variant-clasped.mdlr-variant-missing-b.mdlr-variant-missing-c {
+.mdlr-pattern.mdlr-variant-clasped.mdlr-variant-clasped-missing-b.mdlr-variant-clasped-missing-c {
     grid-template-areas:
         'a . d';
-}
-
-.mdlr-pattern-slot-a {
-    grid-area: a;
-}
-
-.mdlr-pattern-slot-b {
-    grid-area: b;
-}
-
-.mdlr-pattern-slot-c {
-    grid-area: c;
-}
-
-.mdlr-pattern-slot-d {
-    grid-area: d;
-}
-
-.mdlr-pattern-align-left,
-.mdlr-pattern-align-left-above-900,
-.mdlr-pattern-align-left-below-900,
-.mdlr-pattern-align-left-above-600,
-.mdlr-pattern-align-left-below-600,
-.mdlr-pattern-align-center,
-.mdlr-pattern-align-center-above-900,
-.mdlr-pattern-align-center-below-900,
-.mdlr-pattern-align-center-above-600,
-.mdlr-pattern-align-center-below-600,
-.mdlr-pattern-align-right,
-.mdlr-pattern-align-right-above-900,
-.mdlr-pattern-align-right-below-900,
-.mdlr-pattern-align-right-above-600,
-.mdlr-pattern-align-right-below-600,
-.mdlr-pattern-align-top,
-.mdlr-pattern-align-middle,
-.mdlr-pattern-align-bottom {
-    display: flex;
-    justify-content: center;
-}
-
-.mdlr-pattern-align-left {
-    justify-content: start;
-}
-
-.mdlr-pattern-align-center {
-    justify-content: center;
-}
-
-.mdlr-pattern-align-right {
-    justify-content: end;
-}
-
-.mdlr-pattern-align-top {
-    align-items: start;
-}
-
-.mdlr-pattern-align-middle {
-    align-items: center;
-}
-
-.mdlr-pattern-align-bottom {
-    align-items: end;
-}
-
-@media screen and (min-width: 901px) {
-
-    .mdlr-pattern-align-left-above-900 {
-        justify-content: start;
-    }
-
-    .mdlr-pattern-align-center-above-900 {
-        justify-content: center;
-    }
-
-    .mdlr-pattern-align-right-above-900 {
-        justify-content: end;
-    }
 }
 
 @media screen and (max-width: 900px) {
@@ -2816,60 +2863,21 @@ dialog.mdlr-toast > button {
             'c c';
     }
 
-    .mdlr-pattern.mdlr-variant-clasped.mdlr-variant-missing-b {
+    .mdlr-pattern.mdlr-variant-clasped.mdlr-variant-clasped-missing-b {
         grid-template-areas:
             'a d'
             'c c';
     }
 
-    .mdlr-pattern.mdlr-variant-clasped.mdlr-variant-missing-c {
+    .mdlr-pattern.mdlr-variant-clasped.mdlr-variant-clasped-missing-c {
         grid-template-areas:
             'a d'
             'b b';
     }
 
-    .mdlr-pattern.mdlr-variant-clasped.mdlr-variant-missing-b.mdlr-variant-missing-c {
+    .mdlr-pattern.mdlr-variant-clasped.mdlr-variant-clasped-missing-b.mdlr-variant-clasped-missing-c {
         grid-template-areas:
             'a d';
-    }
-
-    .mdlr-pattern-align-left-below-900 {
-        justify-content: start;
-    }
-
-    .mdlr-pattern-align-center-below-900 {
-        justify-content: center;
-    }
-
-    .mdlr-pattern-align-right-below-900 {
-        justify-content: end;
-    }
-
-    .mdlr-pattern-back {
-        position: absolute;
-        top: calc(0.5 * var(--mdlr-spacing-padding-vertical));
-        left: var(--mdlr-spacing-margin);
-        min-height: calc(1.5 * var(--mdlr-spacing-padding-vertical) + var(--mdlr-font-main-height));
-    }
-
-    .mdlr-pattern-back > img,
-    .mdlr-pattern-back > picture > img {
-        margin: auto;
-    }
-}
-
-@media screen and (min-width: 601px) {
-
-    .mdlr-pattern-align-left-above-600 {
-        justify-content: start;
-    }
-
-    .mdlr-pattern-align-center-above-600 {
-        justify-content: center;
-    }
-
-    .mdlr-pattern-align-right-above-600 {
-        justify-content: end;
     }
 }
 
@@ -2898,44 +2906,24 @@ dialog.mdlr-toast > button {
             'd';
     }
 
-    .mdlr-pattern.mdlr-variant-clasped.mdlr-variant-missing-b {
+    .mdlr-pattern.mdlr-variant-clasped.mdlr-variant-clasped-missing-b {
         grid-template-areas:
             'a'
             'c'
             'd';
     }
 
-    .mdlr-pattern.mdlr-variant-clasped.mdlr-variant-missing-c {
+    .mdlr-pattern.mdlr-variant-clasped.mdlr-variant-clasped-missing-c {
         grid-template-areas:
             'a'
             'b'
             'd';
     }
 
-    .mdlr-pattern.mdlr-variant-clasped.mdlr-variant-missing-b.mdlr-variant-missing-c {
+    .mdlr-pattern.mdlr-variant-clasped.mdlr-variant-clasped-missing-b.mdlr-variant-clasped-missing-c {
         grid-template-areas:
             'a'
             'd';
-    }
-
-    .mdlr-pattern.mdlr-variant-addition.mdlr-variant-active {
-        margin-top: calc(0.75 * var(--mdlr-spacing-margin));
-    }
-
-    .mdlr-pattern-align-left-below-600 {
-        justify-content: start;
-    }
-
-    .mdlr-pattern-align-center-below-600 {
-        justify-content: center;
-    }
-
-    .mdlr-pattern-align-right-below-600 {
-        justify-content: end;
-    }
-
-    .mdlr-pattern-back {
-        left: calc(0.75 * var(--mdlr-spacing-margin));
     }
 }
 
@@ -2943,8 +2931,6 @@ dialog.mdlr-toast > button {
 /*
 ## Page #######################################################################
 */
-
-/* Default */
 
 /* Section */
 
