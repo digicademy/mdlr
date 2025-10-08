@@ -1,0 +1,11 @@
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" data-namespace-typo3-fluid="true">
+    <f:argument name="id" type="string" optional="{false}" description="ID of the toast panel" />
+    <f:argument name="close" type="string" optional="{false}" description="Label of the close button" />
+    <f:argument name="variants" type="string[]" optional="{true}" default="{}" description="Type of toast panel to produce (-)" />
+    <f:argument name="function" type="string" optional="{true}" default="" description="JavaScript function to apply (-)" />
+
+    <dialog id="{id}" class="mdlr-toast {f:if(condition: '{variant} != \'\'', then: 'mdlr-variant-{variant} ') -> f:for(each: '{variants}', as: 'variant')} {f:if(condition: '{function} != \'\'', then: 'mdlr-function-{function}')}" role="status" popover="auto">
+        <p></p>
+        <mdlr:atom.button.function function="toast-close" variants="{0: 'icon', 1: 'unobtrusive'}" text="{f:translate(key: 'templates.generic.close', extensionName: 'chf_base')}" icon="close" />
+    </dialog>
+</html>

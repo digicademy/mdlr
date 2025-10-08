@@ -1,10 +1,12 @@
 <html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" data-namespace-typo3-fluid="true">
     <f:argument name="id" type="string" optional="{false}" description="ID of the dropdown" />
     <f:argument name="variants" type="string[]" optional="{true}" default="{}" description="Type of dropdown to produce (right, up, toc)" />
+    <f:argument name="function" type="string" optional="{true}" default="" description="JavaScript function to apply (-)" />
     <f:argument name="role" type="string" optional="{true}" default="listbox" description="Role of the popover menu (listbox)" />
+    <f:comment>The slot "handle" requires an "atom.button.function" with function="dropdown" and popoverTarget="{id}".</f:comment>
 
     <f:slot name="handle" />
-    <menu class="mdlr-dropdown {f:if(condition: '{variant} != \'\'', then: 'mdlr-variant-{variant} ') -> f:for(each: '{variants}', as: 'variant')}" id="{id}" role="{role}" popover="auto">
+    <menu id="{id}" role="{role}" popover="auto" class="mdlr-dropdown {f:if(condition: '{variant} != \'\'', then: 'mdlr-variant-{variant} ') -> f:for(each: '{variants}', as: 'variant')} {f:if(condition: '{function} != \'\'', then: 'mdlr-function-{function}')}">
         <f:slot name="list" />
     </menu>
 </html>

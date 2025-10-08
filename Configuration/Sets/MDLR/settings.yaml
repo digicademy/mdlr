@@ -1,4 +1,8 @@
 styles:
+  templates:
+    templateRootPath: EXT:mdlr/Resources/Private/FluidStyledContent/Templates/
+    partialRootPath: EXT:mdlr/Resources/Private/FluidStyledContent/Partials/
+    layoutRootPath: EXT:mdlr/Resources/Private/FluidStyledContent/Layouts/
   content:
     defaultHeaderType: 3
     image:

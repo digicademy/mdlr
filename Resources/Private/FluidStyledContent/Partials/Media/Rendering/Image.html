@@ -1,0 +1,4 @@
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" data-namespace-typo3-fluid="true">
+    <f:image image="{file}" width="2800m" height="2100m" srcset="{f:uri.image(image: '{file}', width: '1200m', height: '900m', fileExtension: 'jpg')} 1200w, {f:uri.image(image: '{file}', width: '2000m', height: '1500m', fileExtension: 'jpg')} 2000w, {f:uri.image(image: '{file}', width: '2800m', height: '2100m', fileExtension: 'jpg')} 2800w" sizes="(width <= 600px) 1200px, (width <= 1000px) 2000px, 2800px" alt="{file.alternative}" title="{file.title}" loading="{settings.media.lazyLoading}" decoding="{settings.media.imageDecoding}" fileExtension="jpg" />
+    <f:comment>width="{dimensions.width}" height="{dimensions.height}"</f:comment>
+</html>

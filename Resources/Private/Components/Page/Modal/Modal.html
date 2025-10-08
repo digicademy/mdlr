@@ -3,8 +3,9 @@
     <f:argument name="title" type="string" optional="{false}" description="Title of the modal" />
     <f:argument name="close" type="string" optional="{false}" description="Label of the close button" />
     <f:argument name="variants" type="string[]" optional="{true}" default="{}" description="Type of modal to produce (wide)" />
+    <f:argument name="function" type="string" optional="{true}" default="" description="JavaScript function to apply (-)" />
 
-    <dialog id="{id}" class="mdlr-modal {f:if(condition: '{variant} != \'\'', then: 'mdlr-variant-{variant} ') -> f:for(each: '{variants}', as: 'variant')}" closedby="any">
+    <dialog id="{id}" class="mdlr-modal {f:if(condition: '{variant} != \'\'', then: 'mdlr-variant-{variant} ') -> f:for(each: '{variants}', as: 'variant')} {f:if(condition: '{function} != \'\'', then: 'mdlr-function-{function}')}" closedby="any">
         <div class="mdlr-modal-title">
             <h2>{title}</h2>
             <mdlr:atom.button.function function="modal-close" variants="{0: 'icon', 1: 'transparent'}" text="{close}" icon="close" />
