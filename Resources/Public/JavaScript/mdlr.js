@@ -316,7 +316,7 @@ function mdlrDropdownToggle(dropdown, close = false) {
         // Activate handle
         handle.classList.add(dropdownClass);
 
-        // Listen for scroll events
+        // Avoid re-positioning the popover
         document.addEventListener('scroll', (e) => {
             dropdown.hidePopover();
         }, {

@@ -521,7 +521,7 @@ button:disabled abbr {
     cursor: not-allowed;
 }
 
-/* Control: button */
+/* Button (control) */
 
 select,
 input[type="button"],
@@ -878,7 +878,7 @@ a.mdlr-button.mdlr-variant-texticon svg:last-child {
     margin-right: -0.25em;
 }
 
-/* Control: input */
+/* Input (control) */
 
 input[type="email"],
 input[type="number"],
@@ -936,9 +936,16 @@ textarea:enabled:focus-visible {
     transition: var(--mdlr-transition-click);
 }
 
-/* Control: switch */
+/* Switch (control) */
 
-input[type="checkbox"].mdlr-switch {
+.mdlr-switch {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: calc(0.5 * var(--mdlr-spacing-padding-horizontal));
+}
+
+.mdlr-switch > input[type="checkbox"] {
     -webkit-appearance: none;
     appearance: none;
     position: relative;
@@ -949,12 +956,12 @@ input[type="checkbox"].mdlr-switch {
     line-height: 0;
 }
 
-input[type="checkbox"].mdlr-switch:focus-visible {
+.mdlr-switch > input[type="checkbox"]:focus-visible {
     outline: var(--mdlr-color-highlight-main) var(--mdlr-spacing-medium) solid;
     outline-offset: var(--mdlr-spacing-medium);
 }
 
-input[type="checkbox"].mdlr-switch::after {
+.mdlr-switch > input[type="checkbox"]::after {
     clear: both;
     content: '';
     display: inline-block;
@@ -966,15 +973,15 @@ input[type="checkbox"].mdlr-switch::after {
     transition: var(--mdlr-transition-elevate);
 }
 
-input[type="checkbox"].mdlr-switch:hover::after {
+.mdlr-switch > input[type="checkbox"]:hover::after {
     background: var(--mdlr-color-accent-main);
 }
 
-input[type="checkbox"].mdlr-switch:checked::after {
+.mdlr-switch > input[type="checkbox"]:checked::after {
     background: var(--mdlr-color-highlight-main);
 }
 
-input[type="checkbox"].mdlr-switch::before {
+.mdlr-switch > input[type="checkbox"]::before {
     content: '';
     display: block;
     width: 1.25em;
@@ -988,12 +995,12 @@ input[type="checkbox"].mdlr-switch::before {
     transition: var(--mdlr-transition-elevate);
 }
 
-input[type="checkbox"].mdlr-switch:hover::before {
+.mdlr-switch > input[type="checkbox"]:hover::before {
     background: var(--mdlr-color-accent-main-text);
     box-shadow: var(--mdlr-shadow-regular);
 }
 
-input[type="checkbox"].mdlr-switch:checked::before {
+.mdlr-switch > input[type="checkbox"]:checked::before {
     transform: translateX(1.125em);
     background: var(--mdlr-color-highlight-main-text);
     box-shadow: var(--mdlr-shadow-regular);
@@ -1631,6 +1638,30 @@ dl.mdlr-boxedlist > div.mdlr-boxedlist-addition {
     -webkit-box-orient: vertical;
 }
 
+/* Search */
+
+.mdlr-search {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 0;
+}
+
+.mdlr-search > input[type="search"] {
+    flex: 1 1;
+    margin-right: calc(-1.5 * var(--mdlr-spacing-padding-vertical) - 1.5em);
+    padding-right: calc(1.5 * var(--mdlr-spacing-padding-vertical) + 1.5em);
+}
+
+.mdlr-search > *:not(input[type="search"]) > svg {
+    transform: translateY(calc(-0.5 * var(--mdlr-spacing-medium)));
+}
+
+.mdlr-search > *:not(input[type="search"]):hover > svg,
+.mdlr-search > *:not(input[type="search"]):active > svg {
+    transform: none;
+}
+
 /* Dropdown */
 
 menu.mdlr-dropdown[popover] {
@@ -1880,65 +1911,37 @@ dialog.mdlr-toast > button {
     margin: auto;
 }
 
-.mdlr-form-multi,
-.mdlr-form-addition,
-.mdlr-form-entry {
+.mdlr-form-split {
     display: flex;
     justify-content: space-between;
     align-items: center;
     gap: var(--mdlr-spacing-margin);
-}
-
-.mdlr-form-multi {
-    gap: 0;
-}
-
-.mdlr-form-multi > input[type="search"] {
-    flex: 1 1;
-    margin-right: calc(-1.5 * var(--mdlr-spacing-padding-vertical) - 1.5em);
-    padding-right: calc(1.5 * var(--mdlr-spacing-padding-vertical) + 1.5em);
-}
-
-.mdlr-form-multi > *:not(input[type="search"]) > svg {
-    transform: translateY(calc(-0.5 * var(--mdlr-spacing-medium)));
-}
-
-.mdlr-form-multi > *:not(input[type="search"]):hover > svg,
-.mdlr-form-multi > *:not(input[type="search"]):active > svg {
-    transform: none;
-}
-
-.mdlr-form-entry {
-    gap: calc(0.5 * var(--mdlr-spacing-padding-horizontal));
-}
-
-.mdlr-form-addition {
     margin-top: calc(-0.25 * var(--mdlr-spacing-margin));
 }
 
-.mdlr-form-addition > *:first-child {
+.mdlr-form-split > *:first-child {
     justify-content: left;
 }
 
-.mdlr-form-addition > *:last-child {
+.mdlr-form-split > *:last-child {
     justify-content: right;
 }
 
-.mdlr-form-addition > *:first-child:last-child {
+.mdlr-form-split > *:first-child:last-child {
     flex: 1 1;
     justify-content: center;
 }
 
 @media screen and (max-width: 600px) {
 
-    .mdlr-form-addition {
+    .mdlr-form-split {
         flex-direction: column;
         gap: calc(0.5 * var(--mdlr-spacing-margin));
         margin-top: calc(-0.5 * var(--mdlr-spacing-margin));
     }
 
-    .mdlr-form-addition > *:first-child,
-    .mdlr-form-addition > *:last-child {
+    .mdlr-form-split > *:first-child,
+    .mdlr-form-split > *:last-child {
         flex: 1 1;
         justify-content: center;
     }
@@ -1946,30 +1949,37 @@ dialog.mdlr-toast > button {
 
 /* Flexlist */
 
-.mdlr-flexlist {
+ul.mdlr-flexlist,
+ol.mdlr-flexlist {
     display: flex;
     flex-wrap: wrap;
     gap: calc(0.25 * var(--mdlr-spacing-margin));
 }
 
-.mdlr-flexlist-small,
-.mdlr-flexlist-medium,
-.mdlr-flexlist-wide {
+ul.mdlr-flexlist.mdlr-variant-small > li,
+ol.mdlr-flexlist.mdlr-variant-small > li,
+ul.mdlr-flexlist.mdlr-variant-medium > li,
+ol.mdlr-flexlist.mdlr-variant-medium > li,
+ul.mdlr-flexlist.mdlr-variant-wide > li,
+ol.mdlr-flexlist.mdlr-variant-wide > li {
     flex: 1 1;
     height: 250px;
     background: #000;
     border-radius: var(--mdlr-spacing-radius);
 }
 
-.mdlr-flexlist-small {
+ul.mdlr-flexlist.mdlr-variant-small > li,
+ol.mdlr-flexlist.mdlr-variant-small > li {
     flex-basis: 100px;
 }
 
-.mdlr-flexlist-medium {
+ul.mdlr-flexlist.mdlr-variant-medium > li,
+ol.mdlr-flexlist.mdlr-variant-medium > li {
     flex-basis: 225px;
 }
 
-.mdlr-flexlist-wide {
+ul.mdlr-flexlist.mdlr-variant-wide > li,
+ol.mdlr-flexlist.mdlr-variant-wide > li {
     flex-basis: 350px;
 }
 

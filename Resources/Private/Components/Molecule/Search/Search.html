@@ -1,0 +1,16 @@
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" data-namespace-typo3-fluid="true">
+    <f:argument name="id" type="string" optional="{false}" description="ID of the search box" />
+    <f:argument name="name" type="string" optional="{true}" default="" description="Name of the search box if different from ID" />
+    <f:argument name="label" type="string" optional="{false}" description="Text label of the search box" />
+    <f:argument name="placeholder" type="string" optional="{true}" default="" description="Placeholder if different from text label" />
+    <f:argument name="go" type="string" optional="{false}" description="Label of the go button" />
+    <f:argument name="variants" type="string[]" optional="{true}" default="{}" description="Type of search box to produce (-)" />
+    <f:argument name="function" type="string" optional="{true}" default="" description="JavaScript function to apply (-)" />
+    <f:comment>Search bar with an invisible label, a visible placeholder, and a go button.</f:comment>
+
+    <div class="mdlr-search {f:if(condition: '{variant} != \'\'', then: 'mdlr-variant-{variant} ') -> f:for(each: '{variants}', as: 'variant')} {f:if(condition: '{function} != \'\'', then: 'mdlr-function-{function}')}">
+        <label for="{id}" class="mdlr-variant-tacit">{label}</label>
+        <input type="search" id="{id}" name="{f:if(condition: '{name} != \'\'', then: '{name}', else: '{id}')}" placeholder="{f:if(condition: '{placeholder} != \'\'', then: '{placeholder}', else: '{label}')}">
+        <mdlr:atom.button.function id="search-submit" function="" variants="{0: 'icon', 1: 'transparent'}" text="{go}" icon="go" />
+    </div>
+</html>
