@@ -1421,8 +1421,9 @@ ul.mdlr-pills > li > a > span {
 
 /* Boxed */
 
-.mdlr-boxedlist,
-.mdlr-boxedpreview {
+dl.mdlr-boxedlist,
+ul.mdlr-boxedlist,
+.mdlr-boxedrecord {
     max-height: 100%;
     overflow-y: auto;
     color: var(--mdlr-color-primary-main-text);
@@ -1433,8 +1434,9 @@ ul.mdlr-pills > li > a > span {
     transition: var(--mdlr-transition-elevate);
 }
 
-.mdlr-boxedlist:hover,
-.mdlr-boxedpreview:hover {
+dl.mdlr-boxedlist:hover,
+ul.mdlr-boxedlist:hover,
+.mdlr-boxedrecord:hover {
     box-shadow: var(--mdlr-shadow-elevated);
 }
 
@@ -1578,64 +1580,69 @@ dl.mdlr-boxedlist > div.mdlr-boxedlist-addition {
     }
 }
 
-/* Boxed: preview */
+/* Boxed: record */
 
-.mdlr-boxedpreview {
+.mdlr-boxedrecord {
     display: flex;
-    max-height: calc(8rem - (2 * var(--mdlr-spacing-padding-vertical)));
-    padding: var(--mdlr-spacing-padding-vertical) var(--mdlr-spacing-padding-horizontal);
     overflow: hidden;
+    text-decoration: none;
 }
 
-.mdlr-boxedpreview > img,
-.mdlr-boxedpreview > picture > img {
+.mdlr-boxedrecord:hover {
+    background: var(--mdlr-color-primary-more);
+}
+
+a.mdlr-boxedrecord:hover {
+    border-bottom-color: var(--mdlr-color-accent-main);
+}
+
+a.mdlr-boxedrecord:active {
+    background: var(--mdlr-color-primary-more);
+    border-bottom-color: var(--mdlr-color-accent-dark);
+}
+
+.mdlr-boxedrecord > img {
     width: auto;
-    height: auto;
-    max-width: 8rem;
-    max-height: 8rem;
+    max-width: 7.75em;
+    height: 7.75em;
+    object-fit: cover;
     border-radius: var(--mdlr-spacing-radius);
-    margin: calc(-1 * var(--mdlr-spacing-padding-vertical)) var(--mdlr-spacing-padding-horizontal) calc(-1 * var(--mdlr-spacing-padding-vertical)) calc(-1 * var(--mdlr-spacing-padding-horizontal));
 }
 
-.mdlr-boxedpreview > dl {
-    max-width: 100%;
-    overflow: hidden;
+.mdlr-boxedrecord > div {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    padding: var(--mdlr-spacing-padding-vertical) var(--mdlr-spacing-padding-horizontal);
+    gap: calc(0.5 * var(--mdlr-spacing-padding-vertical));
+    min-width: 0; /* Fixes issues with text-overflow in child elements */
 }
 
-.mdlr-boxedpreview > dl > dt {
-    position: absolute !important;
-    visibility: hidden !important;
+.mdlr-boxedrecord > div > * {
     display: block;
+    -webkit-hyphens: auto;
+    hyphens: auto;
     overflow: hidden;
-    width: 0;
-    height: 0;
+    text-overflow: ellipsis;
 }
 
-.mdlr-boxedpreview > dl > dd:not(:last-child) {
-    margin-bottom: calc(0.5 * var(--mdlr-spacing-padding-vertical));
-}
-
-.mdlr-boxedpreview > dl > dd.mdlr-variant-site {
+.mdlr-boxedrecord > div > *.mdlr-boxedrecord-context {
     color: var(--mdlr-color-primary-intense-text);
     white-space: nowrap;
-    text-overflow: ellipsis;
-    overflow: hidden;
 }
 
-.mdlr-boxedpreview > dl > dd.mdlr-variant-title {
+.mdlr-boxedrecord > div > *.mdlr-boxedrecord-title {
+    color: var(--mdlr-color-primary-main-text);
     font-weight: var(--mdlr-font-main-emphasis);
     white-space: nowrap;
-    text-overflow: ellipsis;
-    overflow: hidden;
 }
 
-.mdlr-boxedpreview > dl > dd.mdlr-variant-description {
-    overflow: hidden;
+.mdlr-boxedrecord > div > *.mdlr-boxedrecord-description {
+    color: var(--mdlr-color-primary-main-text);
     display: -webkit-box;
+    -webkit-box-orient: vertical;
     -webkit-line-clamp: 2;
     line-clamp: 2;
-    -moz-box-orient: vertical;
-    -webkit-box-orient: vertical;
 }
 
 /* Search */

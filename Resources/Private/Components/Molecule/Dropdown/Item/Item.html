@@ -4,7 +4,7 @@
     <f:argument name="selected" type="bool" optional="{true}" default="{false}" description="Whether to set aria-selected to true" />
     <f:comment>The component usually wraps around an "atom.button" with variants="{0: 'mini', 1: 'unobtrusive'}".</f:comment>
 
-    <li {f:if(condition: '{id} != \'\'', then: 'id="{id}"')} role="{role}" aria-selected="{f:if(condition: '{selected}', then: 'true', else: 'false')}">
+    <li id="{id}" role="{role}" aria-selected="{f:if(condition: '{selected}', then: 'true', else: 'false')}">
         <f:slot />
     </li>
 </html>

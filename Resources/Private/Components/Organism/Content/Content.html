@@ -6,7 +6,7 @@
     <f:argument name="contentElements" type="array" optional="{false}" description="List of content elements" />
     <f:comment>Gallery and media styles are implemented via overwrites of Fluid Styled Content templates.</f:comment>
 
-    <div {f:if(condition: '{id} != \'\'', then: 'id="{id}"')} class="mdlr-content {f:if(condition: '{area} != \'\'', then: 'mdlr-area-{area} ') -> f:for(each: '{areas}', as: 'area')} {f:if(condition: '{variant} != \'\'', then: 'mdlr-variant-{variant} ') -> f:for(each: '{variants}', as: 'variant')} {f:if(condition: '{function} != \'\'', then: 'mdlr-function-{function}')}">
+    <div id="{id}" class="mdlr-content {f:if(condition: '{area} != \'\'', then: 'mdlr-area-{area} ') -> f:for(each: '{areas}', as: 'area')} {f:if(condition: '{variant} != \'\'', then: 'mdlr-variant-{variant} ') -> f:for(each: '{variants}', as: 'variant')} {f:if(condition: '{function} != \'\'', then: 'mdlr-function-{function}')}">
         <f:for each="{contentElements}" as="contentElement">
             <f:cObject typoscriptObjectPath="{contentElement.mainType}" data="{contentElement.rawRecord}" table="{contentElement.mainType}"/>
         </f:for>

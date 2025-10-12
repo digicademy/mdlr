@@ -5,7 +5,7 @@
     <f:argument name="function" type="string" optional="{true}" default="" description="JavaScript function to apply (scroll)" />
     <f:comment>This component distributes content on a page. Use "template.area" for generic or semantic areas or "page.section" for visually distinct sections.</f:comment>
 
-    <{semanticType} {f:if(condition: '{id} != \'\'', then: 'id="{id}"')} class="mdlr-pattern {f:if(condition: '{variant} != \'\'', then: 'mdlr-variant-{variant} ') -> f:for(each: '{variants}', as: 'variant')} {f:if(condition: '{function} != \'\'', then: 'mdlr-function-{function}')}">
+    <{semanticType} id="{id}" class="mdlr-pattern {f:if(condition: '{variant} != \'\'', then: 'mdlr-variant-{variant} ') -> f:for(each: '{variants}', as: 'variant')} {f:if(condition: '{function} != \'\'', then: 'mdlr-function-{function}')}">
         <f:slot />
     </{semanticType}>
 </html>

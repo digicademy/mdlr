@@ -4,7 +4,7 @@
     <f:argument name="function" type="string" optional="{true}" default="" description="JavaScript function to apply (-)" />
     <f:comment>Horizontally split entry layout for form entries.</f:comment>
 
-    <div {f:if(condition: '{id} != \'\'', then: 'id="{id}"')} class="mdlr-form-split {f:if(condition: '{variant} != \'\'', then: 'mdlr-variant-{variant} ') -> f:for(each: '{variants}', as: 'variant')} {f:if(condition: '{function} != \'\'', then: 'mdlr-function-{function}')}">
+    <div id="{id}" class="mdlr-form-split {f:if(condition: '{variant} != \'\'', then: 'mdlr-variant-{variant} ') -> f:for(each: '{variants}', as: 'variant')} {f:if(condition: '{function} != \'\'', then: 'mdlr-function-{function}')}">
         <f:slot />
     </div>
 </html>
