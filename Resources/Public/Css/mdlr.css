@@ -1099,13 +1099,13 @@ p.mdlr-attribution:hover {
     text-align: center;
 }
 
-.mdlr-empty svg {
+.mdlr-empty > svg {
     margin: 0 auto;
     max-width: var(--mdlr-width-narrow);
     fill: var(--mdlr-color-highlight-intense);
 }
 
-.mdlr-empty p {
+.mdlr-empty > p {
     margin-top: calc(1.5 * var(--mdlr-spacing-padding-vertical));
     color: var(--mdlr-color-primary-intense-text);
     text-align: inherit;
@@ -1360,9 +1360,8 @@ menu.mdlr-viewswitcher > li > a:focus-visible::after {
     }
 }
 
-/* Pill */
+/* Pills */
 
-ol.mdlr-pills,
 ul.mdlr-pills {
     display: flex;
     flex-wrap: wrap;
@@ -1370,12 +1369,10 @@ ul.mdlr-pills {
     margin: calc(-0.5 * var(--mdlr-spacing-extralarge)) calc(-0.5 * var(--mdlr-spacing-extralarge));
 }
 
-ol.mdlr-pills > li,
 ul.mdlr-pills > li {
     margin: calc(0.5 * var(--mdlr-spacing-extralarge));
 }
 
-ol.mdlr-pills > li > a,
 ul.mdlr-pills > li > a {
     display: block;
     width: fit-content;
@@ -1389,31 +1386,26 @@ ul.mdlr-pills > li > a {
     text-overflow: ellipsis;
 }
 
-ol.mdlr-pills.mdlr-variant-limited > li > a,
-ul.mdlr-pills.mdlr-variant-limited > li > a {
+ul.mdlr-pills.mdlr-variant-compact > li > a {
     max-width: 6.5em;
 }
 
-ol.mdlr-pills > li > a:hover,
 ul.mdlr-pills > li > a:hover {
     color: var(--mdlr-color-accent-main-text);
     background: var(--mdlr-color-accent-main);
 }
 
-ol.mdlr-pills > li > a:focus-visible,
 ul.mdlr-pills > li > a:focus-visible {
     outline: var(--mdlr-color-highlight-main) var(--mdlr-spacing-medium) solid;
     outline-offset: var(--mdlr-spacing-medium);
 }
 
-ol.mdlr-pills > li > a:active,
 ul.mdlr-pills > li > a:active {
     color: var(--mdlr-color-accent-dark-text);
     background: var(--mdlr-color-accent-dark);
     transition: var(--mdlr-transition-click);
 }
 
-ol.mdlr-pills > li > a > span,
 ul.mdlr-pills > li > a > span {
     display: block;
     transform: translateY(var(--mdlr-font-main-offset));
