@@ -720,7 +720,7 @@ function mdlrWatchlistView() {
 
             // Build list
             let newList = document.createElement('ul');
-            newList.classList.add('mdlr-boxedlist', 'mdlr-function-watchlist-list');
+            newList.classList.add('mdlr-boxedlist', 'mdlr-variant-compact', 'mdlr-function-watchlist-list');
             watchlistEmpty.after(newList);
 
             // Build list items
@@ -761,14 +761,17 @@ function mdlrWatchlistView() {
                 // Link
                 let newLink = document.createElement('a');
                 newLink.href = encodeURI(key); // Content escaped via function
-                newLink.classList.add('mdlr-boxedlist-emphasis');
-                newLink.textContent = value[0]; // Content auto-escaped via property
                 newEntry.appendChild(newLink);
 
-                // Paragraph
-                let newParagraph = document.createElement('p');
-                newParagraph.textContent = value[1]; // Content auto-escaped via property
-                newEntry.appendChild(newParagraph);
+                // Link > strong
+                let newLinkStrong = document.createElement('strong');
+                newLinkStrong.textContent = value[0]; // Content auto-escaped via property
+                newLink.appendChild(newLinkStrong);
+
+                // Span
+                let newSpan = document.createElement('span');
+                newSpan.textContent = value[1]; // Content auto-escaped via property
+                newEntry.appendChild(newSpan);
 
                 // Deactivate respective add buttons
                 for(const watchlistAdder of watchlistAdders) {

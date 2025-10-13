@@ -1419,13 +1419,14 @@ ul.mdlr-pills > li > a > span {
     transform: translateY(var(--mdlr-font-main-offset));
 }
 
-/* Boxed */
+/* Boxed data and list */
 
-dl.mdlr-boxedlist,
-ul.mdlr-boxedlist,
-.mdlr-boxedrecord {
+dl.mdlr-boxeddata,
+ul.mdlr-boxedlist {
+    width: 100%;
+    height: min-content;
+    overflow: hidden;
     max-height: 100%;
-    overflow-y: auto;
     color: var(--mdlr-color-primary-main-text);
     background: var(--mdlr-color-primary-intense);
     border-radius: var(--mdlr-spacing-radius);
@@ -1434,53 +1435,43 @@ ul.mdlr-boxedlist,
     transition: var(--mdlr-transition-elevate);
 }
 
-dl.mdlr-boxedlist:hover,
-ul.mdlr-boxedlist:hover,
-.mdlr-boxedrecord:hover {
+dl.mdlr-boxeddata:hover,
+ul.mdlr-boxedlist:hover {
     box-shadow: var(--mdlr-shadow-elevated);
 }
 
-/* Boxed: list */
-
-dl.mdlr-boxedlist,
-ul.mdlr-boxedlist {
-    width: 100%;
-    height: min-content;
-    overflow: hidden;
-}
-
-dl.mdlr-boxedlist {
+dl.mdlr-boxeddata {
     display: table;
 }
 
-dl.mdlr-boxedlist > div,
+dl.mdlr-boxeddata > div,
 ul.mdlr-boxedlist > li {
     transition: var(--mdlr-transition-elevate);
 }
 
-dl.mdlr-boxedlist > div {
+dl.mdlr-boxeddata > div {
     display: table-row;
 }
 
-dl.mdlr-boxedlist > div:first-child,
+dl.mdlr-boxeddata > div:first-child,
 ul.mdlr-boxedlist > li:first-child {
     border-top-left-radius: var(--mdlr-spacing-radius);
     border-top-right-radius: var(--mdlr-spacing-radius);
 }
 
-dl.mdlr-boxedlist > div:last-child,
+dl.mdlr-boxeddata > div:last-child,
 ul.mdlr-boxedlist > li:last-child {
     border-bottom-left-radius: var(--mdlr-spacing-radius);
     border-bottom-right-radius: var(--mdlr-spacing-radius);
 }
 
-dl.mdlr-boxedlist > div:hover,
+dl.mdlr-boxeddata > div:hover,
 ul.mdlr-boxedlist > li:hover {
     background: var(--mdlr-color-primary-more);
 }
 
-dl.mdlr-boxedlist > div > dt,
-dl.mdlr-boxedlist > div > dd,
+dl.mdlr-boxeddata > div > dt,
+dl.mdlr-boxeddata > div > dd,
 ul.mdlr-boxedlist > li {
     padding: var(--mdlr-spacing-padding-vertical) var(--mdlr-spacing-padding-horizontal) calc(var(--mdlr-spacing-padding-vertical) - var(--mdlr-font-main-offset)) var(--mdlr-spacing-padding-horizontal);
     border-bottom: var(--mdlr-spacing-thin) solid var(--mdlr-color-primary-less);
@@ -1490,106 +1481,113 @@ ul.mdlr-boxedlist > li {
     overflow-wrap: anywhere;
 }
 
-dl.mdlr-boxedlist > div > dt,
-dl.mdlr-boxedlist > div > dd {
+dl.mdlr-boxeddata > div > dt,
+dl.mdlr-boxeddata > div > dd {
     display: table-cell;
 }
 
-dl.mdlr-boxedlist > div > dt {
+dl.mdlr-boxeddata > div > dt {
     padding-right: 0;
     width: calc(var(--mdlr-spacing-column) - var(--mdlr-spacing-padding-horizontal));
     font-weight: var(--mdlr-font-main-emphasis);
     text-align: right;
 }
 
-dl.mdlr-boxedlist > div > dd {
+dl.mdlr-boxeddata > div > dd {
     width: calc(100% - var(--mdlr-spacing-column) - (2 * var(--mdlr-spacing-padding-horizontal)));
 }
 
-dl.mdlr-boxedlist.mdlr-variant-space > div > dt,
-dl.mdlr-boxedlist.mdlr-variant-space > div > dd,
+dl.mdlr-boxeddata.mdlr-variant-space > div > dt,
+dl.mdlr-boxeddata.mdlr-variant-space > div > dd,
 ul.mdlr-boxedlist.mdlr-variant-space > li {
     padding-top: calc(1.5 * var(--mdlr-spacing-padding-vertical));
     padding-bottom: calc(1.5 * var(--mdlr-spacing-padding-vertical) - var(--mdlr-font-main-offset));
 }
 
-dl.mdlr-boxedlist > div:last-child > dt,
-dl.mdlr-boxedlist > div:last-child > dd,
+dl.mdlr-boxeddata > div:last-child > dt,
+dl.mdlr-boxeddata > div:last-child > dd,
 ul.mdlr-boxedlist > li:last-child {
     border-bottom: none;
 }
 
-dl.mdlr-boxedlist > div > dd > .mdlr-boxedlist-emphasis,
-ul.mdlr-boxedlist > li > .mdlr-boxedlist-emphasis {
-    font-weight: var(--mdlr-font-main-emphasis);
+dl.mdlr-boxeddata > div > dd > span,
+ul.mdlr-boxedlist > li > span {
+    display: block;
 }
 
-dl.mdlr-boxedlist > div > dd > p:not(:first-child),
-ul.mdlr-boxedlist > li > p:not(:first-child) {
+dl.mdlr-boxeddata > div > dd > *:not(:first-child),
+ul.mdlr-boxedlist > li > *:not(:first-child) {
     margin-top: calc(0.5 * var(--mdlr-spacing-padding-vertical));
 }
 
-dl.mdlr-boxedlist > div > dd > .mdlr-boxedlist-emphasis + p,
-ul.mdlr-boxedlist > li > .mdlr-boxedlist-emphasis + p {
+dl.mdlr-boxeddata.mdlr-variant-compact > div > dd > *:not(:first-child),
+ul.mdlr-boxedlist.mdlr-variant-compact > li > *:not(:first-child) {
     margin-top: 0;
 }
 
-dl.mdlr-boxedlist > div > dd > .mdlr-boxedlist-detail,
+dl.mdlr-boxeddata > div > dd > .mdlr-boxeddata-detail,
 ul.mdlr-boxedlist > li > .mdlr-boxedlist-detail {
     color: var(--mdlr-color-primary-intense-text);
 }
 
-dl.mdlr-boxedlist > div > dd > menu.mdlr-buttonrow {
+dl.mdlr-boxeddata > div > dd > menu.mdlr-buttonrow {
     justify-content: left;
     margin-top: calc(-0.5 * var(--mdlr-spacing-padding-vertical));
     margin-bottom: calc(-0.5 * var(--mdlr-spacing-padding-vertical));
-    transform: translateY(-0.125em);
 }
 
-dl.mdlr-boxedlist > div.mdlr-boxedlist-addition {
+dl.mdlr-boxeddata > div.mdlr-boxeddata-addition {
     padding: var(--mdlr-spacing-padding-vertical) var(--mdlr-spacing-padding-horizontal) calc(var(--mdlr-spacing-padding-vertical) + 1px) var(--mdlr-spacing-padding-horizontal);
     border-top: var(--mdlr-spacing-thin) solid var(--mdlr-color-primary-less);
 }
 
 @media screen and ((max-width: 360px)) {
 
-    dl.mdlr-boxedlist > div {
+    dl.mdlr-boxeddata > div {
         display: flex;
         flex-wrap: wrap;
     }
     
-    dl.mdlr-boxedlist > div > dt,
-    dl.mdlr-boxedlist > div > dd {
+    dl.mdlr-boxeddata > div > dt,
+    dl.mdlr-boxeddata > div > dd {
         display: block;
         width: 100%;
     }
     
-    dl.mdlr-boxedlist > div > dt {
+    dl.mdlr-boxeddata > div > dt {
         border-bottom: none;
         text-align: left;
         padding-bottom: 0;
     }
 
-    dl.mdlr-boxedlist.mdlr-variant-space > div > dt {
+    dl.mdlr-boxeddata.mdlr-variant-space > div > dt {
         padding-top: var(--mdlr-spacing-padding-vertical);
     }
 
-    dl.mdlr-boxedlist > div > dd,
-    dl.mdlr-boxedlist.mdlr-variant-space > div > dd {
+    dl.mdlr-boxeddata > div > dd,
+    dl.mdlr-boxeddata.mdlr-variant-space > div > dd {
         padding-top: calc(0.5 * var(--mdlr-spacing-padding-vertical));
     }
 }
 
-/* Boxed: record */
+/* Boxed record */
 
 .mdlr-boxedrecord {
     display: flex;
     overflow: hidden;
     text-decoration: none;
+    max-height: 100%;
+    color: var(--mdlr-color-primary-main-text);
+    background: var(--mdlr-color-primary-intense);
+    border-radius: var(--mdlr-spacing-radius);
+    border-bottom: var(--mdlr-color-highlight-main) solid var(--mdlr-spacing-medium);
+    box-shadow: var(--mdlr-shadow-regular);
+    transition: var(--mdlr-transition-elevate);
 }
 
 .mdlr-boxedrecord:hover {
     background: var(--mdlr-color-primary-more);
+    box-shadow: var(--mdlr-shadow-elevated);
 }
 
 a.mdlr-boxedrecord:hover {

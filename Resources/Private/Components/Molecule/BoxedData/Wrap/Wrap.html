@@ -1,0 +1,11 @@
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" data-namespace-typo3-fluid="true">
+    <f:argument name="id" type="string" optional="{true}" default="" description="ID of the boxed data" />
+    <f:argument name="variants" type="string[]" optional="{true}" default="{}" description="Type of boxed data to produce (compact, space)" />
+    <f:argument name="areas" type="string[]" optional="{true}" default="{}" description="Area stylings to apply (slot-a, slot-b, slot-c, slot-d, align-left, align-left-above-900, align-left-below-900, align-left-above-600, align-left-below-600, align-center, align-center-above-900, align-center-below-900, align-center-above-600, align-center-below-600, align-right, align-right-above-900, align-right-below-900, align-right-above-600, align-right-below-600, align-top, align-middle, align-bottom)" />
+    <f:argument name="function" type="string" optional="{true}" default="" description="JavaScript function to apply (-)" />
+    <f:comment>Component to produce a boxed data section that wraps around "molecule.boxedData.item"s.</f:comment>
+
+    <dl id="{id}" class="mdlr-boxeddata {f:if(condition: '{area} != \'\'', then: 'mdlr-area-{area} ') -> f:for(each: '{areas}', as: 'area')} {f:if(condition: '{variant} != \'\'', then: 'mdlr-variant-{variant} ') -> f:for(each: '{variants}', as: 'variant')} {f:if(condition: '{function} != \'\'', then: 'mdlr-function-{function}')}">
+        <f:slot />
+    </dl>
+</html>
