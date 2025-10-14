@@ -3,9 +3,10 @@
     <f:argument name="url" type="string" optional="{false}" description="URL of the pill item" />
     <f:argument name="text" type="string" optional="{false}" description="Label of the pill item" />
     <f:argument name="hint" type="string" optional="{true}" default="" description="Pill title if different from the text" />
+    <f:argument name="hidden" type="bool" optional="{true}" default="{false}" description="Whether the item is hidden" />
     <f:comment>Individual pill to be used within a "molecule.pills.wrap".</f:comment>
 
-    <li id="{id}">
+    <li id="{id}" {f:if(condition: '{hidden} == \'{false}\'', then: 'hidden')}>
         <a href="{url}" title="{f:if(condition: '{hint} != \'\'', then: '{hint}', else: '{text}')}">
             <span>{text}</span>
         </a>

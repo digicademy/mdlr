@@ -1,0 +1,12 @@
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" data-namespace-typo3-fluid="true">
+    <f:argument name="id" type="string" optional="{true}" default="" description="ID of the image row" />
+    <f:argument name="variants" type="string[]" optional="{true}" default="{}" description="Type of image row to produce (-)" />
+    <f:argument name="areas" type="string[]" optional="{true}" default="{}" description="Area stylings to apply (slot-a, slot-b, slot-c, slot-d, align-left, align-left-above-900, align-left-below-900, align-left-above-600, align-left-below-600, align-center, align-center-above-900, align-center-below-900, align-center-above-600, align-center-below-600, align-right, align-right-above-900, align-right-below-900, align-right-above-600, align-right-below-600, align-top, align-middle, align-bottom)" />
+    <f:argument name="function" type="string" optional="{true}" default="" description="JavaScript function to apply (-)" />
+    <f:argument name="hidden" type="bool" optional="{true}" default="{false}" description="Whether the button row is hidden" />
+    <f:comment>Component to align images in a row via "molecule.imageRow.item"s.</f:comment>
+
+    <ul id="{id}" class="mdlr-imagerow {f:if(condition: '{area} != \'\'', then: 'mdlr-area-{area} ') -> f:for(each: '{areas}', as: 'area')} {f:if(condition: '{variant} != \'\'', then: 'mdlr-variant-{variant} ') -> f:for(each: '{variants}', as: 'variant')} {f:if(condition: '{function} != \'\'', then: 'mdlr-function-{function}')}" {f:if(condition: '{hidden} == \'{false}\'', then: 'hidden')}>
+        <f:slot />
+    </ul>
+</html>

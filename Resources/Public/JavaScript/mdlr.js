@@ -711,11 +711,11 @@ function mdlrWatchlistView() {
 
         // Either hide empty note if the list has items
         if(Object.keys(watchlist).length > 0) {
-            watchlistEmpty.classList.add('mdlr-variant-hidden');
+            watchlistEmpty.hidden = true;
 
             // Show serialisations
             for(const watchlistSerialisation of watchlistSerialisations) {
-                watchlistSerialisation.classList.remove('mdlr-variant-hidden');
+                watchlistSerialisation.hidden = false;
             }
 
             // Build list
@@ -785,9 +785,9 @@ function mdlrWatchlistView() {
 
         // Or only show note if the list is empty
         } else {
-            watchlistEmpty.classList.remove('mdlr-variant-hidden');
+            watchlistEmpty.hidden = false;
             for(const watchlistSerialisation of watchlistSerialisations) {
-                watchlistSerialisation.classList.add('mdlr-variant-hidden');
+                watchlistSerialisation.hidden = true;
             }
         }
     }

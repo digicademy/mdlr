@@ -1022,11 +1022,7 @@ p.mdlr-attribution:hover {
     color: var(--mdlr-color-primary-main-text);
 }
 
-/* Hidden and tacit */
-
-.mdlr-variant-hidden { /* Removed from DOM and screenreaders */
-    display: none !important;
-}
+/* Tacit */
 
 .mdlr-variant-tacit { /* Merely visually hidden */
     position: absolute !important;
@@ -1215,7 +1211,6 @@ ul.mdlr-linkrow {
 
 /* Image row */
 
-ol.mdlr-imagerow,
 ul.mdlr-imagerow {
     display: flex;
     align-items: center;
@@ -1232,6 +1227,10 @@ menu.mdlr-buttonrow {
     justify-content: center;
     flex-wrap: wrap;
     gap: calc(0.5 * var(--mdlr-spacing-padding-vertical)) var(--mdlr-spacing-thin);
+}
+
+menu.mdlr-buttonrow[hidden] {
+    display: none;
 }
 
 menu.mdlr-buttonrow.mdlr-variant-separate {

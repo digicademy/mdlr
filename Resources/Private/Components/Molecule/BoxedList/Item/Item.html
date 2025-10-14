@@ -3,9 +3,10 @@
     <f:argument name="url" type="string" optional="{false}" description="URL of the boxed list item" />
     <f:argument name="label" type="string" optional="{false}" description="Label of the boxed list item" />
     <f:argument name="context" type="string" optional="{false}" description="Context string of the boxed list item" />
+    <f:argument name="hidden" type="bool" optional="{true}" default="{false}" description="Whether the item is hidden" />
     <f:comment>The component commonly wraps around an optional "atom.button" with variants="{0: 'icon', 1: 'transparent', 2: 'sidelined'}".</f:comment>
 
-    <li id="{id}">
+    <li id="{id}" {f:if(condition: '{hidden} == \'{false}\'', then: 'hidden')}>
         <f:slot />
         <f:if condition="{url}">
             <a href="{url}">
