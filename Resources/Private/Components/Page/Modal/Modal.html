@@ -7,7 +7,7 @@
 
     <dialog id="{id}" class="mdlr-modal {f:if(condition: '{variant} != \'\'', then: 'mdlr-variant-{variant} ') -> f:for(each: '{variants}', as: 'variant')} {f:if(condition: '{function} != \'\'', then: 'mdlr-function-{function}')}" closedby="any">
         <div class="mdlr-modal-title">
-            <h2>{title}</h2>
+            <mdlr:atom.heading text="{title}" level="2" />
             <mdlr:atom.button.function function="modal-close" variants="{0: 'icon', 1: 'transparent'}" text="{close}" icon="close" />
         </div>
         <f:slot />

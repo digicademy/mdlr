@@ -534,7 +534,7 @@ a.mdlr-imagelink.mdlr-variant-unobtrusive span {
     height: 0;
 }
 
-/* Control */
+/* Button, control, switch */
 
 label {
     cursor: pointer;
@@ -575,7 +575,7 @@ button:disabled abbr {
     cursor: not-allowed;
 }
 
-/* Button (control) */
+/* Button */
 
 select,
 input[type="button"],
@@ -932,7 +932,7 @@ a.mdlr-button.mdlr-variant-texticon svg:last-child {
     margin-right: -0.25em;
 }
 
-/* Input (control) */
+/* Control */
 
 input[type="email"],
 input[type="number"],
@@ -990,7 +990,7 @@ textarea:enabled:focus-visible {
     transition: var(--mdlr-transition-click);
 }
 
-/* Switch (control) */
+/* Switch */
 
 .mdlr-switch {
     display: flex;
@@ -1167,7 +1167,7 @@ p.mdlr-title-context {
     transform: translateY(var(--mdlr-font-heading-offset));
 }
 
-h2.mdlr-title-heading {
+.mdlr-title > h2 {
     grid-area: a;
 }
 
