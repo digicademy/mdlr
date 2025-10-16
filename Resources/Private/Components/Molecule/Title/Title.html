@@ -1,0 +1,19 @@
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" data-namespace-typo3-fluid="true">
+    <f:argument name="id" type="string" optional="{true}" default="" description="ID of the title" />
+    <f:argument name="title" type="string" optional="{false}" description="Title to display" />
+    <f:argument name="subtitle" type="string" optional="{true}" default="" description="Subtitle to display below the title" />
+    <f:argument name="context" type="string" optional="{true}" default="" description="Context string to display above the title to display" />
+    <f:argument name="variants" type="string[]" optional="{true}" default="{}" description="Type of title to produce (-)" />
+    <f:argument name="areas" type="string[]" optional="{true}" default="{}" description="Area stylings to apply (slot-a, slot-b, slot-c, slot-d, align-left, align-left-above-900, align-left-below-900, align-left-above-600, align-left-below-600, align-center, align-center-above-900, align-center-below-900, align-center-above-600, align-center-below-600, align-right, align-right-above-900, align-right-below-900, align-right-above-600, align-right-below-600, align-top, align-middle, align-bottom)" />
+    <f:argument name="function" type="string" optional="{true}" default="" description="JavaScript function to apply (-)" />
+
+    <div id="{id}" class="mdlr-title {f:if(condition: '{area} != \'\'', then: 'mdlr-area-{area} ') -> f:for(each: '{areas}', as: 'area')} {f:if(condition: '{variant} != \'\'', then: 'mdlr-variant-{variant} ') -> f:for(each: '{variants}', as: 'variant')} {f:if(condition: '{function} != \'\'', then: 'mdlr-function-{function}')}">
+        <h2 class="mdlr-title-heading">{title}</h2>
+        <f:if condition="{subtitle}">
+            <p class="mdlr-title-subheading">{subtitle}</p>
+        </f:if>
+        <f:if condition="{context}">
+            <p class="mdlr-title-context">{context}</p>
+        </f:if>
+    </div>
+</html>

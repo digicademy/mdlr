@@ -167,7 +167,7 @@ LICENSE.txt file that was distributed with this source code.
 
 
 /*
-## Atom #######################################################################
+## Quantum ####################################################################
 */
 
 /* Basics */
@@ -260,6 +260,89 @@ body {
     navigation: auto;
 }
 
+/* Inline */
+
+strong {
+    font-weight: var(--mdlr-font-main-emphasis);
+}
+
+cite {
+    font-style: normal;
+}
+
+abbr {
+    text-decoration-line: underline;
+    text-decoration-style: dotted;
+    text-decoration-thickness: var(--mdlr-spacing-thin);
+    text-decoration-color: var(--mdlr-color-accent-intense);
+    text-underline-offset: var(--mdlr-spacing-large);
+    cursor: help;
+}
+
+/* Tacit */
+
+.mdlr-variant-tacit {
+    position: absolute !important;
+    visibility: hidden !important;
+    display: block;
+    overflow: hidden;
+    width: 0;
+    height: 0;
+}
+
+@media screen and (min-width: 901px) {
+
+    .mdlr-variant-tacit-above-900 {
+        position: absolute !important;
+        visibility: hidden !important;
+        display: block;
+        overflow: hidden;
+        width: 0;
+        height: 0;
+    }
+}
+
+@media screen and (max-width: 900px) {
+
+    .mdlr-variant-tacit-below-900 {
+        position: absolute !important;
+        visibility: hidden !important;
+        display: block;
+        overflow: hidden;
+        width: 0;
+        height: 0;
+    }
+}
+
+@media screen and (min-width: 601px) {
+
+    .mdlr-variant-tacit-above-600 {
+        position: absolute !important;
+        visibility: hidden !important;
+        display: block;
+        overflow: hidden;
+        width: 0;
+        height: 0;
+    }
+}
+
+@media screen and (max-width: 600px) {
+
+    .mdlr-variant-tacit-below-600 {
+        position: absolute !important;
+        visibility: hidden !important;
+        display: block;
+        overflow: hidden;
+        width: 0;
+        height: 0;
+    }
+}
+
+
+/*
+## Atom #######################################################################
+*/
+
 /* Asset */
 
 .mdlr-asset {
@@ -351,35 +434,6 @@ h6 {
         font-size: var(--mdlr-font-sectionheading-size-below-600);
         line-height: var(--mdlr-font-sectionheading-height);
     }
-}
-
-
-/* Inline style */
-
-strong {
-    font-weight: var(--mdlr-font-main-emphasis);
-}
-
-cite {
-    font-style: normal;
-}
-
-abbr {
-    text-decoration-line: underline;
-    text-decoration-style: dotted;
-    text-decoration-thickness: var(--mdlr-spacing-thin);
-    text-decoration-color: var(--mdlr-color-accent-intense);
-    text-underline-offset: var(--mdlr-spacing-large);
-    cursor: help;
-}
-
-/* Note */
-
-p.mdlr-note {
-    text-align: center;
-    color: var(--mdlr-color-primary-intense-text);
-    text-wrap: balance;
-    margin-top: 1.15em;
 }
 
 /* Link */
@@ -1006,6 +1060,15 @@ textarea:enabled:focus-visible {
     box-shadow: var(--mdlr-shadow-regular);
 }
 
+/* Note */
+
+p.mdlr-note {
+    text-align: center;
+    color: var(--mdlr-color-primary-intense-text);
+    text-wrap: balance;
+    margin-top: 1.15em;
+}
+
 /* Attribution */
 
 p.mdlr-attribution {
@@ -1020,65 +1083,6 @@ p.mdlr-attribution {
 
 p.mdlr-attribution:hover {
     color: var(--mdlr-color-primary-main-text);
-}
-
-/* Tacit */
-
-.mdlr-variant-tacit { /* Merely visually hidden */
-    position: absolute !important;
-    visibility: hidden !important;
-    display: block;
-    overflow: hidden;
-    width: 0;
-    height: 0;
-}
-
-@media screen and (min-width: 901px) {
-
-    .mdlr-variant-tacit-above-900 {
-        position: absolute !important;
-        visibility: hidden !important;
-        display: block;
-        overflow: hidden;
-        width: 0;
-        height: 0;
-    }
-}
-
-@media screen and (max-width: 900px) {
-
-    .mdlr-variant-tacit-below-900 {
-        position: absolute !important;
-        visibility: hidden !important;
-        display: block;
-        overflow: hidden;
-        width: 0;
-        height: 0;
-    }
-}
-
-@media screen and (min-width: 601px) {
-
-    .mdlr-variant-tacit-above-600 {
-        position: absolute !important;
-        visibility: hidden !important;
-        display: block;
-        overflow: hidden;
-        width: 0;
-        height: 0;
-    }
-}
-
-@media screen and (max-width: 600px) {
-
-    .mdlr-variant-tacit-below-600 {
-        position: absolute !important;
-        visibility: hidden !important;
-        display: block;
-        overflow: hidden;
-        width: 0;
-        height: 0;
-    }
 }
 
 
@@ -1155,7 +1159,7 @@ p.mdlr-attribution:hover {
 }
 
 p.mdlr-title-subheading,
-p.mdlr-title-superheading {
+p.mdlr-title-context {
     text-align: center;
     text-wrap: balance;
     -webkit-hyphens: auto;
@@ -1178,7 +1182,7 @@ p.mdlr-title-subheading {
     margin-top: calc(0.5 * var(--mdlr-spacing-margin));
 }
 
-p.mdlr-title-superheading {
+p.mdlr-title-context {
     grid-area: c;
     font-weight: var(--mdlr-font-main-emphasis);
     color: var(--mdlr-color-primary-intense-text);
@@ -1200,8 +1204,7 @@ p.mdlr-title-superheading {
 
 /* Link row */
 
-ol.mdlr-linkrow,
-ul.mdlr-linkrow {
+menu.mdlr-linkrow {
     display: flex;
     align-items: center;
     justify-content: center;
