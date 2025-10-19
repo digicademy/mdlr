@@ -1,0 +1,22 @@
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" data-namespace-typo3-fluid="true">
+    <f:argument name="id" type="string" optional="{false}" description="ID of the field" />
+    <f:argument name="name" type="string" optional="{true}" default="" description="Name of the field if different from ID" />
+    <f:argument name="text" type="string" optional="{false}" description="Text label of the field" />
+    <f:argument name="placeholder" type="string" optional="{true}" default="" description="Placeholder if different from text label" />
+    <f:argument name="type" type="string" optional="{true}" default="text" description="Kind of field to produce (email, number, password, search, tel, text, textarea, url)" />
+    <f:argument name="variants" type="string[]" optional="{true}" default="{}" description="Type of field to produce (-)" />
+    <f:argument name="function" type="string" optional="{true}" default="" description="JavaScript function to apply (-)" />
+    <f:comment>Provides text-input fields along with placeholder texts and invisible text labels.</f:comment>
+
+    <div class="mdlr-field {f:if(condition: '{variant} != \'\'', then: 'mdlr-variant-{variant} ') -> f:for(each: '{variants}', as: 'variant')} {f:if(condition: '{function} != \'\'', then: 'mdlr-function-{function}')}">
+        <label for="{id}" class="mdlr-variant-tacit">{text}</label>
+        <f:if condition="{type} == 'textarea'">
+            <f:then>
+                <textarea id="{id}" name="{f:if(condition: '{name} != \'\'', then: '{name}', else: '{id}')}" placeholder="{f:if(condition: '{placeholder} != \'\'', then: '{placeholder}', else: '{label}')}"></textarea>
+            </f:then>
+            <f:else>
+                <input type="{type}" id="{id}" name="{f:if(condition: '{name} != \'\'', then: '{name}', else: '{id}')}" placeholder="{f:if(condition: '{placeholder} != \'\'', then: '{placeholder}', else: '{label}')}">
+            </f:else>
+        </f:if>
+    </div>
+</html>

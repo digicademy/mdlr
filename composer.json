@@ -34,7 +34,8 @@
     "require": {
         "typo3/cms-core": "^13",
         "typo3/cms-fluid": "^13",
-        "typo3/cms-fluid-styled-content": "^13"
+        "typo3/cms-fluid-styled-content": "^13",
+        "typo3/cms-redirects": "^13"
     },
     "autoload": {
         "psr-4": {
