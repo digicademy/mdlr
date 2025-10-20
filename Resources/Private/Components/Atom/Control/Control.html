@@ -4,16 +4,13 @@
     <f:argument name="value" type="string" optional="{true}" default="true" description="Value of the control if checked" />
     <f:argument name="checked" type="bool" optional="{true}" default="{false}" description="Whether the element is checked" />
     <f:argument name="text" type="string" optional="{false}" description="Text label of the control" />
-    <f:argument name="type" type="string" optional="{true}" default="switch" description="Kind of control to produce (checkbox, color, date, datetime-local, month, radio, switch, time, week)" />
+    <f:argument name="type" type="string" optional="{true}" default="switch" description="Kind of control to produce (checkbox, color, radio, switch)" />
     <f:argument name="variants" type="string[]" optional="{true}" default="{}" description="Type of control to produce (-)" />
     <f:argument name="function" type="string" optional="{true}" default="" description="JavaScript function to apply (-)" />
     <f:comment>Provides small controls with a visible text label on the side.</f:comment>
 
     <f:if condition="{type} == 'color' && {value} == 'true'">
         <f:variable name="value">#000000</f:variable>
-    </f:if>
-    <f:if condition="({type} == 'date' || {type} == 'datetime-local' || {type} == 'month' || {type} == 'time' || {type} == 'week') && {value} == 'true'">
-        <f:variable name="value"></f:variable>
     </f:if>
 
     <div class="mdlr-control {f:if(condition: '{variant} != \'\'', then: 'mdlr-variant-{variant} ') -> f:for(each: '{variants}', as: 'variant')} {f:if(condition: '{function} != \'\'', then: 'mdlr-function-{function}')}">

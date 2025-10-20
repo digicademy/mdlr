@@ -281,6 +281,52 @@ abbr {
     cursor: help;
 }
 
+/* Link */
+
+a {
+    color: var(--mdlr-color-highlight-intense);
+    text-decoration-line: underline;
+    text-decoration-style: solid;
+    text-decoration-thickness: var(--mdlr-spacing-thin);
+    text-decoration-color: transparent;
+    text-underline-offset: var(--mdlr-spacing-large);
+    -webkit-tap-highlight-color: transparent;
+    transition: var(--mdlr-transition-change);
+}
+
+a:hover,
+a.mdlr-variant-active {
+    color: var(--mdlr-color-primary-main-text);
+    text-decoration-color: var(--mdlr-color-accent-intense);
+}
+
+a:focus-visible,
+a.mdlr-variant-active:focus-visible {
+    border-radius: var(--mdlr-spacing-outlineradius);
+    outline: var(--mdlr-color-highlight-main) var(--mdlr-spacing-medium) solid;
+    outline-offset: var(--mdlr-spacing-large);
+}
+
+a:active,
+a.mdlr-variant-active:active {
+    color: var(--mdlr-color-accent-intense);
+    transition: var(--mdlr-transition-click);
+}
+
+a:active *,
+a.mdlr-variant-active:active *,
+a:active span,
+a.mdlr-variant-active:active span {
+    transition: var(--mdlr-transition-click);
+}
+
+/* Image */
+
+img {
+    max-width: 100%;
+    display: block;
+}
+
 /* Tacit */
 
 .mdlr-variant-tacit {
@@ -438,68 +484,6 @@ h6 {
     }
 }
 
-/* Image */
-
-/* Link */
-
-a {
-    color: var(--mdlr-color-highlight-intense);
-    text-decoration-line: underline;
-    text-decoration-style: solid;
-    text-decoration-thickness: var(--mdlr-spacing-thin);
-    text-decoration-color: transparent;
-    text-underline-offset: var(--mdlr-spacing-large);
-    -webkit-tap-highlight-color: transparent;
-    transition: var(--mdlr-transition-change);
-}
-
-a.mdlr-variant-inherit {
-    color: inherit;
-}
-
-a:hover,
-a.mdlr-variant-inherit:hover,
-a.mdlr-variant-active,
-a.mdlr-variant-inherit.mdlr-variant-active {
-    color: var(--mdlr-color-primary-main-text);
-    text-decoration-color: var(--mdlr-color-accent-intense);
-}
-
-a:focus-visible,
-a.mdlr-variant-inherit:focus-visible,
-a.mdlr-variant-active:focus-visible,
-a.mdlr-variant-inherit.mdlr-variant-active:focus-visible {
-    border-radius: var(--mdlr-spacing-outlineradius);
-    outline: var(--mdlr-color-highlight-main) var(--mdlr-spacing-medium) solid;
-    outline-offset: var(--mdlr-spacing-large);
-}
-
-a:active,
-a.mdlr-variant-inherit:active,
-a.mdlr-variant-active:active,
-a.mdlr-variant-inherit.mdlr-variant-active:active {
-    color: var(--mdlr-color-accent-intense);
-    transition: var(--mdlr-transition-click);
-}
-
-a:active *,
-a.mdlr-variant-inherit:active *,
-a.mdlr-variant-active:active *,
-a.mdlr-variant-inherit.mdlr-variant-active:active *,
-a:active span,
-a.mdlr-variant-inherit:active span,
-a.mdlr-variant-active:active span,
-a.mdlr-variant-inherit.mdlr-variant-active:active span {
-    transition: var(--mdlr-transition-click);
-}
-
-/* Image */
-
-img {
-    max-width: 100%;
-    display: block;
-}
-
 /* Image link */
 
 a.mdlr-imagelink {
@@ -541,6 +525,7 @@ a.mdlr-imagelink.mdlr-variant-unobtrusive span {
 /* Button, field, control */
 
 label {
+    display: block;
     cursor: pointer;
 }
 
@@ -938,6 +923,10 @@ a.mdlr-button.mdlr-variant-texticon svg:last-child {
 
 /* Field */
 
+.mdlr-field > label:not(mdlr-variant-tacit) {
+    transform: translateY(calc(-0.65 * var(--mdlr-spacing-padding-vertical)));
+}
+
 input[type="email"],
 input[type="number"],
 input[type="password"],
@@ -951,6 +940,7 @@ input[type="datetime-local"],
 input[type="month"],
 input[type="week"],
 textarea {
+    width: 100%;
     color: var(--mdlr-color-primary-main-text);
     background: var(--mdlr-color-primary-intense);
     border: none;
@@ -960,15 +950,8 @@ textarea {
     padding-bottom: calc(0.75 * var(--mdlr-spacing-padding-vertical) - 0.5 * var(--mdlr-spacing-medium));
 }
 
-input[type="email"],
-input[type="number"],
-input[type="password"],
-input[type="search"],
-input[type="tel"],
-input[type="text"],
-input[type="url"],
 textarea {
-    width: 100%;
+    height: 7.5em;
 }
 
 input[type="email"]::placeholder,
@@ -1263,27 +1246,6 @@ p.mdlr-attribution:hover {
 .mdlr-logo.mdlr-variant-back {
     flex-direction: row-reverse;
     gap: var(--mdlr-spacing-extralarge);
-}
-
-.mdlr-logo h1,
-.mdlr-logo h2,
-.mdlr-logo h3,
-.mdlr-logo h4,
-.mdlr-logo h5,
-.mdlr-logo h6 {
-    transform: none;
-}
-
-@media screen and (max-width: 600px) {
-
-    .mdlr-logo.mdlr-variant-back h1:first-child:not(:last-child) {
-        position: absolute !important;
-        visibility: hidden !important;
-        display: block;
-        overflow: hidden;
-        width: 0;
-        height: 0;
-    }
 }
 
 /* Title */

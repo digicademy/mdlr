@@ -1,21 +1,23 @@
 <html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" data-namespace-typo3-fluid="true">
     <f:argument name="id" type="string" optional="{false}" description="ID of the field" />
     <f:argument name="name" type="string" optional="{true}" default="" description="Name of the field if different from ID" />
+    <f:argument name="value" type="string" optional="{true}" default="" description="Current value of the field" />
     <f:argument name="text" type="string" optional="{false}" description="Text label of the field" />
-    <f:argument name="placeholder" type="string" optional="{true}" default="" description="Placeholder if different from text label" />
-    <f:argument name="type" type="string" optional="{true}" default="text" description="Kind of field to produce (email, number, password, search, tel, text, textarea, url)" />
+    <f:argument name="example" type="string" optional="{true}" default="" description="Placeholder indicating sample input" />
+    <f:argument name="type" type="string" optional="{true}" default="text" description="Kind of field to produce (email, date, datetime-local, month, number, password, search, tel, text, textarea, time, url, week)" />
+    <f:argument name="hideLabel" type="bool" optional="{true}" default="{false}" description="Whether to hide the label in special cases" />
     <f:argument name="variants" type="string[]" optional="{true}" default="{}" description="Type of field to produce (-)" />
     <f:argument name="function" type="string" optional="{true}" default="" description="JavaScript function to apply (-)" />
-    <f:comment>Provides text-input fields along with placeholder texts and invisible text labels.</f:comment>
+    <f:comment>Provides text-input fields along with a text label and placeholder.</f:comment>
 
     <div class="mdlr-field {f:if(condition: '{variant} != \'\'', then: 'mdlr-variant-{variant} ') -> f:for(each: '{variants}', as: 'variant')} {f:if(condition: '{function} != \'\'', then: 'mdlr-function-{function}')}">
-        <label for="{id}" class="mdlr-variant-tacit">{text}</label>
+        <label for="{id}" class="{f:if(condition: '{hideLabel}', then: 'mdlr-variant-tacit')}">{text}</label>
         <f:if condition="{type} == 'textarea'">
             <f:then>
-                <textarea id="{id}" name="{f:if(condition: '{name} != \'\'', then: '{name}', else: '{id}')}" placeholder="{f:if(condition: '{placeholder} != \'\'', then: '{placeholder}', else: '{label}')}"></textarea>
+                <textarea id="{id}" name="{f:if(condition: '{name} != \'\'', then: '{name}', else: '{id}')}" placeholder="{example}">{value}</textarea>
             </f:then>
             <f:else>
-                <input type="{type}" id="{id}" name="{f:if(condition: '{name} != \'\'', then: '{name}', else: '{id}')}" placeholder="{f:if(condition: '{placeholder} != \'\'', then: '{placeholder}', else: '{label}')}">
+                <input type="{type}" id="{id}" name="{f:if(condition: '{name} != \'\'', then: '{name}', else: '{id}')}" value="{value}" placeholder="{example}">
             </f:else>
         </f:if>
     </div>
