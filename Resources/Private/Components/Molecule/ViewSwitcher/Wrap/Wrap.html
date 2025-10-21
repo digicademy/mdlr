@@ -1,11 +1,24 @@
 <html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" data-namespace-typo3-fluid="true">
-    <f:argument name="id" type="string" optional="{true}" default="" description="ID of the view switcher" />
-    <f:argument name="variants" type="string[]" optional="{true}" default="{}" description="Type of view switcher to produce (-)" />
-    <f:argument name="areas" type="string[]" optional="{true}" default="{}" description="Area stylings to apply (slot-a, slot-b, slot-c, slot-d, align-left, align-left-above-900, align-left-below-900, align-left-above-600, align-left-below-600, align-center, align-center-above-900, align-center-below-900, align-center-above-600, align-center-below-600, align-right, align-right-above-900, align-right-below-900, align-right-above-600, align-right-below-600, align-top, align-middle, align-bottom)" />
-    <f:argument name="function" type="string" optional="{true}" default="" description="JavaScript function to apply (-)" />
     <f:comment>Main navigation component that wraps around "molecule.viewSwitcher.item"s.</f:comment>
 
-    <menu id="{id}" class="mdlr-viewswitcher {f:if(condition: '{area} != \'\'', then: 'mdlr-area-{area} ') -> f:for(each: '{areas}', as: 'area')} {f:if(condition: '{variant} != \'\'', then: 'mdlr-variant-{variant} ') -> f:for(each: '{variants}', as: 'variant')} {f:if(condition: '{function} != \'\'', then: 'mdlr-function-{function}')}">
+    <f:argument name="id" type="string" optional="{true}" default="" description="ID of the view switcher" />
+    <f:argument name="areas" type="string[]" optional="{true}" default="{}" description="Area stylings to apply (slot-a, slot-b, slot-c, slot-d, align-left, align-left-above-900, align-left-below-900, align-left-above-600, align-left-below-600, align-center, align-center-above-900, align-center-below-900, align-center-above-600, align-center-below-600, align-right, align-right-above-900, align-right-below-900, align-right-above-600, align-right-below-600, align-top, align-middle, align-bottom)" />
+    <f:argument name="variants" type="string[]" optional="{true}" default="{}" description="Type of view switcher to produce (tacit, tacit-above-900, tacit-below-900, tacit-above-600, tacit-below-600)" />
+    <f:argument name="function" type="string" optional="{true}" default="" description="JavaScript function to apply (-)" />
+    <f:argument name="hidden" type="bool" optional="{true}" default="{false}" description="Whether the view switcher is hidden" />
+
+    <f:variable name="class">mdlr-viewswitcher</f:variable>
+    <f:for each="{areas}" as="area">
+        <f:variable name="class">{class} mdlr-area-{area}</f:variable>
+    </f:for>
+    <f:for each="{variants}" as="variant">
+        <f:variable name="class">{class} mdlr-variant-{variant}</f:variable>
+    </f:for>
+    <f:if condition="{function}">
+        <f:variable name="class">{class} mdlr-function-{function}</f:variable>
+    </f:if>
+
+    <menu{f:if(condition: '{id}', then: ' id="{id}"')}{f:if(condition: '{class}', then: ' class="{class}"')}{f:if(condition: '{hidden}', then: ' hidden')}>
         <f:slot />
     </menu>
 </html>

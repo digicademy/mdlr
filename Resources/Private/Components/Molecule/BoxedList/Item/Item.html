@@ -1,18 +1,19 @@
 <html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" data-namespace-typo3-fluid="true">
+    <f:comment>The component commonly wraps around an optional "atom.button" with variants="{0: 'icon', 1: 'transparent', 2: 'sidelined'}".</f:comment>
+
     <f:argument name="id" type="string" optional="{true}" default="" description="ID of the boxed list item" />
-    <f:argument name="url" type="string" optional="{false}" description="URL of the boxed list item" />
+    <f:argument name="uri" type="string" optional="{false}" description="URL of the boxed list item" />
     <f:argument name="text" type="string" optional="{false}" description="Text label of the boxed list item" />
     <f:argument name="context" type="string" optional="{false}" description="Context string of the boxed list item" />
     <f:argument name="hidden" type="bool" optional="{true}" default="{false}" description="Whether the item is hidden" />
-    <f:comment>The component commonly wraps around an optional "atom.button" with variants="{0: 'icon', 1: 'transparent', 2: 'sidelined'}".</f:comment>
 
-    <li id="{id}" {f:if(condition: '{hidden} == \'{false}\'', then: 'hidden')}>
+    <li{f:if(condition: '{id}', then: ' id="{id}"')}{f:if(condition: '{hidden}', then: ' hidden')}>
         <f:slot />
-        <f:if condition="{url}">
-            <a href="{url}">
+        <f:if condition="{uri}">
+            <a href="{uri}">
         </f:if>
         <strong>{text}</strong>
-        <f:if condition="{url}">
+        <f:if condition="{uri}">
             </a>
         </f:if>
         <span>{context}</span>

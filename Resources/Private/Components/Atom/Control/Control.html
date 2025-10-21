@@ -1,26 +1,36 @@
 <html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" data-namespace-typo3-fluid="true">
+    <f:comment>Provides small controls with a visible text label on the side.</f:comment>
+
     <f:argument name="id" type="string" optional="{false}" description="ID of the control" />
+    <f:argument name="type" type="string" optional="{true}" default="switch" description="Kind of control to produce (checkbox, color, radio, switch)" />
     <f:argument name="name" type="string" optional="{true}" default="" description="Name of the control if different from ID" />
     <f:argument name="value" type="string" optional="{true}" default="true" description="Value of the control if checked" />
-    <f:argument name="checked" type="bool" optional="{true}" default="{false}" description="Whether the element is checked" />
     <f:argument name="text" type="string" optional="{false}" description="Text label of the control" />
-    <f:argument name="type" type="string" optional="{true}" default="switch" description="Kind of control to produce (checkbox, color, radio, switch)" />
-    <f:argument name="variants" type="string[]" optional="{true}" default="{}" description="Type of control to produce (-)" />
+    <f:argument name="variants" type="string[]" optional="{true}" default="{}" description="Type of control to produce (tacit, tacit-above-900, tacit-below-900, tacit-above-600, tacit-below-600)" />
     <f:argument name="function" type="string" optional="{true}" default="" description="JavaScript function to apply (-)" />
-    <f:comment>Provides small controls with a visible text label on the side.</f:comment>
+    <f:argument name="checked" type="bool" optional="{true}" default="{false}" description="Whether the element is checked" />
+    <f:argument name="hidden" type="bool" optional="{true}" default="{false}" description="Whether the control is hidden" />
 
     <f:if condition="{type} == 'color' && {value} == 'true'">
         <f:variable name="value">#000000</f:variable>
     </f:if>
 
-    <div class="mdlr-control {f:if(condition: '{variant} != \'\'', then: 'mdlr-variant-{variant} ') -> f:for(each: '{variants}', as: 'variant')} {f:if(condition: '{function} != \'\'', then: 'mdlr-function-{function}')}">
+    <f:variable name="class">mdlr-control</f:variable>
+    <f:for each="{variants}" as="variant">
+        <f:variable name="class">{class} mdlr-variant-{variant}</f:variable>
+    </f:for>
+    <f:if condition="{function}">
+        <f:variable name="class">{class} mdlr-function-{function}</f:variable>
+    </f:if>
+
+    <div{f:if(condition: '{class}', then: ' class="{class}"')}{f:if(condition: '{hidden}', then: ' hidden')}>
         <label for="{id}"><f:format.raw>{text}</f:format.raw></label>
         <f:if condition="{type} == 'switch'">
             <f:then>
-                <input type="checkbox" id="{id}" name="{f:if(condition: '{name} != \'\'', then: '{name}', else: '{id}')}" value="{value}" class="mdlr-variant-switch" {f:if(condition: '{checked} == {true}', then: 'checked')}>
+                <input{f:if(condition: '{id}', then: ' id="{id}"')} type="checkbox" name="{f:if(condition: '{name}', then: '{name}', else: '{id}')}" value="{value}" class="mdlr-variant-switch" {f:if(condition: '{checked} == {true}', then: 'checked')}>
             </f:then>
             <f:else>
-                <input type="{type}" id="{id}" name="{f:if(condition: '{name} != \'\'', then: '{name}', else: '{id}')}" value="{value}" {f:if(condition: '{checked} == {true}', then: 'checked')}>
+                <input{f:if(condition: '{id}', then: ' id="{id}"')} type="{type}" name="{f:if(condition: '{name}', then: '{name}', else: '{id}')}" value="{value}" {f:if(condition: '{checked} == {true}', then: 'checked')}>
             </f:else>
         </f:if>
     </div>

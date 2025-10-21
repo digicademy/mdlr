@@ -1,14 +1,15 @@
 <html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" data-namespace-typo3-fluid="true">
-    <f:argument name="id" type="string" optional="{true}" default="" description="ID of the view switcher item" />
-    <f:argument name="pageUid" type="int" optional="{false}" description="Page UID of the view switcher item" />
-    <f:argument name="active" type="bool" optional="{true}" default="{false}" description="Whether the nav item is currently active" />
-    <f:argument name="text" type="string" optional="{false}" description="Label of the view switcher item" />
-    <f:argument name="hint" type="string" optional="{true}" default="" description="Nav item title if different from the text" />
-    <f:argument name="hidden" type="bool" optional="{true}" default="{false}" description="Whether the item is hidden" />
     <f:comment>Individual navigation item to use within a "molecule.viewSwitcher.wrap".</f:comment>
 
-    <li id="{id}" {f:if(condition: '{hidden} == \'{false}\'', then: 'hidden')}>
-        <f:link.page pageUid="{pageUid}" class="{f:if(condition: '{active}', then:'mdlr-variant-active')}" title="{f:if(condition: '{hint} != \'\'', then: '{hint}', else: '{text}')}">
+    <f:argument name="id" type="string" optional="{true}" default="" description="ID of the view switcher item" />
+    <f:argument name="pageUid" type="int" optional="{false}" description="Page UID of the view switcher item" />
+    <f:argument name="text" type="string" optional="{false}" description="Label of the view switcher item" />
+    <f:argument name="hint" type="string" optional="{true}" default="" description="Nav item title if different from the text" />
+    <f:argument name="active" type="bool" optional="{true}" default="{false}" description="Whether the nav item is currently active" />
+    <f:argument name="hidden" type="bool" optional="{true}" default="{false}" description="Whether the item is hidden" />
+
+    <li{f:if(condition: '{id}', then: ' id="{id}"')}{f:if(condition: '{hidden}', then: ' hidden')}>
+        <f:link.page pageUid="{pageUid}" class="{f:if(condition: '{active}', then:'mdlr-variant-active')}" title="{f:if(condition: '{hint}', then: '{hint}', else: '{text}')}">
             <span>{text}</span>
         </f:link.page>
     </li>

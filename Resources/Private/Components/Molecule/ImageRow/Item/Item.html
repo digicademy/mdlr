@@ -1,9 +1,10 @@
 <html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" data-namespace-typo3-fluid="true">
-    <f:argument name="id" type="string" optional="{true}" default="" description="ID of the image row item" />
-    <f:argument name="hidden" type="bool" optional="{true}" default="{false}" description="Whether the item is hidden" />
     <f:comment>Individual row item to use within a "molecule.imageRow.wrap", wraps around "atom.imageLink"s.</f:comment>
 
-    <li id="{id}" {f:if(condition: '{hidden} == \'{false}\'', then: 'hidden')}>
+    <f:argument name="id" type="string" optional="{true}" default="" description="ID of the image row item" />
+    <f:argument name="hidden" type="bool" optional="{true}" default="{false}" description="Whether the item is hidden" />
+
+    <li{f:if(condition: '{id}', then: ' id="{id}"')}{f:if(condition: '{hidden}', then: ' hidden')}>
         <f:slot />
     </li>
 </html>

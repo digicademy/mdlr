@@ -1,28 +1,38 @@
 <html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" data-namespace-typo3-fluid="true">
+    <f:comment>Button to point to an email address or an email template.</f:comment>
+
     <f:argument name="id" type="string" optional="{true}" default="" description="ID of the button" />
-    <f:argument name="variants" type="string[]" optional="{true}" default="{}" description="Type of button to produce (tiny, mini, icon, tinyicon, miniicon, texticon, round, light, overlay, transparent, unobtrusive, unobserved, embedded, sidelined)" />
     <f:argument name="email" type="string" optional="{false}" description="Email address to link to" />
     <f:argument name="cc" type="string" optional="{true}" default="" description="Email address to send a copy to" />
     <f:argument name="bcc" type="string" optional="{true}" default="" description="Email address to send a shadow copy to" />
     <f:argument name="subject" type="string" optional="{true}" default="" description="Email subject to use" />
     <f:argument name="body" type="string" optional="{true}" default="" description="Email body to use" />
-    <f:argument name="function" type="string" optional="{true}" default="" description="JavaScript function to apply (copy)" />
     <f:argument name="text" type="string" optional="{false}" description="Text to show on the button and as its title" />
     <f:argument name="hint" type="string" optional="{true}" default="" description="Button title if different from the text" />
+    <f:argument name="rel" type="string" optional="{true}" default="" description="The link's relationship attribute" />
     <f:argument name="icon" type="string" optional="{true}" default="" description="The icon to display (cf. available icon assets)" />
     <f:argument name="iconAfter" type="string" optional="{true}" default="" description="The icon to display after the text (cf. available icon assets)" />
+    <f:argument name="variants" type="string[]" optional="{true}" default="{}" description="Type of button to produce (tiny, mini, icon, tinyicon, miniicon, texticon, round, light, overlay, transparent, unobtrusive, unobserved, embedded, sidelined, tacit, tacit-above-900, tacit-below-900, tacit-above-600, tacit-below-600)" />
+    <f:argument name="function" type="string" optional="{true}" default="" description="JavaScript function to apply (copy)" />
     <f:argument name="aria" type="string[]" optional="{true}" default="{}" description="Array of additional ARIA attributes" />
     <f:argument name="data" type="string[]" optional="{true}" default="{}" description="Array of additional data attributes" />
-    <f:argument name="rel" type="string" optional="{true}" default="" description="The link's relationship attribute" />
 
-    <f:link.email id="{id}" email="{email}" cc="{cc}" bcc="{bcc}" subject="{subject}" body="{body}" target="_blank" class="mdlr-button {f:if(condition: '{variant} != \'\'', then: 'mdlr-variant-{variant} ') -> f:for(each: '{variants}', as: 'variant')} {f:if(condition: '{function} != \'\'', then: 'mdlr-function-{function}')}" title="{f:if(condition: '{hint} != \'\'', then: '{hint}', else: '{text}')}" aria="{aria}" data="{data}" rel="{rel}">
-        <f:if condition="{icon} != ''">
+    <f:variable name="class">mdlr-button</f:variable>
+    <f:for each="{variants}" as="variant">
+        <f:variable name="class">{class} mdlr-variant-{variant}</f:variable>
+    </f:for>
+    <f:if condition="{function}">
+        <f:variable name="class">{class} mdlr-function-{function}</f:variable>
+    </f:if>
+
+    <f:link.email id="{id}" email="{email}" cc="{cc}" bcc="{bcc}" subject="{subject}" body="{body}" target="_blank" class="{class}" title="{f:if(condition: '{hint}', then: '{hint}', else: '{text}')}" aria="{aria}" data="{data}" rel="{rel}">
+        <f:if condition="{icon}">
             <svg width="24" height="24" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                 <use href="#icon-{icon}" />
             </svg>
         </f:if>
         <span><f:format.raw>{text}</f:format.raw></span>
-        <f:if condition="{iconAfter} != ''">
+        <f:if condition="{iconAfter}">
             <svg width="24" height="24" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                 <use href="#icon-{iconAfter}" />
             </svg>
