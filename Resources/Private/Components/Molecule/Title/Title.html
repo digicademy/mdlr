@@ -21,7 +21,7 @@
         <f:variable name="class">{class} mdlr-function-{function}</f:variable>
     </f:if>
 
-    <div{f:if(condition: '{id}', then: ' id="{id}"')}{f:if(condition: '{class}', then: ' class="{class}"')}{f:if(condition: '{hidden}', then: ' hidden')}>
+    <div{f:if(condition: id, then: ' id="{id}"')}{f:if(condition: class, then: ' class="{class}"')}{f:if(condition: hidden, then: ' hidden')}>
         <mdlr:atom.heading text="{title}" level="2" />
         <f:if condition="{subtitle}">
             <p class="mdlr-title-subheading">{subtitle}</p>

@@ -21,7 +21,7 @@
         <f:variable name="class">{class} mdlr-function-{function}</f:variable>
     </f:if>
 
-    <div{f:if(condition: '{id}', then: ' id="{id}"')}{f:if(condition: '{class}', then: ' class="{class}"')}{f:if(condition: '{dataKey} && {dataValue}', then: ' data-{dataKey}="{dataValue}"') -> f:for(each: '{data}', as: 'dataValue', key: 'dataKey')}{f:if(condition: '{hidden}', then: ' hidden')}>
+    <div{f:if(condition: id, then: ' id="{id}"')}{f:if(condition: class, then: ' class="{class}"')}{f:if(condition: '{dataKey} && {dataValue}', then: ' data-{dataKey}="{dataValue}"') -> f:for(each: data, as: 'dataValue', key: 'dataKey')}{f:if(condition: hidden, then: ' hidden')}>
         <svg width="160" height="160" viewBox="0 0 160 160" version="1.1" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
             <use href="#illustration-{illustration}"/>
         </svg>

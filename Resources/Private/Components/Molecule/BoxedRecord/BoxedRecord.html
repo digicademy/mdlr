@@ -34,7 +34,7 @@
         <f:variable name="class">{class} mdlr-function-{function}</f:variable>
     </f:if>
 
-    <{semanticTypeOpen}{f:if(condition: '{id}', then: ' id="{id}"')}{f:if(condition: '{class}', then: ' class="{class}"')}{f:if(condition: '{hidden}', then: ' hidden')}>
+    <{semanticTypeOpen}{f:if(condition: id, then: ' id="{id}"')}{f:if(condition: class, then: ' class="{class}"')}{f:if(condition: hidden, then: ' hidden')}>
         <f:if condition="{image}">
             <f:image image="{image}" height="300c" fileExtension="jpg" />
         </f:if>

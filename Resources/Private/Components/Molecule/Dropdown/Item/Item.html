@@ -6,7 +6,7 @@
     <f:argument name="selected" type="bool" optional="{true}" default="{false}" description="Whether to set aria-selected to true" />
     <f:argument name="hidden" type="bool" optional="{true}" default="{false}" description="Whether the item is hidden" />
 
-    <li{f:if(condition: '{id}', then: ' id="{id}"')} role="{role}" aria-selected="{f:if(condition: '{selected}', then: 'true', else: 'false')}"{f:if(condition: '{hidden}', then: ' hidden')}>
+    <li{f:if(condition: id, then: ' id="{id}"')} role="{role}" aria-selected="{f:if(condition: selected, then: 'true', else: 'false')}"{f:if(condition: hidden, then: ' hidden')}>
         <f:slot />
     </li>
 </html>

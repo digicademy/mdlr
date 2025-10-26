@@ -17,7 +17,7 @@
         <f:variable name="class">{class} mdlr-function-{function}</f:variable>
     </f:if>
 
-    <f:link.page id="{id}" pageUid="{pageUid}" title="{f:if(condition: '{hint} != \'\'', then: '{hint}', else: '{alternativeText}')}" class="{class}">
+    <f:link.page id="{id}" pageUid="{pageUid}" title="{f:if(condition: hint, then: hint, else: alternativeText)}" class="{class}">
         <span>{alternativeText}</span>
         <img src="{image}" alt="{alternativeText}" aria-hidden="true">
     </f:link.page>

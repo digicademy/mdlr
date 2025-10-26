@@ -20,7 +20,7 @@
         <f:variable name="class">{class} mdlr-function-{function}</f:variable>
     </f:if>
 
-    <button{f:if(condition: '{id}', then: ' id="{id}"')} type="button"{f:if(condition: '{class}', then: ' class="{class}"')} title="{f:if(condition: '{hint}', then: '{hint}', else: '{text}')}"{f:if(condition: '{popoverTarget}', then: ' popovertarget="{popoverTarget}" popovertargetaction="toggle"')}{f:if(condition: '{ariaKey} && {ariaValue}', then: ' aria-{ariaKey}="{ariaValue}"') -> f:for(each: '{aria}', as: 'ariaValue', key: 'ariaKey')}{f:if(condition: '{dataKey} && {dataValue}', then: ' data-{dataKey}="{dataValue}"') -> f:for(each: '{data}', as: 'dataValue', key: 'dataKey')}>
+    <button{f:if(condition: id, then: ' id="{id}"')} type="button"{f:if(condition: class, then: ' class="{class}"')} title="{f:if(condition: hint, then: hint, else: text)}"{f:if(condition: popoverTarget, then: ' popovertarget="{popoverTarget}" popovertargetaction="toggle"')}{f:if(condition: '{ariaKey} && {ariaValue}', then: ' aria-{ariaKey}="{ariaValue}"') -> f:for(each: aria, as: 'ariaValue', key: 'ariaKey')}{f:if(condition: '{dataKey} && {dataValue}', then: ' data-{dataKey}="{dataValue}"') -> f:for(each: data, as: 'dataValue', key: 'dataKey')}>
         <f:if condition="{icon}">
             <svg width="24" height="24" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                 <use href="#icon-{icon}" />

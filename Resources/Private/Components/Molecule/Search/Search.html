@@ -18,9 +18,9 @@
         <f:variable name="class">{class} mdlr-function-{function}</f:variable>
     </f:if>
 
-    <div{f:if(condition: '{class}', then: ' class="{class}"')}{f:if(condition: '{hidden}', then: ' hidden')}>
+    <div{f:if(condition: class, then: ' class="{class}"')}{f:if(condition: hidden, then: ' hidden')}>
         <label for="{id}" class="mdlr-variant-tacit">{text}</label>
-        <input id="{id}" type="search" name="{f:if(condition: '{name}', then: '{name}', else: '{id}')}"{f:if(condition: '{example}', then: ' placeholder="{example}"')}>
+        <input id="{id}" type="search" name="{f:if(condition: name, then: name, else: id)}"{f:if(condition: example, then: ' placeholder="{example}"')}>
         <mdlr:atom.button.function function="" variants="{0: 'icon', 1: 'transparent'}" text="{go}" icon="go" />
     </div>
 </html>

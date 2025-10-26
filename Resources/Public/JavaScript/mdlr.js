@@ -644,7 +644,7 @@ function mdlrWatchlistAdd(clickedElement) {
 
     // Retrieve new list item
     var addUrl = clickedElement.dataset.target;
-    var addLabel = clickedElement.dataset.label;
+    var addTitle = clickedElement.dataset.title;
     var addType = clickedElement.dataset.type;
     var messageFailure = clickedElement.dataset.failure;
 
@@ -655,7 +655,7 @@ function mdlrWatchlistAdd(clickedElement) {
 
         // Add item to watchlist
         watchlist[addUrl] = [
-            addLabel,
+            addTitle,
             addType,
         ];
 

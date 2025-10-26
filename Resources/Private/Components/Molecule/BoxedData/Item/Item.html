@@ -5,7 +5,7 @@
     <f:argument name="text" type="string" optional="{false}" description="Text label of the boxed data item" />
     <f:argument name="hidden" type="bool" optional="{true}" default="{false}" description="Whether the item is hidden" />
 
-    <div{f:if(condition: '{id}', then: ' id="{id}"')}{f:if(condition: '{hidden}', then: ' hidden')}>
+    <div{f:if(condition: id, then: ' id="{id}"')}{f:if(condition: hidden, then: ' hidden')}>
         <dt><f:format.raw>{text}</f:format.raw></dt>
         <dd>
             <f:slot />

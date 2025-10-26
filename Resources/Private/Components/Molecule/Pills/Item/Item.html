@@ -7,8 +7,8 @@
     <f:argument name="hint" type="string" optional="{true}" default="" description="Pill title if different from the text" />
     <f:argument name="hidden" type="bool" optional="{true}" default="{false}" description="Whether the item is hidden" />
 
-    <li{f:if(condition: '{id}', then: ' id="{id}"')}{f:if(condition: '{hidden}', then: ' hidden')}>
-        <f:link.external uri="{uri}" title="{f:if(condition: '{hint}', then: '{hint}', else: '{text}')}">
+    <li{f:if(condition: id, then: ' id="{id}"')}{f:if(condition: hidden, then: ' hidden')}>
+        <f:link.external uri="{uri}" title="{f:if(condition: hint, then: hint, else: text)}">
             <span>{text}</span>
         </f:link.external>
     </li>

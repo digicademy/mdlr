@@ -8,8 +8,8 @@
     <f:argument name="active" type="bool" optional="{true}" default="{false}" description="Whether the nav item is currently active" />
     <f:argument name="hidden" type="bool" optional="{true}" default="{false}" description="Whether the item is hidden" />
 
-    <li{f:if(condition: '{id}', then: ' id="{id}"')}{f:if(condition: '{hidden}', then: ' hidden')}>
-        <f:link.page pageUid="{pageUid}" class="{f:if(condition: '{active}', then:'mdlr-variant-active')}" title="{f:if(condition: '{hint}', then: '{hint}', else: '{text}')}">
+    <li{f:if(condition: id, then: ' id="{id}"')}{f:if(condition: hidden, then: ' hidden')}>
+        <f:link.page pageUid="{pageUid}" class="{f:if(condition: active, then:'mdlr-variant-active')}" title="{f:if(condition: hint, then: hint, else: text)}">
             <span>{text}</span>
         </f:link.page>
     </li>

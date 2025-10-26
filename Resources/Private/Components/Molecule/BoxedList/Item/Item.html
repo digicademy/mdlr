@@ -7,7 +7,7 @@
     <f:argument name="context" type="string" optional="{false}" description="Context string of the boxed list item" />
     <f:argument name="hidden" type="bool" optional="{true}" default="{false}" description="Whether the item is hidden" />
 
-    <li{f:if(condition: '{id}', then: ' id="{id}"')}{f:if(condition: '{hidden}', then: ' hidden')}>
+    <li{f:if(condition: id, then: ' id="{id}"')}{f:if(condition: hidden, then: ' hidden')}>
         <f:slot />
         <f:if condition="{uri}">
             <a href="{uri}">

@@ -18,7 +18,7 @@
         <f:variable name="class">{class} mdlr-function-{function}</f:variable>
     </f:if>
 
-    <dl{f:if(condition: '{id}', then: ' id="{id}"')}{f:if(condition: '{class}', then: ' class="{class}"')}{f:if(condition: '{hidden}', then: ' hidden')}>
+    <dl{f:if(condition: id, then: ' id="{id}"')}{f:if(condition: class, then: ' class="{class}"')}{f:if(condition: hidden, then: ' hidden')}>
         <f:slot />
     </dl>
 </html>

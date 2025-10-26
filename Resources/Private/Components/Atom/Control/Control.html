@@ -23,14 +23,14 @@
         <f:variable name="class">{class} mdlr-function-{function}</f:variable>
     </f:if>
 
-    <div{f:if(condition: '{class}', then: ' class="{class}"')}{f:if(condition: '{hidden}', then: ' hidden')}>
+    <div{f:if(condition: class, then: ' class="{class}"')}{f:if(condition: hidden, then: ' hidden')}>
         <label for="{id}"><f:format.raw>{text}</f:format.raw></label>
         <f:if condition="{type} == 'switch'">
             <f:then>
-                <input{f:if(condition: '{id}', then: ' id="{id}"')} type="checkbox" name="{f:if(condition: '{name}', then: '{name}', else: '{id}')}" value="{value}" class="mdlr-variant-switch" {f:if(condition: '{checked} == {true}', then: 'checked')}>
+                <input{f:if(condition: id, then: ' id="{id}"')} type="checkbox" name="{f:if(condition: name, then: name, else: id)}" value="{value}" class="mdlr-variant-switch"{f:if(condition: checked, then: ' checked')}>
             </f:then>
             <f:else>
-                <input{f:if(condition: '{id}', then: ' id="{id}"')} type="{type}" name="{f:if(condition: '{name}', then: '{name}', else: '{id}')}" value="{value}" {f:if(condition: '{checked} == {true}', then: 'checked')}>
+                <input{f:if(condition: id, then: ' id="{id}"')} type="{type}" name="{f:if(condition: name, then: name, else: id)}" value="{value}"{f:if(condition: checked, then: ' checked')}>
             </f:else>
         </f:if>
     </div>

@@ -20,14 +20,14 @@
         <f:variable name="class">{class} mdlr-function-{function}</f:variable>
     </f:if>
 
-    <div{f:if(condition: '{class}', then: ' class="{class}"')}{f:if(condition: '{hidden}', then: ' hidden')}>
-        <label for="{id}"{f:if(condition: '{hideLabel}', then: ' class="mdlr-variant-tacit"')}>{text}</label>
+    <div{f:if(condition: class, then: ' class="{class}"')}{f:if(condition: hidden, then: ' hidden')}>
+        <label for="{id}"{f:if(condition: hideLabel, then: ' class="mdlr-variant-tacit"')}>{text}</label>
         <f:if condition="{type} == 'textarea'">
             <f:then>
-                <textarea{f:if(condition: '{id}', then: ' id="{id}"')} name="{f:if(condition: '{name}', then: '{name}', else: '{id}')}"{f:if(condition: '{example}', then: ' placeholder="{example}"')}>{value}</textarea>
+                <textarea{f:if(condition: id, then: ' id="{id}"')} name="{f:if(condition: name}', then: name, else: id)}"{f:if(condition: example, then: ' placeholder="{example}"')}>{value}</textarea>
             </f:then>
             <f:else>
-                <input{f:if(condition: '{id}', then: ' id="{id}"')} type="{type}" name="{f:if(condition: '{name}', then: '{name}', else: '{id}')}"{f:if(condition: '{value}', then: ' value="{value}"')}{f:if(condition: '{example}', then: ' placeholder="{example}"')}>
+                <input{f:if(condition: id, then: ' id="{id}"')} type="{type}" name="{f:if(condition: name, then: name, else: id)}"{f:if(condition: value, then: ' value="{value}"')}{f:if(condition: example, then: ' placeholder="{example}"')}>
             </f:else>
         </f:if>
     </div>

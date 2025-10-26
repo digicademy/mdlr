@@ -635,6 +635,8 @@ button.mdlr-variant-overlay,
 a.mdlr-button.mdlr-variant-overlay {
     color: var(--mdlr-color-highlight-intense);
     background: var(--mdlr-color-primary-translucent);
+    -webkit-backdrop-filter: var(--mdlr-color-primary-translucent-filter);
+    backdrop-filter: var(--mdlr-color-primary-translucent-filter);
     box-shadow: none;
 }
 
@@ -1279,7 +1281,6 @@ p.mdlr-title-subheading {
     font-size: var(--mdlr-font-subheading-size);
     line-height: var(--mdlr-font-subheading-height);
     font-weight: var(--mdlr-font-subheading-weight);
-    color: var(--mdlr-color-highlight-intense);
     margin-top: calc(0.5 * var(--mdlr-spacing-margin));
 }
 

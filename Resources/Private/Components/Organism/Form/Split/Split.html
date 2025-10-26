@@ -13,7 +13,7 @@
         <f:variable name="class">{class} mdlr-function-{function}</f:variable>
     </f:if>
 
-    <div{f:if(condition: '{id}', then: ' id="{id}"')}{f:if(condition: '{class}', then: ' class="{class}"')}>
+    <div{f:if(condition: id, then: ' id="{id}"')}{f:if(condition: class, then: ' class="{class}"')}>
         <f:slot />
     </div>
 </html>

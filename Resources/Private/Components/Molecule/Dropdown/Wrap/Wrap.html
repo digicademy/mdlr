@@ -16,7 +16,7 @@
     </f:if>
 
     <f:slot name="handle" />
-    <menu{f:if(condition: '{id}', then: ' id="{id}"')} popover="auto"{f:if(condition: '{role}', then: ' role="{role}"')}{f:if(condition: '{class}', then: ' class="{class}"')}{f:if(condition: '{hidden}', then: ' hidden')}>
+    <menu{f:if(condition: id, then: ' id="{id}"')} popover="auto"{f:if(condition: role, then: ' role="{role}"')}{f:if(condition: class, then: ' class="{class}"')}{f:if(condition: hidden, then: ' hidden')}>
         <f:slot name="list" />
     </menu>
 </html>
