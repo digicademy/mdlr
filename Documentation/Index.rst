@@ -32,15 +32,16 @@ MDLR
 
 ----
 
-This extension provides a web frontend library for use in TYPO3 and other web
-applications with Fluid-based templating. Components are defined via Fluid to
-provide vanilla HTML, CSS and a tiny bit of JS. They follow an atomic-design
-pattern from small atoms via larger molecules, organisms, and templates all
-the way to pages. This implementation avoids reactive frameworks, CSS and JS
-preprocessors, as well as largely JS-based web components in favour of
-delivering readable but coherent HTML to end users. All components aim for
-semantic expressivity, accessibility, and responsive layouts that adapt to
-various form factors from mobile to tablet to laptop to desktop.
+This extension provides a web frontend library for use as a site set with Fluid
+components in TYPO3 projects and other web applications with Fluid-based
+templating. Components are defined via Fluid to provide vanilla HTML, CSS and
+a tiny bit of JS. They follow an atomic-design pattern from small atoms via
+larger molecules, organisms, and templates all the way to pages. This
+implementation avoids reactive frameworks, CSS and JS preprocessors, as well
+as largely JS-based web components in favour of delivering readable but
+coherent HTML to end users. All components aim for semantic expressivity,
+accessibility, and responsive layouts that adapt to various form factors from
+mobile to tablet to laptop to desktop.
 
 ----
 
