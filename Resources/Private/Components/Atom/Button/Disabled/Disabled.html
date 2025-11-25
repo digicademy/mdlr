@@ -2,7 +2,9 @@
     <f:comment>Button in an inactive state.</f:comment>
 
     <f:argument name="id" type="string" optional="{true}" default="" description="ID of the button" />
+    <f:argument name="textCode" type="string" optional="{true}" default="" description="Short, bold text to show on the button before its title" />
     <f:argument name="text" type="string" optional="{false}" description="Text to show on the button and as its title" />
+    <f:argument name="textCount" type="int" optional="{true}" default="0" description="Count to show on the button after its title" />
     <f:argument name="hint" type="string" optional="{true}" default="" description="Button title if different from the text" />
     <f:argument name="icon" type="string" optional="{true}" default="" description="The icon to display (cf. available icon assets)" />
     <f:argument name="iconAfter" type="string" optional="{true}" default="" description="The icon to display after the text (cf. available icon assets)" />
@@ -19,7 +21,7 @@
                 <use href="#icon-{icon}" />
             </svg>
         </f:if>
-        <span><f:format.raw>{text}</f:format.raw></span>
+        <span><f:if condition="{textCode}"><strong><f:format.raw>{textCode}</f:format.raw></strong> </f:if><f:format.raw>{text}</f:format.raw><f:if condition="{textCount}"> <span class="mdlr-button-count">{textCount}</span></f:if></span>
         <f:if condition="{iconAfter}">
             <svg width="24" height="24" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                 <use href="#icon-{iconAfter}" />
