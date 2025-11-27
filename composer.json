@@ -2,7 +2,7 @@
     "name": "digicademy/mdlr",
     "version": "2.0.0",
     "type": "typo3-cms-extension",
-    "description": "Atomic web frontend library for use in accessible, responsive web apps",
+    "description": "MDLR - Atomic web frontend library for use in accessible, responsive web apps",
     "authors": [
         {
             "name": "Jonatan Jalle Steller",
@@ -32,10 +32,10 @@
         "Academic"
     ],
     "require": {
-        "typo3/cms-core": "^13",
-        "typo3/cms-fluid": "^13",
-        "typo3/cms-fluid-styled-content": "^13",
-        "typo3/cms-redirects": "^13"
+        "typo3/cms-core": "^14",
+        "typo3/cms-fluid": "^14",
+        "typo3/cms-fluid-styled-content": "^14",
+        "typo3/cms-redirects": "^14"
     },
     "autoload": {
         "psr-4": {
