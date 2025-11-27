@@ -12,7 +12,7 @@
         </f:if>
         <f:if condition="{data.image_zoom}">
             <div class="mdlr-gallery-tools">
-                <mdlr:atom.button.function function="fullscreen" variants="{0: 'tinyicon', 1: 'overlay'}" text="{f:translate(key: 'templates.generic.fullscreen', extensionName: 'chf_base')}" data="{target: 'c{data.uid}-gallery-{row}-{column}', failure: '{f:translate(key: \'templates.generic.fullscreen.failure\', extensionName: \'chf_base\')}'}" icon="fullscreen" />
+                <mdlr:atom.button.function function="fullscreen" variants="{0: 'tinyicon', 1: 'overlay'}" text="{f:translate(key: 'templates.generic.fullscreen', domain: 'chf_base')}" data="{target: 'c{data.uid}-gallery-{row}-{column}', failure: '{f:translate(key: \'templates.generic.fullscreen.failure\', domain: \'chf_base\')}'}" icon="fullscreen" />
             </div>
         </f:if>
         <f:if condition="{file.description}">

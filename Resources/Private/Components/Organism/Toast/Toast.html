@@ -16,6 +16,6 @@
 
     <dialog{f:if(condition: id, then: ' id="{id}"')} role="status" popover="auto"{f:if(condition: class, then: ' class="{class}"')}>
         <p></p>
-        <mdlr:atom.button.function function="toast-close" variants="{0: 'icon', 1: 'unobtrusive'}" text="{f:translate(key: 'templates.generic.close', extensionName: 'chf_base')}" icon="close" />
+        <mdlr:atom.button.function function="toast-close" variants="{0: 'icon', 1: 'unobtrusive'}" text="{f:translate(key: 'templates.generic.close', domain: 'chf_base')}" icon="close" />
     </dialog>
 </html>
