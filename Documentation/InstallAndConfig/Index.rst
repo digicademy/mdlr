@@ -10,13 +10,22 @@ Install and config
 
 1.  Install the extension
 
-    Add the package name to your ``composer.json`` or install the package
-    manually.
+    Add the package to your ``composer.json`` via a PHP Composer command:
 
-..  _use-the-components:
+    ..  code-block::
 
-==================
-Use the components
-==================
+        composer require digicademy/mdlr:^2
 
-TBD
+2.  Apply the site set
+
+    For MDLR components to have the right CSS and JS code, edit your site
+    configuration in the TYPO3 backend at :guilabel:`Sites > Setup` and add
+    ``MDLR Frontend Library`` to the site sets you use.
+
+    Alternatively, if your site is implemented via its own site set, add
+    the following code to your ``config.yaml``:
+
+    ..  code-block:: yaml
+
+        dependencies:
+          - digicademy/mdlr
