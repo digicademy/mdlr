@@ -7,8 +7,8 @@ Maintenance
 ===========
 
 The following information is primarily **intended for the further development**
-of this package. Maintenance of the extension may include adapting it to new TYPO3 versions or
-updating dependencies and includes.
+of this package. Maintenance of the extension may include adapting it to new
+TYPO3 versions or updating dependencies and includes.
 
 ..  _creating-a-new-release:
 
