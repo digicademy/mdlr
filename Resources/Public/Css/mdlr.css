@@ -849,7 +849,6 @@ a.mdlr-button > span {
     transform: translateY(var(--mdlr-font-main-offset));
     overflow: hidden;
     white-space: nowrap;
-    /*text-overflow: ellipsis;*/
     flex: 1;
 }
 
@@ -2215,6 +2214,49 @@ ol.mdlr-flexlist.mdlr-variant-wide > li {
 
 .mdlr-flexlist > article > a > div > p {
 }*/
+
+/* Frame */
+
+.mdlr-frame {
+    border-radius: var(--mdlr-spacing-radius);
+    min-height: 500px;
+}
+
+.maplibregl-map {
+    font: inherit !important;
+    font-size: 12px !important;
+    line-height: 20px !important;
+}
+
+.maplibregl-ctrl {
+    margin: calc(0.5 * var(--mdlr-spacing-padding-vertical)) !important;
+}
+
+.maplibregl-ctrl + .maplibregl-ctrl {
+    margin-top: 0 !important;
+}
+
+.maplibregl-ctrl-attrib a {
+    color: var(--mdlr-color-highlight-intense) !important;
+    text-decoration-line: underline !important;
+    text-decoration-style: solid !important;
+    text-decoration-thickness: var(--mdlr-spacing-thin) !important;
+    text-decoration-color: transparent !important;
+}
+
+.maplibregl-ctrl-attrib a:hover {
+    color: var(--mdlr-color-primary-main-text) !important;
+    text-decoration-line: underline !important;
+    text-decoration-style: solid !important;
+    text-decoration-thickness: var(--mdlr-spacing-thin) !important;
+    text-decoration-color: var(--mdlr-color-accent-intense) !important;
+}
+
+.maplibregl-ctrl-group {
+    box-shadow: none !important;
+    background: transparent !important;
+    border-radius: 0 !important;
+}
 
 /* Content */
 
