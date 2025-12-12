@@ -1,4 +1,0 @@
-name: digicademy/mdlr
-label: MDLR Frontend Library
-dependencies:
-  - typo3/fluid-styled-content

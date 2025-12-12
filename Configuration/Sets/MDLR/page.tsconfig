@@ -1,4 +1,0 @@
-// Set fullscreen buttons to appear by default
-TCAdefaults {
-    tt_content.image_zoom = 1
-}

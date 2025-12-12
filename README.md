@@ -1,0 +1,1 @@
+**Moved to https://gitlab.rlp.net/adwmainz/digicademy/chf/mdlr, please switch to the new URL**
